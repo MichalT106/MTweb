@@ -29,7 +29,7 @@ class CustomExperienceTimeline extends HTMLElement {
                     position: absolute;
                     width: 20px;
                     height: 20px;
-                    background-color: white;
+                    background-color: var(--surface);
                     border: 4px solid var(--primary);
                     border-radius: 50%;
                     top: 15px;
@@ -49,7 +49,7 @@ class CustomExperienceTimeline extends HTMLElement {
                 }
                 .timeline-content {
                     padding: 20px;
-                    background-color: white;
+                    background-color: var(--surface);
                     border-radius: 0.5rem;
                     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
                 }
@@ -63,7 +63,7 @@ class CustomExperienceTimeline extends HTMLElement {
                     margin-bottom: 0.5rem;
                 }
                 .timeline-description {
-                    color: #6B7280;
+                    color: var(--muted-text);
                 }
                 @media (max-width: 768px) {
                     .timeline::after {

@@ -11,7 +11,8 @@ const translations = {
         "footer.copyright": "© 2023 My Portfolio. All rights reserved.",
         "nav.home": "Home",
         "nav.projects": "Projects",
-        "nav.experience": "Experience",
+        "nav.school": "School Projects",
+        "nav.experience": "Work Experience",
         "footer.about": "About Me",
         "footer.aboutText": "Student with passion for technology and learning.",
         "footer.links": "Quick Links",
@@ -28,13 +29,17 @@ const translations = {
         "footer.copyright": "© 2023 Moje portfólio. Všetky práva vyhradené.",
         "nav.home": "Domov",
         "nav.projects": "Projekty",
-        "nav.experience": "Skúsenosti",
+        "nav.school": "Školské projekty",
+        "nav.experience": "Pracovné skúsenosti",
         "footer.about": "O mne",
         "footer.aboutText": "Študent so záujmom o technológie a učenie.",
         "footer.links": "Rýchle odkazy",
         "footer.contact": "Kontakt"
 }
 };
+
+// expose translations for components
+window.translations = translations;
 
 let currentLanguage = 'en';
 
@@ -56,16 +61,17 @@ function setLanguage(lang) {
     
     // Store preference
     localStorage.setItem('preferredLanguage', lang);
+    // expose current language for components
+    window.currentLanguage = currentLanguage;
+    // notify other parts (shadow DOMs) that language changed
+    document.dispatchEvent(new CustomEvent('languageChange', { detail: { language: lang } }));
 }
+// expose setter for components
+window.setLanguage = setLanguage;
 // Initialize language
 document.addEventListener('DOMContentLoaded', () => {
     const preferredLanguage = localStorage.getItem('preferredLanguage') || 'en';
     setLanguage(preferredLanguage);
-
-    // Add event listener for language switcher
-    document.addEventListener('languageChange', (e) => {
-        setLanguage(e.detail.language);
-    });
 });
 // Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -75,4 +81,28 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             behavior: 'smooth'
         });
     });
+});
+
+
+// Theme management (light / dark)
+function applyTheme(theme) {
+    const t = (theme === 'dark') ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+    localStorage.setItem('theme', t);
+    document.dispatchEvent(new CustomEvent('themeChange', { detail: { theme: t } }));
+}
+
+function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme') || 'light';
+    applyTheme(current === 'dark' ? 'light' : 'dark');
+}
+
+// Expose for web components
+window.applyTheme = applyTheme;
+window.toggleTheme = toggleTheme;
+
+document.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(saved || (prefersDark ? 'dark' : 'light'));
 });

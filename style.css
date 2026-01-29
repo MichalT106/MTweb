@@ -1,8 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
+    /* Existing */
     --primary: #4F46E5;
     --secondary: #10B981;
+
+    /* Theme tokens (light defaults) */
+    --bg: #F9FAFB;
+    --text: #1F2937;
+    --muted-text: #6B7280;
+    --surface: #FFFFFF;
+    --border: #E5E7EB;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.12);
+
+    --footer-bg: #1F2937;
+    --footer-text: #FFFFFF;
+    --footer-link: #D1D5DB;
+}
+
+html[data-theme="dark"] {
+    --bg: #0B1220;
+    --text: #E5E7EB;
+    --muted-text: #9CA3AF;
+    --surface: #111827;
+    --border: #273244;
+    --shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    --shadow-hover: 0 10px 24px rgba(0, 0, 0, 0.45);
+
+    --footer-bg: #0A0F1A;
+    --footer-text: #E5E7EB;
+    --footer-link: #9CA3AF;
+}
+
+/* Apply theme colors (override Tailwind utility background/text on body) */
+body {
+    background-color: var(--bg) !important;
+    color: var(--text) !important;
+    transition: background-color 200ms ease, color 200ms ease;
 }
 
 body {
@@ -38,10 +73,10 @@ body {
 }
 
 .skill-card {
-    background-color: white;
+    background-color: var(--surface);
     padding: 1.5rem;
     border-radius: 0.5rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow);
     text-align: center;
     transition: transform 0.3s ease;
 }
@@ -63,24 +98,17 @@ body {
 }
 
 .skill-card p {
-    color: #6B7280;
+    color: var(--muted-text);
 }
 
 section {
     scroll-margin-top: 100px;
 }
 
-/* Language switcher styles */
-.language-switcher {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-}
-
+/* Language switcher styles (global fallback) */
 .language-btn {
-    background-color: white;
-    border: 1px solid #E5E7EB;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
     padding: 0.5rem 1rem;
     border-radius: 0.375rem;
     font-weight: 500;
@@ -95,4 +123,27 @@ section {
 .language-btn.active {
     background-color: var(--primary);
     color: white;
+}
+
+/* Offset main content so fixed navbar doesn't overlap profile image */
+main {
+    padding-top: 6rem !important; /* adjust this value if you want more/less spacing */
+}
+
+@media (max-width: 768px) {
+    main {
+        padding-top: 5rem !important;
+    }
+}
+
+/* Profile image fine-tuning: keep circular mask, nudge image slightly down inside the circle */
+.profile-pic {
+    object-fit: cover;
+    object-position: center 30%; /* slight downward shift */
+    display: block;
+    border-radius: 9999px; /* keep circular cropping */
+}
+
+@media (min-width: 768px) {
+    .profile-pic { object-position: center 30%; }
 }

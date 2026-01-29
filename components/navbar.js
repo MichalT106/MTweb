@@ -4,8 +4,8 @@ class CustomNavbar extends HTMLElement {
         this.shadowRoot.innerHTML = `
             <style>
                 nav {
-                    background-color: white;
-                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                    background-color: var(--surface);
+                    box-shadow: var(--shadow);
                     position: fixed;
                     width: 100%;
                     top: 0;
@@ -14,10 +14,22 @@ class CustomNavbar extends HTMLElement {
                 .nav-container {
                     max-width: 1200px;
                     margin: 0 auto;
-                    padding: 1rem 2rem;
+                    padding: 0.75rem 1rem;
                     display: flex;
-                    justify-content: space-between;
                     align-items: center;
+                    gap: 1rem;
+                    position: relative;
+                }
+                .nav-left {
+                    display: flex;
+                    align-items: center;
+                    gap: 1.5rem;
+                }
+                .nav-right {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.75rem;
+                    margin-left: auto;
                 }
                 .logo {
                     font-size: 1.5rem;
@@ -27,10 +39,10 @@ class CustomNavbar extends HTMLElement {
                 }
                 .nav-links {
                     display: flex;
-                    gap: 2rem;
+                    gap: 1.25rem;
                 }
                 .nav-link {
-                    color: #4B5563;
+                    color: var(--muted-text);
                     text-decoration: none;
                     font-weight: 500;
                     transition: color 0.3s ease;
@@ -43,30 +55,78 @@ class CustomNavbar extends HTMLElement {
                     background: none;
                     border: none;
                     cursor: pointer;
+                    font-size: 1.25rem;
+                    padding: 0.25rem 0.5rem;
                 }
                 @media (max-width: 768px) {
                     .nav-links {
                         display: none;
+                        position: absolute;
+                        top: 100%;
+                        right: 1rem;
+                        background: var(--surface);
+                        padding: 0.75rem;
+                        box-shadow: var(--shadow);
+                        flex-direction: column;
+                        gap: 0.5rem;
+                        border-radius: 0.5rem;
+                    }
+                    .nav-links.open {
+                        display: flex;
                     }
                     .mobile-menu-btn {
                         display: block;
+                        margin-left: auto;
                     }
                 }
             </style>
             <nav>
                 <div class="nav-container">
-                    <a href="#" class="logo">PortfolioPro</a>
-                    <div class="nav-links">
-                    <a href="#" class="nav-link" data-i18n="nav.home">Home</a>
-                    <a href="#school-projects" class="nav-link" data-i18n="nav.school">School Projects</a>
-                    <a href="#experience" class="nav-link" data-i18n="nav.experience">Experience</a>
-</div>
-<button class="mobile-menu-btn">
-                        <i data-feather="menu"></i>
-                    </button>
+                    <div class="nav-left">
+                        <a href="#" class="logo">MTweb</a>
+                        <div class="nav-links" id="navLinks">
+                            <a href="#" class="nav-link" data-i18n="nav.home">Home</a>
+                            <a href="#school-projects" class="nav-link" data-i18n="nav.school">School Projects</a>
+                            <a href="#experience" class="nav-link" data-i18n="nav.experience">Experience</a>
+                        </div>
+                    </div>
+
+                    <div class="nav-right">
+                        <slot name="right"></slot>
+
+                        <button class="mobile-menu-btn" id="mobileBtn" aria-label="Toggle menu">☰</button>
+                    </div>
                 </div>
             </nav>
         `;
+
+        // add mobile menu toggle behavior
+        const mobileBtn = this.shadowRoot.getElementById('mobileBtn');
+        const navLinks = this.shadowRoot.getElementById('navLinks');
+        if (mobileBtn && navLinks) {
+            mobileBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('open');
+            });
+        }
+        // i18n: update nav texts inside shadow DOM when language changes
+        const applyI18n = (lang) => {
+            try {
+                const tr = window.translations || {};
+                const elems = this.shadowRoot.querySelectorAll('[data-i18n]');
+                elems.forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (tr[lang] && tr[lang][key]) el.textContent = tr[lang][key];
+                });
+            } catch (e) { /* ignore */ }
+        };
+
+        document.addEventListener('languageChange', (e) => {
+            applyI18n(e.detail.language);
+        });
+
+        // initialize to preferred language immediately
+        const pref = localStorage.getItem('preferredLanguage') || (window.currentLanguage || 'en');
+        applyI18n(pref);
     }
 }
 customElements.define('custom-navbar', CustomNavbar);

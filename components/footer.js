@@ -4,8 +4,8 @@ class CustomFooter extends HTMLElement {
         this.shadowRoot.innerHTML = `
             <style>
                 footer {
-                    background-color: #1F2937;
-                    color: white;
+                    background-color: var(--footer-bg);
+                    color: var(--footer-text);
                     padding: 3rem 0;
                 }
                 .footer-container {
@@ -28,12 +28,12 @@ class CustomFooter extends HTMLElement {
                     gap: 0.5rem;
                 }
                 .footer-link {
-                    color: #D1D5DB;
+                    color: var(--footer-link);
                     text-decoration: none;
                     transition: color 0.3s ease;
                 }
                 .footer-link:hover {
-                    color: white;
+                    color: var(--footer-text);
                 }
                 .social-links {
                     display: flex;
@@ -41,7 +41,7 @@ class CustomFooter extends HTMLElement {
                     margin-top: 1rem;
                 }
                 .social-link {
-                    color: white;
+                    color: var(--footer-text);
                     transition: color 0.3s ease;
                 }
                 .social-link:hover {

@@ -9,15 +9,15 @@ class CustomProjectCard extends HTMLElement {
         this.shadowRoot.innerHTML = `
             <style>
                 .project-card {
-                    background-color: white;
+                    background-color: var(--surface);
                     border-radius: 0.5rem;
                     overflow: hidden;
-                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                    box-shadow: var(--shadow);
                     transition: transform 0.3s ease, box-shadow 0.3s ease;
                 }
                 .project-card:hover {
                     transform: translateY(-5px);
-                    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+                    box-shadow: var(--shadow-hover);
                 }
                 .project-image {
                     width: 100%;
@@ -33,7 +33,7 @@ class CustomProjectCard extends HTMLElement {
                     margin-bottom: 0.5rem;
                 }
                 .project-description {
-                    color: #6B7280;
+                    color: var(--muted-text);
                     margin-bottom: 1rem;
                 }
                 .project-tags {
@@ -42,8 +42,8 @@ class CustomProjectCard extends HTMLElement {
                     gap: 0.5rem;
                 }
                 .tag {
-                    background-color: #E5E7EB;
-                    color: #4B5563;
+                    background-color: var(--border);
+                    color: var(--muted-text);
                     padding: 0.25rem 0.5rem;
                     border-radius: 9999px;
                     font-size: 0.75rem;

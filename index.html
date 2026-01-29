@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio Prodigy | Professional Showcase</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+        // Apply saved theme ASAP to avoid flash
+        (function () {
+            const saved = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = saved || (prefersDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
@@ -15,15 +25,16 @@
     <script src="components/footer.js"></script>
 </head>
 <body class="bg-gray-50 text-gray-800">
-    <custom-navbar></custom-navbar>
-    <custom-language-switcher></custom-language-switcher>
+    <custom-navbar>
+        <custom-language-switcher slot="right" inline></custom-language-switcher>
+    </custom-navbar>
 
     <main class="container mx-auto px-4 py-12">
         <!-- Hero Section -->
         <section class="mb-20">
             <div class="flex flex-col md:flex-row items-center gap-8">
                 <div class="md:w-1/3">
-                    <img src="http://static.photos/technology/640x360/42" alt="Profile" class="rounded-full w-64 h-64 object-cover mx-auto shadow-xl">
+                    <img src="./images/profile_picture.jfif" alt="Profile" class="profile-pic rounded-full w-64 h-64 object-cover mx-auto shadow-xl">
                 </div>
                 <div class="md:w-2/3 text-center md:text-left">
                     <h1 class="text-4xl md:text-5xl font-bold mb-4" data-i18n="hero.title">Welcome to My Professional Journey</h1>
@@ -92,6 +103,5 @@
     <script>
         feather.replace();
     </script>
-<script src="https://huggingface.co/deepsite/deepsite-badge.js"></script>
 </body>
 </html>
