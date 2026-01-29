@@ -1,11 +1,98 @@
-body {
-    background: #111;
-    color: #eee;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding-top: 50px;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary: #4F46E5;
+    --secondary: #10B981;
 }
 
-h1 {
-    color: #4da3ff;
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #4338CA;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: var(--secondary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #0D9488;
+    transform: translateY(-2px);
+}
+
+.skill-card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+}
+
+.skill-card i {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 1rem;
+    color: var(--primary);
+}
+
+.skill-card h3 {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.skill-card p {
+    color: #6B7280;
+}
+
+section {
+    scroll-margin-top: 100px;
+}
+
+/* Language switcher styles */
+.language-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.language-btn {
+    background-color: white;
+    border: 1px solid #E5E7EB;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.language-btn:hover {
+    background-color: #F3F4F6;
+}
+
+.language-btn.active {
+    background-color: var(--primary);
+    color: white;
 }

@@ -1,12 +1,105 @@
 <!DOCTYPE html>
-<html lang="sk">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>MTweb</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Prodigy | Professional Showcase</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="components/navbar.js"></script>
+    <script src="components/language-switcher.js"></script>
+    <script src="components/project-card.js"></script>
+    <script src="components/experience-timeline.js"></script>
+    <script src="components/footer.js"></script>
 </head>
-<body>
-    <h1>Ahoj svet 👋</h1>
-    <p>Moja prvá GitHub Pages stránka.</p>
+<body class="bg-gray-50 text-gray-800">
+    <custom-navbar></custom-navbar>
+    <custom-language-switcher></custom-language-switcher>
+
+    <main class="container mx-auto px-4 py-12">
+        <!-- Hero Section -->
+        <section class="mb-20">
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <div class="md:w-1/3">
+                    <img src="http://static.photos/technology/640x360/42" alt="Profile" class="rounded-full w-64 h-64 object-cover mx-auto shadow-xl">
+                </div>
+                <div class="md:w-2/3 text-center md:text-left">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4" data-i18n="hero.title">Welcome to My Professional Journey</h1>
+                    <p class="text-xl mb-6" data-i18n="hero.subtitle">Showcasing my achievements, projects, and experiences</p>
+                    <div class="flex gap-4 justify-center md:justify-start">
+                        <a href="#projects" class="btn-primary" data-i18n="hero.projects">View Projects</a>
+                        <a href="#experience" class="btn-secondary" data-i18n="hero.experience">My Experience</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="mb-20">
+            <h2 class="text-3xl font-bold mb-8 text-center" data-i18n="projects.title">Featured Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <custom-project-card 
+                    title="School Management System" 
+                    description="A comprehensive system for managing school operations"
+                    tags="Web Development, Database"
+                    image="http://static.photos/education/640x360/1">
+                </custom-project-card>
+                <custom-project-card 
+                    title="E-commerce Platform" 
+                    description="Full-featured online shopping solution"
+                    tags="React, Node.js"
+                    image="http://static.photos/retail/640x360/2">
+                </custom-project-card>
+                <custom-project-card 
+                    title="Data Analysis Tool" 
+                    description="Advanced analytics for business intelligence"
+                    tags="Python, Machine Learning"
+                    image="http://static.photos/technology/640x360/3">
+                </custom-project-card>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="mb-20">
+            <h2 class="text-3xl font-bold mb-8 text-center" data-i18n="experience.title">Professional Experience</h2>
+            <custom-experience-timeline></custom-experience-timeline>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold mb-8 text-center" data-i18n="skills.title">Technical Skills</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="skill-card">
+                    <i data-feather="code"></i>
+                    <h3 data-i18n="skills.web">Web Development</h3>
+                    <p>HTML, CSS, JavaScript, React</p>
+                </div>
+                <div class="skill-card">
+                    <i data-feather="database"></i>
+                    <h3 data-i18n="skills.backend">Backend</h3>
+                    <p>Node.js, Python, PHP</p>
+                </div>
+                <div class="skill-card">
+                    <i data-feather="smartphone"></i>
+                    <h3 data-i18n="skills.mobile">Mobile</h3>
+                    <p>React Native, Flutter</p>
+                </div>
+                <div class="skill-card">
+                    <i data-feather="cloud"></i>
+                    <h3 data-i18n="skills.cloud">Cloud</h3>
+                    <p>AWS, Firebase, Docker</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script src="script.js"></script>
+    <script>
+        feather.replace();
+    </script>
 </body>
 </html>
