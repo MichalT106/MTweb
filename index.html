@@ -60,40 +60,31 @@
                 </custom-project-card>
             </div>
         </section>
-
         <!-- Experience Section -->
         <section id="experience" class="mb-20">
             <h2 class="text-3xl font-bold mb-8 text-center" data-i18n="experience.title">Professional Experience</h2>
             <custom-experience-timeline></custom-experience-timeline>
         </section>
 
-        <!-- Skills Section -->
-        <section class="mb-20">
-            <h2 class="text-3xl font-bold mb-8 text-center" data-i18n="skills.title">Technical Skills</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="skill-card">
-                    <i data-feather="code"></i>
-                    <h3 data-i18n="skills.web">Web Development</h3>
-                    <p>HTML, CSS, JavaScript, React</p>
-                </div>
-                <div class="skill-card">
-                    <i data-feather="database"></i>
-                    <h3 data-i18n="skills.backend">Backend</h3>
-                    <p>Node.js, Python, PHP</p>
-                </div>
-                <div class="skill-card">
-                    <i data-feather="smartphone"></i>
-                    <h3 data-i18n="skills.mobile">Mobile</h3>
-                    <p>React Native, Flutter</p>
-                </div>
-                <div class="skill-card">
-                    <i data-feather="cloud"></i>
-                    <h3 data-i18n="skills.cloud">Cloud</h3>
-                    <p>AWS, Firebase, Docker</p>
-                </div>
+        <!-- School Projects Section -->
+        <section id="school-projects" class="mb-20">
+            <h2 class="text-3xl font-bold mb-8 text-center" data-i18n="school.title">School Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <custom-project-card 
+                    title="Database Project" 
+                    description="School database management system"
+                    tags="SQL, Database Design"
+                    image="http://static.photos/education/640x360/4">
+                </custom-project-card>
+                <custom-project-card 
+                    title="Web Design Project" 
+                    description="Responsive website for school"
+                    tags="HTML, CSS"
+                    image="http://static.photos/education/640x360/6">
+                </custom-project-card>
             </div>
         </section>
-    </main>
+</main>
 
     <custom-footer></custom-footer>
 
@@ -101,5 +92,6 @@
     <script>
         feather.replace();
     </script>
+<script src="https://huggingface.co/deepsite/deepsite-badge.js"></script>
 </body>
 </html>

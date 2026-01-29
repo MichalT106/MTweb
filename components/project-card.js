@@ -1,73 +1,65 @@
-class CustomNavbar extends HTMLElement {
+class CustomProjectCard extends HTMLElement {
     connectedCallback() {
+        const title = this.getAttribute('title') || 'Project Title';
+        const description = this.getAttribute('description') || 'Project description';
+        const tags = this.getAttribute('tags') || '';
+        const image = this.getAttribute('image') || 'http://static.photos/technology/640x360/1';
+
         this.attachShadow({ mode: 'open' });
         this.shadowRoot.innerHTML = `
             <style>
-                nav {
+                .project-card {
                     background-color: white;
-                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                    position: fixed;
+                    border-radius: 0.5rem;
+                    overflow: hidden;
+                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                }
+                .project-card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+                }
+                .project-image {
                     width: 100%;
-                    top: 0;
-                    z-index: 1000;
+                    height: 200px;
+                    object-fit: cover;
                 }
-                .nav-container {
-                    max-width: 1200px;
-                    margin: 0 auto;
-                    padding: 1rem 2rem;
+                .project-content {
+                    padding: 1.5rem;
+                }
+                .project-title {
+                    font-size: 1.25rem;
+                    font-weight: 600;
+                    margin-bottom: 0.5rem;
+                }
+                .project-description {
+                    color: #6B7280;
+                    margin-bottom: 1rem;
+                }
+                .project-tags {
                     display: flex;
-                    justify-content: space-between;
-                    align-items: center;
+                    flex-wrap: wrap;
+                    gap: 0.5rem;
                 }
-                .logo {
-                    font-size: 1.5rem;
-                    font-weight: 700;
-                    color: var(--primary);
-                    text-decoration: none;
-                }
-                .nav-links {
-                    display: flex;
-                    gap: 2rem;
-                }
-                .nav-link {
+                .tag {
+                    background-color: #E5E7EB;
                     color: #4B5563;
-                    text-decoration: none;
-                    font-weight: 500;
-                    transition: color 0.3s ease;
-                }
-                .nav-link:hover {
-                    color: var(--primary);
-                }
-                .mobile-menu-btn {
-                    display: none;
-                    background: none;
-                    border: none;
-                    cursor: pointer;
-                }
-                @media (max-width: 768px) {
-                    .nav-links {
-                        display: none;
-                    }
-                    .mobile-menu-btn {
-                        display: block;
-                    }
+                    padding: 0.25rem 0.5rem;
+                    border-radius: 9999px;
+                    font-size: 0.75rem;
                 }
             </style>
-            <nav>
-                <div class="nav-container">
-                    <a href="#" class="logo">PortfolioPro</a>
-                    <div class="nav-links">
-                        <a href="#" class="nav-link" data-i18n="nav.home">Home</a>
-                        <a href="#projects" class="nav-link" data-i18n="nav.projects">Projects</a>
-                        <a href="#experience" class="nav-link" data-i18n="nav.experience">Experience</a>
-                        <a href="#skills" class="nav-link" data-i18n="nav.skills">Skills</a>
+            <div class="project-card">
+                <img src="${image}" alt="${title}" class="project-image">
+                <div class="project-content">
+                    <h3 class="project-title">${title}</h3>
+                    <p class="project-description">${description}</p>
+                    <div class="project-tags">
+                        ${tags.split(',').map(tag => `<span class="tag">${tag.trim()}</span>`).join('')}
                     </div>
-                    <button class="mobile-menu-btn">
-                        <i data-feather="menu"></i>
-                    </button>
                 </div>
-            </nav>
+            </div>
         `;
     }
 }
-customElements.define('custom-navbar', CustomNavbar);
+customElements.define('custom-project-card', CustomProjectCard);

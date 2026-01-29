@@ -57,12 +57,11 @@ class CustomNavbar extends HTMLElement {
                 <div class="nav-container">
                     <a href="#" class="logo">PortfolioPro</a>
                     <div class="nav-links">
-                        <a href="#" class="nav-link" data-i18n="nav.home">Home</a>
-                        <a href="#projects" class="nav-link" data-i18n="nav.projects">Projects</a>
-                        <a href="#experience" class="nav-link" data-i18n="nav.experience">Experience</a>
-                        <a href="#skills" class="nav-link" data-i18n="nav.skills">Skills</a>
-                    </div>
-                    <button class="mobile-menu-btn">
+                    <a href="#" class="nav-link" data-i18n="nav.home">Home</a>
+                    <a href="#school-projects" class="nav-link" data-i18n="nav.school">School Projects</a>
+                    <a href="#experience" class="nav-link" data-i18n="nav.experience">Experience</a>
+</div>
+<button class="mobile-menu-btn">
                         <i data-feather="menu"></i>
                     </button>
                 </div>
