@@ -142,8 +142,28 @@ main {
     object-position: center 30%; /* slight downward shift */
     display: block;
     border-radius: 9999px; /* keep circular cropping */
+    width: auto;
+    height: auto;
 }
 
-@media (min-width: 768px) {
-    .profile-pic { object-position: center 30%; }
+/* Responsive profile image sizing */
+@media (max-width: 640px) {
+    .profile-pic {
+        max-width: 200px;
+        max-height: 200px;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+    .profile-pic {
+        max-width: 240px;
+        max-height: 240px;
+    }
+}
+
+@media (min-width: 769px) {
+    .profile-pic {
+        max-width: 256px;
+        max-height: 256px;
+    }
 }

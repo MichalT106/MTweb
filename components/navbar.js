@@ -88,6 +88,7 @@ class CustomNavbar extends HTMLElement {
                             <a href="#" class="nav-link" data-i18n="nav.home">Home</a>
                             <a href="#school-projects" class="nav-link" data-i18n="nav.school">School Projects</a>
                             <a href="#experience" class="nav-link" data-i18n="nav.experience">Experience</a>
+                            <a href="#" id="cvLink" class="nav-link" data-i18n="nav.cv" onclick="return false;">CV</a>
                         </div>
                     </div>
 
@@ -106,6 +107,12 @@ class CustomNavbar extends HTMLElement {
         if (mobileBtn && navLinks) {
             mobileBtn.addEventListener('click', () => {
                 navLinks.classList.toggle('open');
+            });
+            // Close mobile menu when a nav link is clicked
+            navLinks.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('open');
+                });
             });
         }
         // i18n: update nav texts inside shadow DOM when language changes
@@ -127,6 +134,22 @@ class CustomNavbar extends HTMLElement {
         // initialize to preferred language immediately
         const pref = localStorage.getItem('preferredLanguage') || (window.currentLanguage || 'en');
         applyI18n(pref);
+
+        // CV button: construct PDF URL based on current language
+        const cvLink = this.shadowRoot.getElementById('cvLink');
+        const openCvPdf = () => {
+            const lang = localStorage.getItem('preferredLanguage') || (window.currentLanguage || 'en');
+            const fileName = lang === 'sk' ? 'CV_SK.pdf' : 'CV_EN.pdf';
+            const cvUrl = './biography/' + fileName;
+            window.open(cvUrl, '_blank');
+        };
+
+        if (cvLink) {
+            cvLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                openCvPdf();
+            });
+        }
     }
 }
 customElements.define('custom-navbar', CustomNavbar);
