@@ -52,6 +52,12 @@ class CustomExperienceTimeline extends HTMLElement {
                     background-color: var(--surface);
                     border-radius: 0.5rem;
                     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                }
+                .timeline-content:hover {
+                    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.12);
+                    transform: translateY(-2px);
                 }
                 .timeline-date {
                     color: var(--primary);
@@ -87,35 +93,43 @@ class CustomExperienceTimeline extends HTMLElement {
             </style>
             <div class="timeline">
                 <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <div class="timeline-date">2022 - Present</div>
-                        <h3 class="timeline-title" data-i18n="experience.job1.title">Senior Developer</h3>
-                        <p class="timeline-description" data-i18n="experience.job1.description">Leading development teams and implementing complex solutions</p>
-                    </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <div class="timeline-date">2019 - 2022</div>
-                        <h3 class="timeline-title" data-i18n="experience.job2.title">Software Engineer</h3>
-                        <p class="timeline-description" data-i18n="experience.job2.description">Developed web applications and APIs</p>
-                    </div>
-                </div>
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <div class="timeline-date">2017 - 2019</div>
-                        <h3 class="timeline-title" data-i18n="experience.job3.title">Junior Developer</h3>
-                        <p class="timeline-description" data-i18n="experience.job3.description">Assisted in development and maintenance of applications</p>
-                    </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <div class="timeline-date">2015 - 2017</div>
-                        <h3 class="timeline-title" data-i18n="experience.job4.title">Intern</h3>
-                        <p class="timeline-description" data-i18n="experience.job4.description">Learned industry practices and assisted senior developers</p>
+                    <div class="timeline-content" id="experienceItem">
+                        <div class="timeline-date">July 2023 – August 2025</div>
+                        <h3 class="timeline-title" data-i18n="experience.job1.title">Software & DevOps Engineer</h3>
+                        <p class="timeline-description" data-i18n="experience.job1.company">Webasto Convertibles Slovakia s.r.o.</p>
+                        <p class="timeline-description" data-i18n="experience.job1.location">Košice, Slovak Republic</p>
                     </div>
                 </div>
             </div>
         `;
+
+        // Handle click on experience item
+        const experienceItem = this.shadowRoot.getElementById('experienceItem');
+        if (experienceItem) {
+            experienceItem.addEventListener('click', () => {
+                // Emit custom event that main app can listen to
+                window.dispatchEvent(new CustomEvent('navigateToExperienceDetail'));
+            });
+        }
+
+        // Apply i18n
+        const applyI18n = (lang) => {
+            try {
+                const tr = window.translations || {};
+                const elems = this.shadowRoot.querySelectorAll('[data-i18n]');
+                elems.forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (tr[lang] && tr[lang][key]) el.textContent = tr[lang][key];
+                });
+            } catch (e) { /* ignore */ }
+        };
+
+        document.addEventListener('languageChange', (e) => {
+            applyI18n(e.detail.language);
+        });
+
+        const pref = localStorage.getItem('preferredLanguage') || (window.currentLanguage || 'en');
+        applyI18n(pref);
     }
 }
 customElements.define('custom-experience-timeline', CustomExperienceTimeline);

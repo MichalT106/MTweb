@@ -64,9 +64,9 @@ class CustomFooter extends HTMLElement {
                     <div class="footer-section">
                         <h3 data-i18n="footer.links">Quick Links</h3>
                         <div class="footer-links">
-                            <a href="#" class="footer-link" data-i18n="nav.home">Home</a>
-                            <a href="#projects" class="footer-link" data-i18n="nav.projects">Projects</a>
-                            <a href="#experience" class="footer-link" data-i18n="nav.experience">Experience</a>
+                            <a href="#" class="footer-link" data-i18n="nav.home" data-nav="home">Home</a>
+                            <a href="#experience" class="footer-link" data-i18n="nav.experience" data-nav="experience">Experience</a>
+                            <a href="#school-projects" class="footer-link" data-i18n="nav.school" data-nav="school-projects">School Projects</a>
                             <a href="#skills" class="footer-link" data-i18n="nav.skills">Skills</a>
                         </div>
                     </div>
@@ -88,6 +88,45 @@ class CustomFooter extends HTMLElement {
                 </div>
             </footer>
         `;
+        
+        // Handle data-nav attributes in footer using new router
+        const footerNavElements = this.shadowRoot.querySelectorAll('[data-nav]');
+        footerNavElements.forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                const nav = el.getAttribute('data-nav');
+                // Use window.router methods from router.js
+                if (window.router) {
+                    if (nav === 'home') {
+                        window.goHome();
+                    } else if (nav === 'school-projects') {
+                        window.goHome('school-projects');
+                    } else if (nav === 'experience') {
+                        window.goHome('experience');
+                    }
+                }
+            });
+        });
+        
+        // i18n: update footer texts inside shadow DOM when language changes
+        const applyI18n = (lang) => {
+            try {
+                const tr = window.translations || {};
+                const elems = this.shadowRoot.querySelectorAll('[data-i18n]');
+                elems.forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (tr[lang] && tr[lang][key]) el.textContent = tr[lang][key];
+                });
+            } catch (e) { /* ignore */ }
+        };
+
+        document.addEventListener('languageChange', (e) => {
+            applyI18n(e.detail.language);
+        });
+
+        // initialize to preferred language immediately
+        const pref = localStorage.getItem('preferredLanguage') || (window.currentLanguage || 'en');
+        applyI18n(pref);
     }
 }
 customElements.define('custom-footer', CustomFooter);

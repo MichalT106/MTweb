@@ -83,11 +83,11 @@ class CustomNavbar extends HTMLElement {
             <nav>
                 <div class="nav-container">
                     <div class="nav-left">
-                        <a href="#" class="logo">MTweb</a>
+                        <a href="#" class="logo" data-nav="home">MTweb</a>
                         <div class="nav-links" id="navLinks">
-                            <a href="#" class="nav-link" data-i18n="nav.home">Home</a>
-                            <a href="#school-projects" class="nav-link" data-i18n="nav.school">School Projects</a>
-                            <a href="#experience" class="nav-link" data-i18n="nav.experience">Experience</a>
+                            <a href="#" class="nav-link" data-i18n="nav.home" data-nav="home">Home</a>
+                            <a href="#school-projects" class="nav-link" data-i18n="nav.school" data-nav="school-projects">School Projects</a>
+                            <a href="#experience" class="nav-link" data-i18n="nav.experience" data-nav="experience">Experience</a>
                             <a href="#" id="cvLink" class="nav-link" data-i18n="nav.cv" onclick="return false;">CV</a>
                         </div>
                     </div>
@@ -115,6 +115,30 @@ class CustomNavbar extends HTMLElement {
                 });
             });
         }
+        
+        // Handle data-nav attributes using new router system
+        const navElements = this.shadowRoot.querySelectorAll('[data-nav]');
+        navElements.forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                const nav = el.getAttribute('data-nav');
+                // Use window.router methods from router.js
+                if (window.router) {
+                    if (nav === 'home') {
+                        window.goHome();
+                    } else if (nav === 'school-projects') {
+                        window.goHome('school-projects');
+                    } else if (nav === 'experience') {
+                        window.goHome('experience');
+                    }
+                }
+                // Close mobile menu
+                if (navLinks) {
+                    navLinks.classList.remove('open');
+                }
+            });
+        });
+        
         // i18n: update nav texts inside shadow DOM when language changes
         const applyI18n = (lang) => {
             try {

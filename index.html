@@ -23,12 +23,15 @@
     <script src="components/project-card.js"></script>
     <script src="components/experience-timeline.js"></script>
     <script src="components/footer.js"></script>
+    <script src="router.js"></script>
 </head>
 <body class="bg-gray-50 text-gray-800">
     <custom-navbar>
         <custom-language-switcher slot="right" inline></custom-language-switcher>
     </custom-navbar>
 
+    <!-- Home Page -->
+    <div id="page-home" style="display: block;">
     <main class="container mx-auto px-4 py-12">
         <!-- Hero Section -->
         <section class="mb-20">
@@ -40,37 +43,13 @@
                     <h1 class="text-3xl md:text-5xl font-bold mb-4" data-i18n="hero.title">Welcome to My Professional Journey</h1>
                     <p class="text-lg md:text-xl mb-6" data-i18n="hero.subtitle">Showcasing my achievements, projects, and experiences</p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <a href="#projects" class="btn-primary" data-i18n="hero.projects">View Projects</a>
+                        <a href="#experience" class="btn-primary" data-i18n="hero.projects">School Projects</a>
                         <a href="#experience" class="btn-secondary" data-i18n="hero.experience">My Experience</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Projects Section -->
-        <section id="projects" class="mb-20">
-            <h2 class="text-3xl font-bold mb-8 text-center" data-i18n="projects.title">Featured Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <custom-project-card 
-                    title="School Management System" 
-                    description="A comprehensive system for managing school operations"
-                    tags="Web Development, Database"
-                    image="http://static.photos/education/640x360/1">
-                </custom-project-card>
-                <custom-project-card 
-                    title="E-commerce Platform" 
-                    description="Full-featured online shopping solution"
-                    tags="React, Node.js"
-                    image="http://static.photos/retail/640x360/2">
-                </custom-project-card>
-                <custom-project-card 
-                    title="Data Analysis Tool" 
-                    description="Advanced analytics for business intelligence"
-                    tags="Python, Machine Learning"
-                    image="http://static.photos/technology/640x360/3">
-                </custom-project-card>
-            </div>
-        </section>
         <!-- Experience Section -->
         <section id="experience" class="mb-20">
             <h2 class="text-3xl font-bold mb-8 text-center" data-i18n="experience.title">Professional Experience</h2>
@@ -95,7 +74,16 @@
                 </custom-project-card>
             </div>
         </section>
-</main>
+    </main>
+    </div>
+
+    <!-- Experience Detail Page -->
+    <div id="page-experience-detail" style="display: none;">
+    <main class="container mx-auto px-4 py-12">
+        <!-- Experience detail content will be rendered here by JavaScript -->
+        <div id="experience-detail-content"></div>
+    </main>
+    </div>
 
     <custom-footer></custom-footer>
 
