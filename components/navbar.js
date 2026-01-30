@@ -146,7 +146,13 @@ class CustomNavbar extends HTMLElement {
             } catch (e) { /* ignore */ }
         };
 
-        // listen for language changes from centralized AppState (or legacy document events)
+        // initialize to preferred language from AppState immediately
+        const getPrefLang = () => {
+            return (window.AppState && window.AppState.getLanguage && window.AppState.getLanguage()) || (window.getLanguage && window.getLanguage()) || 'en';
+        };
+        applyI18n(getPrefLang());
+
+        // listen for language changes from centralized AppState with immediate: true to ensure sync
         if (window.AppState && window.AppState.on) {
             window.AppState.on('languageChange', (e) => {
                 console.log('[navbar] languageChange received', e.detail.language);
@@ -154,10 +160,6 @@ class CustomNavbar extends HTMLElement {
             }, { immediate: true });
         }
         document.addEventListener('languageChange', (e) => { console.log('[navbar] document languageChange', e.detail.language); applyI18n(e.detail.language); });
-
-        // initialize to preferred language from AppState
-        const prefLang = (window.AppState && window.AppState.getLanguage && window.AppState.getLanguage()) || (window.getLanguage && window.getLanguage()) || 'en';
-        applyI18n(prefLang);
 
         // CV button: construct PDF URL based on current language
         const cvLink = this.shadowRoot.getElementById('cvLink');

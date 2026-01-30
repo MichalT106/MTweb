@@ -11,6 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
     <script src="../globals.js"></script>
+    <script src="../script.js"></script>
     <script src="../components/navbar.js"></script>
     <script src="../components/language-switcher.js"></script>
     <script src="../components/footer.js"></script>
@@ -24,14 +25,13 @@
         <div class="experience-detail-content">
             <div class="experience-detail-header">
                 <a href="../index.html#experience" class="btn-primary" data-i18n="experience.back">Back to Experience</a>
-                <h1 style="margin: 0; flex: 1;" data-i18n="experience.details.title">Experience Details</h1>
             </div>
             
             <div class="detail-container">
                 <div class="detail-grid">
                     <div class="detail-section">
                         <h3 data-i18n="experience.details.period">Period</h3>
-                        <p>July 2023 – August 2025</p>
+                        <p data-i18n="experience.job1.period">July 2023 – August 2025</p>
                     </div>
                     <div class="detail-section">
                         <h3 data-i18n="experience.job1.title">Software & DevOps Engineer</h3>
@@ -50,17 +50,92 @@
                     </div>
                 </div>
                 
+                
                 <div class="detail-section">
-                    <h3 data-i18n="experience.details.responsibilities">Responsibilities</h3>
-                    <p data-i18n="experience.details.responsibilities.text">As a Software & DevOps Engineer at Webasto Convertibles Slovakia, I focused on developing and maintaining scalable software solutions while implementing DevOps best practices. My responsibilities included infrastructure management, CI/CD pipeline optimization, and collaborating with cross-functional teams to deliver high-quality products.</p>
+                    <h3 data-i18n="experience.details.intro.title">Role overview</h3>
+                    <p data-i18n="experience.details.intro.text">I worked as a Software & DevOps Engineer, focusing on internal developer enablement and CI automation. I created and maintained extensive GitLab Wiki documentation and later built a full Polyspace static analysis workflow in Jenkins (Bug Finder and Code Prover), from configuration and filtering to exporting results and publishing reports.</p>
                 </div>
-            </div>
+
+                <div class="detail-section">
+                    <h3 data-i18n="experience.details.keyResponsibilities.title">Key responsibilities</h3>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li data-i18n="experience.details.keyResponsibilities.item1">Create and maintain internal GitLab Wiki documentation for development processes, pipelines, and tooling.</li>
+                        <li data-i18n="experience.details.keyResponsibilities.item2">Implement Polyspace static analysis in Jenkins pipelines (Bug Finder and Code Prover) with project- and variant-based configuration.</li>
+                        <li data-i18n="experience.details.keyResponsibilities.item3">Design continuous jobs for fast analysis of changed files with concise summaries for Merge Requests, and nightly jobs for full-project analysis with detailed results.</li>
+                        <li data-i18n="experience.details.keyResponsibilities.item4">Provide ongoing Polyspace support: troubleshooting, output optimization, and keeping automation stable across projects; occasionally build small helper tools and scripts.</li>
+                    </ul>
+                </div>
+
+                <div class="detail-section">
+                    <h3 data-i18n="experience.details.polyspace.title">Polyspace in Jenkins (Bug Finder & Code Prover)</h3>
+                    <p class="mb-4" data-i18n="experience.details.polyspace.intro">The goal was to give developers quick, relevant feedback during Merge Requests, while also running deeper full-project verification regularly. The pipelines were structured around variants, robust source filtering, and clear outputs (artifacts, reports, and server uploads).</p>
+
+                    <div class="detail-grid">
+                        <div class="detail-section">
+                            <h4 class="text-lg font-semibold mb-2" data-i18n="experience.details.polyspace.continuous.title">Continuous job (Merge Requests)</h4>
+                            <ul class="list-disc pl-6 space-y-2">
+                                <li data-i18n="experience.details.polyspace.continuous.item1">Detect changed files by comparing the Merge Request branch against main and store the list for later filtering.</li>
+                                <li data-i18n="experience.details.polyspace.continuous.item2">Analyze only valid changed .c/.cpp files that are present in the variant's compile_commands.json, while excluding configured folders to avoid noise.</li>
+                                <li data-i18n="experience.details.polyspace.continuous.item3">Run Polyspace Bug Finder for fast feedback (Code Prover intentionally skipped to keep runtime low).</li>
+                                <li data-i18n="experience.details.polyspace.continuous.item4">Export results to CSV and SARIF, normalize SARIF paths with a script, generate a human-readable summary, and post it as a Merge Request comment; archive artifacts for download.</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <h4 class="text-lg font-semibold mb-2" data-i18n="experience.details.polyspace.nightly.title">Nightly job (full analysis)</h4>
+                            <ul class="list-disc pl-6 space-y-2">
+                                <li data-i18n="experience.details.polyspace.nightly.item1">Run full analysis across predefined variants, not limited to changed files.</li>
+                                <li data-i18n="experience.details.polyspace.nightly.item2">Execute both Bug Finder and Code Prover per variant, with parallel processing and consistent preprocessing configuration.</li>
+                                <li data-i18n="experience.details.polyspace.nightly.item3">Upload results to Polyspace Access in a structured hierarchy by variant and tool for team-wide browsing and review.</li>
+                                <li data-i18n="experience.details.polyspace.nightly.item4">Generate HTML reports from selected templates and export standardized CSV/SARIF outputs, then package and publish the outputs as Jenkins artifacts.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <h4 class="text-lg font-semibold mb-2" data-i18n="experience.details.polyspace.implementation.title">Implementation details</h4>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li data-i18n="experience.details.polyspace.implementation.item1">Use CMake compilation databases (compile_commands.json) as the single source of truth for per-variant configuration.</li>
+                            <li data-i18n="experience.details.polyspace.implementation.item2">Generate .psopts files via polyspace-configure and apply exclude-sources patterns to remove third-party / generated / irrelevant code from analysis sources.</li>
+                            <li data-i18n="experience.details.polyspace.implementation.item3">Handle cases where excluded folders still appear in preprocessing options by building a custom -do-not-generate-results-for argument (derived from .psopts content).</li>
+                            <li data-i18n="experience.details.polyspace.implementation.item4">Patch configurations for specific compiler environments (e.g., Green Hills) by adding stub include paths required for preprocessing.</li>
+                            <li data-i18n="experience.details.polyspace.implementation.item5">Configure analysis for interrupt handling and project-specific preprocessing (macros and interrupt enable/disable routines).</li>
+                            <li data-i18n="experience.details.polyspace.implementation.item6">Document safe usage of Polyspace code annotations as a last resort, with clear status/severity and justification comments for traceability.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h3 data-i18n="experience.details.support.title">Polyspace support & troubleshooting</h3>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li data-i18n="experience.details.support.item1">Diagnose and fix pipeline issues (configuration, missing sources/options, preprocessing problems, tool invocation errors).</li>
+                        <li data-i18n="experience.details.support.item2">Improve signal-to-noise by refining exclusions, filtering logic, and report/export outputs so results are actionable.</li>
+                        <li data-i18n="experience.details.support.item3">Help developers consume results effectively (Jenkins artifacts, Polyspace Access browsing, SARIF workflows in VS Code) and keep documentation up to date.</li>
+                    </ul>
+                </div>
+
+                <div class="detail-section">
+                    <h3 data-i18n="experience.details.tech.title">Technologies & tooling</h3>
+                    <p class="mb-4" data-i18n="experience.details.tech.subtitle">Main focus: CI/CD automation, static analysis integration, reporting/export workflows, and internal documentation.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-full text-sm bg-gray-200 text-gray-800">Jenkins</span>
+                        <span class="px-3 py-1 rounded-full text-sm bg-gray-200 text-gray-800">GitLab</span>
+                        <span class="px-3 py-1 rounded-full text-sm bg-gray-200 text-gray-800">GitLab Wiki</span>
+                        <span class="px-3 py-1 rounded-full text-sm bg-gray-200 text-gray-800">Groovy Pipelines</span>
+                        <span class="px-3 py-1 rounded-full text-sm bg-gray-200 text-gray-800">CMake</span>
+                        <span class="px-3 py-1 rounded-full text-sm bg-gray-200 text-gray-800">Polyspace Bug Finder</span>
+                        <span class="px-3 py-1 rounded-full text-sm bg-gray-200 text-gray-800">Polyspace Code Prover</span>
+                        <span class="px-3 py-1 rounded-full text-sm bg-gray-200 text-gray-800">Polyspace Access</span>
+                        <span class="px-3 py-1 rounded-full text-sm bg-gray-200 text-gray-800">Python scripting</span>
+                        <span class="px-3 py-1 rounded-full text-sm bg-gray-200 text-gray-800">VS Code (SARIF)</span>
+                    </div>
+                </div>
+
+</div>
         </div>
     </main>
 
     <custom-footer></custom-footer>
 
-    <script src="../script.js"></script>
     <script>
         feather.replace();
     </script>
