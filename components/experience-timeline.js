@@ -124,11 +124,14 @@ class CustomExperienceTimeline extends HTMLElement {
             } catch (e) { /* ignore */ }
         };
 
-        document.addEventListener('languageChange', (e) => {
-            applyI18n(e.detail.language);
-        });
+        // Listen for language changes from centralized AppState (and legacy document events)
+        if (window.AppState && window.AppState.on) {
+            window.AppState.on('languageChange', (e) => { console.log('[timeline] languageChange received', e.detail.language); applyI18n(e.detail.language); }, { immediate: true });
+        }
+        document.addEventListener('languageChange', (e) => { console.log('[timeline] document languageChange', e.detail.language); applyI18n(e.detail.language); });
 
-        const pref = localStorage.getItem('preferredLanguage') || (window.currentLanguage || 'en');
+        // Initialize from AppState
+        const pref = (window.AppState && window.AppState.getLanguage && window.AppState.getLanguage()) || (window.getLanguage && window.getLanguage()) || 'en';
         applyI18n(pref);
     }
 }

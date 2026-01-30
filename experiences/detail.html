@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience Details | Portfolio</title>
+    <link rel="stylesheet" href="../style.css">
+    <!-- Theme applied by globals.js -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="../globals.js"></script>
+    <script src="../components/navbar.js"></script>
+    <script src="../components/language-switcher.js"></script>
+    <script src="../components/footer.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <custom-navbar>
+        <custom-language-switcher slot="right" inline></custom-language-switcher>
+    </custom-navbar>
+
+    <main class="container mx-auto px-4 py-12">
+        <div class="experience-detail-content">
+            <div class="experience-detail-header">
+                <a href="../index.html#experience" class="btn-primary" data-i18n="experience.back">Back to Experience</a>
+                <h1 style="margin: 0; flex: 1;" data-i18n="experience.details.title">Experience Details</h1>
+            </div>
+            
+            <div class="detail-container">
+                <div class="detail-grid">
+                    <div class="detail-section">
+                        <h3 data-i18n="experience.details.period">Period</h3>
+                        <p>July 2023 – August 2025</p>
+                    </div>
+                    <div class="detail-section">
+                        <h3 data-i18n="experience.job1.title">Software & DevOps Engineer</h3>
+                        <p data-i18n="experience.job1.company">Webasto Convertibles Slovakia s.r.o.</p>
+                    </div>
+                </div>
+                
+                <div class="detail-grid">
+                    <div class="detail-section">
+                        <h3 data-i18n="experience.details.company">Company</h3>
+                        <p data-i18n="experience.job1.company">Webasto Convertibles Slovakia s.r.o.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h3 data-i18n="experience.details.location">Location</h3>
+                        <p data-i18n="experience.job1.location">Košice, Slovak Republic</p>
+                    </div>
+                </div>
+                
+                <div class="detail-section">
+                    <h3 data-i18n="experience.details.responsibilities">Responsibilities</h3>
+                    <p data-i18n="experience.details.responsibilities.text">As a Software & DevOps Engineer at Webasto Convertibles Slovakia, I focused on developing and maintaining scalable software solutions while implementing DevOps best practices. My responsibilities included infrastructure management, CI/CD pipeline optimization, and collaborating with cross-functional teams to deliver high-quality products.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script src="../script.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>

@@ -5,33 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio Prodigy | Professional Showcase</title>
     <link rel="stylesheet" href="style.css">
-    <script>
-        // Apply saved theme ASAP to avoid flash
-        (function () {
-            const saved = localStorage.getItem('theme');
-            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const theme = saved || (prefersDark ? 'dark' : 'light');
-            document.documentElement.setAttribute('data-theme', theme);
-        })();
-    </script>
+    <!-- Theme is applied by globals.js to avoid duplication -->
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
+    <script src="globals.js"></script>
     <script src="components/navbar.js"></script>
     <script src="components/language-switcher.js"></script>
     <script src="components/project-card.js"></script>
     <script src="components/experience-timeline.js"></script>
     <script src="components/footer.js"></script>
-    <script src="router.js"></script>
 </head>
 <body class="bg-gray-50 text-gray-800">
     <custom-navbar>
         <custom-language-switcher slot="right" inline></custom-language-switcher>
     </custom-navbar>
 
-    <!-- Home Page -->
-    <div id="page-home" style="display: block;">
     <main class="container mx-auto px-4 py-12">
         <!-- Hero Section -->
         <section class="mb-20">
@@ -43,7 +33,7 @@
                     <h1 class="text-3xl md:text-5xl font-bold mb-4" data-i18n="hero.title">Welcome to My Professional Journey</h1>
                     <p class="text-lg md:text-xl mb-6" data-i18n="hero.subtitle">Showcasing my achievements, projects, and experiences</p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <a href="#experience" class="btn-primary" data-i18n="hero.projects">School Projects</a>
+                        <a href="#school-projects" class="btn-primary" data-i18n="hero.projects">School Projects</a>
                         <a href="#experience" class="btn-secondary" data-i18n="hero.experience">My Experience</a>
                     </div>
                 </div>
@@ -53,37 +43,51 @@
         <!-- Experience Section -->
         <section id="experience" class="mb-20">
             <h2 class="text-3xl font-bold mb-8 text-center" data-i18n="experience.title">Professional Experience</h2>
-            <custom-experience-timeline></custom-experience-timeline>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content clickable" onclick="window.location.href='experiences/detail.html'" style="cursor: pointer;">
+                        <div class="timeline-date">July 2023 – August 2025</div>
+                        <h3 class="timeline-title" data-i18n="experience.job1.title">Software & DevOps Engineer</h3>
+                        <p class="timeline-description" data-i18n="experience.job1.company">Webasto Convertibles Slovakia s.r.o.</p>
+                        <p class="timeline-description" data-i18n="experience.job1.location">Košice, Slovak Republic</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- School Projects Section -->
         <section id="school-projects" class="mb-20">
             <h2 class="text-3xl font-bold mb-8 text-center" data-i18n="school.title">School Projects</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <custom-project-card 
-                    title="Database Project" 
-                    description="School database management system"
-                    tags="SQL, Database Design"
-                    image="http://static.photos/education/640x360/4">
-                </custom-project-card>
-                <custom-project-card 
-                    title="Web Design Project" 
-                    description="Responsive website for school"
-                    tags="HTML, CSS"
-                    image="http://static.photos/education/640x360/6">
-                </custom-project-card>
+                <div class="project-item" onclick="window.location.href='projects/detail-1.html'" style="cursor: pointer;">
+                    <div class="project-card">
+                        <img src="http://static.photos/education/640x360/4" alt="Database Project" class="w-full h-48 object-cover rounded-t-lg">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">Database Project</h3>
+                            <p class="text-gray-600 mb-4">School database management system</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">SQL</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Database Design</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-item" onclick="window.location.href='projects/detail-2.html'" style="cursor: pointer;">
+                    <div class="project-card">
+                        <img src="http://static.photos/education/640x360/6" alt="Web Design Project" class="w-full h-48 object-cover rounded-t-lg">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">Web Design Project</h3>
+                            <p class="text-gray-600 mb-4">Responsive website for school</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">HTML</span>
+                                <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">CSS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
-    </div>
-
-    <!-- Experience Detail Page -->
-    <div id="page-experience-detail" style="display: none;">
-    <main class="container mx-auto px-4 py-12">
-        <!-- Experience detail content will be rendered here by JavaScript -->
-        <div id="experience-detail-content"></div>
-    </main>
-    </div>
 
     <custom-footer></custom-footer>
 

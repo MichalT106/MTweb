@@ -1,5 +1,12 @@
 class CustomNavbar extends HTMLElement {
     connectedCallback() {
+        // Determine if we're in a subdirectory
+        const path = window.location.pathname;
+        const isInSubdir = path.includes('/experiences/') || path.includes('/projects/');
+        const homeLink = isInSubdir ? '../index.html' : 'index.html';
+        const experienceLink = isInSubdir ? '../index.html#experience' : 'index.html#experience';
+        const projectsLink = isInSubdir ? '../index.html#school-projects' : 'index.html#school-projects';
+        
         this.attachShadow({ mode: 'open' });
         this.shadowRoot.innerHTML = `
             <style>
@@ -83,11 +90,11 @@ class CustomNavbar extends HTMLElement {
             <nav>
                 <div class="nav-container">
                     <div class="nav-left">
-                        <a href="#" class="logo" data-nav="home">MTweb</a>
+                        <a href="${homeLink}" class="logo" data-nav="home">MTweb</a>
                         <div class="nav-links" id="navLinks">
-                            <a href="#" class="nav-link" data-i18n="nav.home" data-nav="home">Home</a>
-                            <a href="#school-projects" class="nav-link" data-i18n="nav.school" data-nav="school-projects">School Projects</a>
-                            <a href="#experience" class="nav-link" data-i18n="nav.experience" data-nav="experience">Experience</a>
+                            <a href="${homeLink}" class="nav-link" data-i18n="nav.home" data-nav="home">Home</a>
+                            <a href="${projectsLink}" class="nav-link" data-i18n="nav.school" data-nav="school-projects">School Projects</a>
+                            <a href="${experienceLink}" class="nav-link" data-i18n="nav.experience" data-nav="experience">Experience</a>
                             <a href="#" id="cvLink" class="nav-link" data-i18n="nav.cv" onclick="return false;">CV</a>
                         </div>
                     </div>
@@ -116,22 +123,10 @@ class CustomNavbar extends HTMLElement {
             });
         }
         
-        // Handle data-nav attributes using new router system
-        const navElements = this.shadowRoot.querySelectorAll('[data-nav]');
+        // Simply close mobile menu when a nav link is clicked
+        const navElements = this.shadowRoot.querySelectorAll('[data-nav], #cvLink');
         navElements.forEach(el => {
-            el.addEventListener('click', (e) => {
-                e.preventDefault();
-                const nav = el.getAttribute('data-nav');
-                // Use window.router methods from router.js
-                if (window.router) {
-                    if (nav === 'home') {
-                        window.goHome();
-                    } else if (nav === 'school-projects') {
-                        window.goHome('school-projects');
-                    } else if (nav === 'experience') {
-                        window.goHome('experience');
-                    }
-                }
+            el.addEventListener('click', () => {
                 // Close mobile menu
                 if (navLinks) {
                     navLinks.classList.remove('open');
@@ -151,22 +146,38 @@ class CustomNavbar extends HTMLElement {
             } catch (e) { /* ignore */ }
         };
 
-        document.addEventListener('languageChange', (e) => {
-            applyI18n(e.detail.language);
-        });
+        // listen for language changes from centralized AppState (or legacy document events)
+        if (window.AppState && window.AppState.on) {
+            window.AppState.on('languageChange', (e) => {
+                console.log('[navbar] languageChange received', e.detail.language);
+                applyI18n(e.detail.language);
+            }, { immediate: true });
+        }
+        document.addEventListener('languageChange', (e) => { console.log('[navbar] document languageChange', e.detail.language); applyI18n(e.detail.language); });
 
-        // initialize to preferred language immediately
-        const pref = localStorage.getItem('preferredLanguage') || (window.currentLanguage || 'en');
-        applyI18n(pref);
+        // initialize to preferred language from AppState
+        const prefLang = (window.AppState && window.AppState.getLanguage && window.AppState.getLanguage()) || (window.getLanguage && window.getLanguage()) || 'en';
+        applyI18n(prefLang);
 
         // CV button: construct PDF URL based on current language
         const cvLink = this.shadowRoot.getElementById('cvLink');
         const openCvPdf = () => {
-            const lang = localStorage.getItem('preferredLanguage') || (window.currentLanguage || 'en');
+            const lang = (window.getLanguage && window.getLanguage()) || window.currentLanguage || 'en';
             const fileName = lang === 'sk' ? 'CV_SK.pdf' : 'CV_EN.pdf';
-            const cvUrl = './biography/' + fileName;
+            const cvPath = isInSubdir ? '../biography/' : './biography/';
+            const cvUrl = cvPath + fileName;
             window.open(cvUrl, '_blank');
         };
+
+        // update CV when language changes
+        const updateCvForLang = () => {
+            // nothing to mutate here; openCvPdf will read the AppState when used
+        };
+
+        if (window.AppState && window.AppState.on) {
+            window.AppState.on('languageChange', (e) => { console.log('[navbar] languageChange for CV', e.detail.language); updateCvForLang(); }, { immediate: true });
+        }
+        document.addEventListener('languageChange', (e) => { console.log('[navbar] document languageChange for CV', e.detail.language); updateCvForLang(); });
 
         if (cvLink) {
             cvLink.addEventListener('click', (e) => {

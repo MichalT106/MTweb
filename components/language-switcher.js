@@ -75,44 +75,69 @@ class CustomLanguageSwitcher extends HTMLElement {
         };
 
         const toggleLang = () => {
-            const current = localStorage.getItem('preferredLanguage') || (window.currentLanguage || 'en');
-            const next = current === 'sk' ? 'en' : 'sk';
-            if (window.setLanguage) {
+            // Do not hold local state; ask AppState to change the language.
+            console.log('[language-switcher] toggleLang clicked');
+            if (window.AppState && typeof window.AppState.getLanguage === 'function') {
+                const current = window.AppState.getLanguage();
+                const next = current === 'sk' ? 'en' : 'sk';
+                window.AppState.setLanguage(next);
+            } else if (window.setLanguage) {
+                const current = (window.getLanguage && window.getLanguage()) || 'en';
+                const next = current === 'sk' ? 'en' : 'sk';
                 window.setLanguage(next);
-            } else {
-                this.dispatchEvent(new CustomEvent('languageChange', { detail: { language: next }, bubbles: true, composed: true }));
             }
-            setLangUI(next);
+            // do NOT directly call setLangUI here; UI will update in response to the centralized event
         };
 
         langToggle.addEventListener('click', toggleLang);
         langToggle.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleLang(); } });
 
-        // initialize from preference or global
-        const prefLang = localStorage.getItem('preferredLanguage') || (window.currentLanguage || 'en');
-        setLangUI(prefLang);
+        // initialize from global AppState
+        const initialLang = (window.AppState && window.AppState.getLanguage && window.AppState.getLanguage()) || (window.getLanguage && window.getLanguage()) || 'en';
+        setLangUI(initialLang);
 
-        // listen for external language changes
-        document.addEventListener('languageChange', (e) => { setLangUI(e.detail.language); });
+        // listen for external language changes from AppState (and legacy document events)
+        if (window.AppState && window.AppState.on) {
+            // use immediate:true to avoid race where AppState already emitted initial events
+            window.AppState.on('languageChange', (e) => {
+                console.log('[language-switcher] languageChange received', e.detail.language);
+                setLangUI(e.detail.language);
+            }, { immediate: true });
+        }
+        document.addEventListener('languageChange', (e) => { console.log('[language-switcher] document languageChange', e.detail.language); setLangUI(e.detail.language); });
 
         // Theme toggle (checkbox)
         const themeToggle = this.shadowRoot.getElementById('themeToggle');
         const themeKnob = this.shadowRoot.getElementById('themeKnob');
 
-        const syncThemeUI = () => {
-            const theme = document.documentElement.getAttribute('data-theme') || 'light';
-            const isDark = theme === 'dark';
+        const syncThemeUI = (theme) => {
+            const t = theme || ((window.AppState && window.AppState.getTheme && window.AppState.getTheme()) || document.documentElement.getAttribute('data-theme') || 'light');
+            const isDark = t === 'dark';
             if (isDark) themeToggle.setAttribute('data-checked', 'true'); else themeToggle.removeAttribute('data-checked');
             // Show sun for light mode, moon for dark mode
             themeKnob.textContent = isDark ? '🌙' : '☀️';
         };
 
-        const toggleTheme = () => { if (window.toggleTheme) window.toggleTheme(); };
+        const toggleTheme = () => {
+            console.log('[language-switcher] toggleTheme clicked');
+            if (window.AppState && window.AppState.toggleTheme) {
+                window.AppState.toggleTheme();
+            } else if (window.toggleTheme) {
+                window.toggleTheme();
+            }
+        };
 
         themeToggle.addEventListener('click', toggleTheme);
         themeToggle.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTheme(); } });
 
-        document.addEventListener('themeChange', syncThemeUI);
+        if (window.AppState && window.AppState.on) {
+            window.AppState.on('themeChange', (e) => {
+                console.log('[language-switcher] themeChange received', e.detail.theme);
+                syncThemeUI(e.detail.theme);
+            }, { immediate: true });
+        }
+        document.addEventListener('themeChange', (e) => { console.log('[language-switcher] document themeChange', e.detail.theme); syncThemeUI(e.detail.theme); });
+        // initialize theme UI
         syncThemeUI();
     }
 }

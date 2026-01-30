@@ -64,10 +64,9 @@ class CustomFooter extends HTMLElement {
                     <div class="footer-section">
                         <h3 data-i18n="footer.links">Quick Links</h3>
                         <div class="footer-links">
-                            <a href="#" class="footer-link" data-i18n="nav.home" data-nav="home">Home</a>
-                            <a href="#experience" class="footer-link" data-i18n="nav.experience" data-nav="experience">Experience</a>
-                            <a href="#school-projects" class="footer-link" data-i18n="nav.school" data-nav="school-projects">School Projects</a>
-                            <a href="#skills" class="footer-link" data-i18n="nav.skills">Skills</a>
+                            <a href="index.html" class="footer-link" data-i18n="nav.home" data-nav="home">Home</a>
+                            <a href="index.html#experience" class="footer-link" data-i18n="nav.experience" data-nav="experience">Experience</a>
+                            <a href="index.html#school-projects" class="footer-link" data-i18n="nav.school" data-nav="school-projects">School Projects</a>
                         </div>
                     </div>
                     <div class="footer-section">
@@ -89,23 +88,22 @@ class CustomFooter extends HTMLElement {
             </footer>
         `;
         
-        // Handle data-nav attributes in footer using new router
-        const footerNavElements = this.shadowRoot.querySelectorAll('[data-nav]');
-        footerNavElements.forEach(el => {
-            el.addEventListener('click', (e) => {
-                e.preventDefault();
-                const nav = el.getAttribute('data-nav');
-                // Use window.router methods from router.js
-                if (window.router) {
-                    if (nav === 'home') {
-                        window.goHome();
-                    } else if (nav === 'school-projects') {
-                        window.goHome('school-projects');
-                    } else if (nav === 'experience') {
-                        window.goHome('experience');
-                    }
-                }
-            });
+        // Adjust footer links for subdirectory pages and smooth scroll
+        const path = window.location.pathname;
+        const isInSubdir = path.includes('/experiences/') || path.includes('/projects/');
+        const base = isInSubdir ? '../' : '';
+        this.shadowRoot.querySelectorAll('.footer-link').forEach(el => {
+            const href = el.getAttribute('href');
+            if (href && href.startsWith('index.html')) {
+                el.setAttribute('href', base + 'index.html' + href.replace('index.html', '').trim());
+            }
+            if (href && href.startsWith('#')) {
+                el.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = document.querySelector(el.getAttribute('href'));
+                    if (target) target.scrollIntoView({ behavior: 'smooth' });
+                });
+            }
         });
         
         // i18n: update footer texts inside shadow DOM when language changes
@@ -120,12 +118,14 @@ class CustomFooter extends HTMLElement {
             } catch (e) { /* ignore */ }
         };
 
-        document.addEventListener('languageChange', (e) => {
-            applyI18n(e.detail.language);
-        });
+        // listen for language changes from centralized AppState (and legacy document events)
+        if (window.AppState && window.AppState.on) {
+            window.AppState.on('languageChange', (e) => { console.log('[footer] languageChange received', e.detail.language); applyI18n(e.detail.language); }, { immediate: true });
+        }
+        document.addEventListener('languageChange', (e) => { console.log('[footer] document languageChange', e.detail.language); applyI18n(e.detail.language); });
 
-        // initialize to preferred language immediately
-        const pref = localStorage.getItem('preferredLanguage') || (window.currentLanguage || 'en');
+        // initialize language
+        const pref = (window.AppState && window.AppState.getLanguage && window.AppState.getLanguage()) || (window.getLanguage && window.getLanguage()) || 'en';
         applyI18n(pref);
     }
 }
