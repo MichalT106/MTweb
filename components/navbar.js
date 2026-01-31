@@ -93,8 +93,8 @@ class CustomNavbar extends HTMLElement {
                         <a href="${homeLink}" class="logo" data-nav="home">MTweb</a>
                         <div class="nav-links" id="navLinks">
                             <a href="${homeLink}" class="nav-link" data-i18n="nav.home" data-nav="home">Home</a>
-                            <a href="${projectsLink}" class="nav-link" data-i18n="nav.school" data-nav="school-projects">School Projects</a>
                             <a href="${experienceLink}" class="nav-link" data-i18n="nav.experience" data-nav="experience">Experience</a>
+                            <a href="${projectsLink}" class="nav-link" data-i18n="nav.school" data-nav="school-projects">School Projects</a>
                             <a href="#" id="cvLink" class="nav-link" data-i18n="nav.cv" onclick="return false;">CV</a>
                         </div>
                     </div>

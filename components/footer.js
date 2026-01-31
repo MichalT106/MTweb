@@ -58,10 +58,6 @@ class CustomFooter extends HTMLElement {
             <footer>
             <div class="footer-container">
                 <div class="footer-section">
-                <h3 data-i18n="footer.about">About Me</h3>
-                <p data-i18n="footer.aboutText">Passionate developer with experience in various technologies and industries.</p>
-                </div>
-                <div class="footer-section">
                 <h3 data-i18n="footer.links">Quick Links</h3>
                 <div class="footer-links">
                     <a href="index.html" class="footer-link" data-i18n="nav.home" data-nav="home">Home</a>

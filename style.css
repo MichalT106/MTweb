@@ -350,3 +350,9 @@ main {
         margin-top: 0.5rem !important;
     }
 }
+
+/* FORCE BLACK TEXT IN LIGHT MODE (GAMEDAYS + DETAIL PAGES) */
+html:not([data-theme="dark"]) {
+    --text: #000000;
+    --muted-text: #1F2937;
+}

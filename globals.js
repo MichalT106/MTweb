@@ -8,6 +8,24 @@
 
     // Toggle this to `false` when you no longer need verbose runtime logs
     const DEBUG = true;
+    // Apply theme to both <html> and <body>.
+    // Some legacy CSS targets body[data-theme], so we keep them in sync.
+    const applyThemeToDocument = (theme) => {
+        const t = theme === 'dark' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', t);
+        if (t === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Body may not exist yet when this runs (early in <head>).
+        if (document.body) {
+            document.body.setAttribute('data-theme', t);
+            if (t === 'dark') document.body.classList.add('dark');
+            else document.body.classList.remove('dark');
+        }
+    };
 
     class AppStateClass extends EventTarget {
         constructor() {
@@ -19,7 +37,10 @@
             this._theme = savedTheme === 'dark' ? 'dark' : 'light';
 
             // Apply theme immediately to avoid flash
-            document.documentElement.setAttribute('data-theme', this._theme);
+            applyThemeToDocument(this._theme);
+
+            // Ensure <body> gets updated once it exists.
+            document.addEventListener('DOMContentLoaded', () => applyThemeToDocument(this._theme));
 
             // Keep in sync with other tabs/windows
             window.addEventListener('storage', (e) => this._onStorage(e));
@@ -34,7 +55,10 @@
             }
             if (e.key === THEME_KEY && e.newValue && e.newValue !== this._theme) {
                 this._theme = e.newValue === 'dark' ? 'dark' : 'light';
-                document.documentElement.setAttribute('data-theme', this._theme);
+                applyThemeToDocument(this._theme);
+
+            // Ensure <body> gets updated once it exists.
+            document.addEventListener('DOMContentLoaded', () => applyThemeToDocument(this._theme));
                 this._emit('themeChange', { theme: this._theme });
             }
         }
@@ -66,7 +90,7 @@
             if (t === this._theme) return;
             if (DEBUG) console.log('[AppState] setTheme called', t);
             this._theme = t;
-            document.documentElement.setAttribute('data-theme', t);
+            applyThemeToDocument(t);
             localStorage.setItem(THEME_KEY, t);
             this._emit('themeChange', { theme: t });
         }

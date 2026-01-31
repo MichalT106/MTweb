@@ -17,43 +17,58 @@
 }
 
 /* ============================================================================
-   CARD & HOVER EFFECTS
+   CONTENT / MEDIA BLOCKS
+   Replaces old .card-hover centered card look with flexible
+   semantic blocks that follow theme variables from the global styles.
+   Use `section.content-block` for textual content and
+   `figure.media-block` for media (video / gallery).
    ============================================================================ */
 
+/* Base block appearance - theme-aware via CSS variables defined in ../style.css */
+.content-block,
+.media-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.2s ease;
+}
+
+/* Slightly darker borders in light mode so blocks don't fade into background */
+html:not([data-theme="dark"]) .content-block,
+html:not([data-theme="dark"]) .media-block,
+html:not([data-theme="dark"]) .card-hover {
+    border-color: #D1D5DB;
+}
+
+.content-block {
+    padding: 1.5rem;
+    border-radius: 0.6rem;
+}
+
+.media-block {
+    padding: 1rem;
+    border-radius: 0.6rem;
+}
+
+/* Subtle hover lift for emphasis */
+.content-block:hover,
+.media-block:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover) !important;
+}
+
+/* Utility: make blocks compose nicely with existing Tailwind spacing classes */
+.content-block.p-6,
+.media-block.p-6 {
+    padding: 1.5rem;
+}
+
+/* Backwards compatibility: provide a gentle alias to the legacy class
+   so old pages won't break immediately. Prefer using `.content-block`. */
 .card-hover {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.card-hover:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15) !important;
-}
-
-/* Light mode card styling */
-[data-theme="light"] .card-hover,
-body:not([data-theme]) .card-hover {
-    background: linear-gradient(135deg, #FFFFFF 0%, #F9FAFB 100%);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-[data-theme="light"] .card-hover:hover,
-body:not([data-theme]) .card-hover:hover {
-    border-color: #4F46E5;
-    background: #FFFFFF;
-}
-
-/* Dark mode card styling */
-[data-theme="dark"] .card-hover {
-    background: linear-gradient(135deg, #1F2937 0%, #111827 100%);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(79, 70, 229, 0.1);
-}
-
-[data-theme="dark"] .card-hover:hover {
-    border-color: #818CF8;
-    background: #111827;
-    box-shadow: 0 12px 24px rgba(79, 70, 229, 0.2) !important;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
 }
 
 /* ============================================================================
@@ -117,7 +132,7 @@ body:not([data-theme]) .card-hover:hover {
 }
 
 /* ============================================================================
-   TAG & BADGE STYLES
+   TAGS
    ============================================================================ */
 
 .tag {
@@ -133,12 +148,12 @@ body:not([data-theme]) .card-hover:hover {
 
 /* Light mode tags */
 [data-theme="light"] .tag,
-body:not([data-theme]) .tag {
+html:not([data-theme="dark"]) .tag {
     background: linear-gradient(135deg, #E0E7FF 0%, #F3E8FF 100%);
 }
 
 [data-theme="light"] .tag:hover,
-body:not([data-theme]) .tag:hover {
+html:not([data-theme="dark"]) .tag:hover {
     background: linear-gradient(135deg, #C7D2FE 0%, #DDD6FE 100%);
     transform: scale(1.05);
     box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
@@ -293,7 +308,7 @@ body:not([data-theme]) .tag:hover {
 
 /* Light mode header */
 [data-theme="light"] .header-accent,
-body:not([data-theme]) .header-accent {
+html:not([data-theme="dark"]) .header-accent {
     background: linear-gradient(135deg, rgba(79, 70, 229, 0.05), rgba(139, 92, 246, 0.05));
 }
 
@@ -396,17 +411,13 @@ body:not([data-theme]) .header-accent {
         border-top-color: #A5B4FC;
     }
 
-    .card-hover:hover {
+    .content-block:hover, .media-block:hover, .card-hover:hover {
         transform: translateY(-4px);
     }
 
     /* Slightly reduce shadow on mobile */
-    .card-hover:hover {
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12) !important;
-    }
-
-    [data-theme="dark"] .card-hover:hover {
-        box-shadow: 0 8px 16px rgba(79, 70, 229, 0.15) !important;
+    .content-block:hover, .media-block:hover, .card-hover:hover {
+        box-shadow: var(--shadow-hover) !important;
     }
 
     /* Adjust button size on mobile */
@@ -431,7 +442,7 @@ body:not([data-theme]) .header-accent {
         animation: none !important;
     }
 
-    .card-hover:hover {
+    .content-block:hover, .media-block:hover, .card-hover:hover {
         transform: none;
     }
 
@@ -585,17 +596,13 @@ body:not([data-theme]) .header-accent {
         border-top-color: #A5B4FC;
     }
 
-    .card-hover:hover {
+    .content-block:hover, .media-block:hover, .card-hover:hover {
         transform: translateY(-4px);
     }
 
     /* Slightly reduce shadow on mobile */
-    .card-hover:hover {
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12) !important;
-    }
-
-    [data-theme="dark"] .card-hover:hover {
-        box-shadow: 0 8px 16px rgba(79, 70, 229, 0.15) !important;
+    .content-block:hover, .media-block:hover, .card-hover:hover {
+        box-shadow: var(--shadow-hover) !important;
     }
 
     /* Adjust button size on mobile */
@@ -649,7 +656,7 @@ body:not([data-theme]) .header-accent {
         animation: none !important;
     }
 
-    .card-hover:hover {
+    .content-block:hover, .media-block:hover, .card-hover:hover {
         transform: none;
     }
 
@@ -662,14 +669,60 @@ body:not([data-theme]) .header-accent {
     }
 }
 
+/* ============================================================================
+   TAILWIND DARK MODE SUPPORT
+   ============================================================================ */
+
+/* Fix Tailwind dark: prefix colors */
+.dark .dark\:text-white {
+    color: #FFFFFF !important;
+}
+
+.dark .dark\:text-gray-300 {
+    color: #D1D5DB !important;
+}
+
+.dark .dark\:bg-gray-800 {
+    background-color: #1F2937 !important;
+}
+
+.dark .dark\:bg-gray-900 {
+    background-color: #111827 !important;
+}
+
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6 {
+    color: #F3F4F6 !important;
+}
+
+.dark p,
+.dark li,
+.dark span {
+    color: #D1D5DB;
+}
+
+.dark .text-gray-700 {
+    color: #D1D5DB !important;
+}
+
+.dark .text-gray-900 {
+    color: #F3F4F6 !important;
+}
+
 @media print {
     .btn-modern,
+    .content-block,
+    .media-block,
     .card-hover {
         box-shadow: none !important;
         transform: none !important;
     }
 
-    .card-hover:hover {
+    .content-block:hover, .media-block:hover, .card-hover:hover {
         box-shadow: none !important;
     }
 
@@ -680,4 +733,18 @@ body:not([data-theme]) .header-accent {
     .lightbox-modal {
         display: none !important;
     }
+}
+
+
+/* LIGHT MODE TEXT COLOR FIX */
+html:not([data-theme="dark"]) .text-gray-700 {
+    color: #000000 !important;
+}
+
+html:not([data-theme="dark"]) .text-gray-600 {
+    color: #1F2937 !important;
+}
+
+html:not([data-theme="dark"]) .text-gray-900 {
+    color: #000000 !important;
 }

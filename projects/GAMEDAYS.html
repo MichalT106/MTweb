@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Call For Justice | Portfolio</title>
+    <title>MTweb | Call For Justice Project</title>
 
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="./styles/project-detail-template.css" />
@@ -28,15 +28,8 @@
     <main class="container mx-auto px-4 py-12">
         <!-- Header Section with Enhanced Design -->
         <div class="mb-12">
-            <a href="../index.html#school-projects" class="btn-modern mb-4 inline-flex" data-i18n="project1.back">
-                <span>←</span> <span>Back to Projects</span>
-            </a>
-
-            <div class="header-accent mt-6">
+                <div class="header-accent mt-6">
                 <h1 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-3" data-i18n="project1.title">Call For Justice</h1>
-                <p class="text-gray-600 text-lg" data-i18n="project1.subtitle">
-                    2D story-driven game created during GameDays (48-hour game jam)
-                </p>
             </div>
         </div>
 
@@ -44,56 +37,70 @@
         <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <!-- LEFT: Text / Description -->
             <section class="space-y-6">
-                <!-- Event Info Card -->
-                <div class="card-hover p-6 bg-white rounded-lg">
+                <!-- Event Info -->
+                <article class="content-block p-6 rounded-lg">
                     <div class="flex items-start gap-4">
                         <div class="text-2xl">🎮</div>
-                        <div>
-                            <p class="text-gray-700 leading-relaxed">
+                        <div class="space-y-3">
+                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
                                 <span data-i18n="project1.eventPrefix">Created during </span>
                                 <a href="https://gamedays.sk/" target="_blank" rel="noopener" class="link-primary" data-i18n="project1.eventLink">GameDays (Game Jam Košice)</a>
-                                <span data-i18n="project1.eventSuffix">, a 48-hour challenge with the theme of journalism.</span>
+                                <span data-i18n="project1.eventSuffix">, an event I took part in as part of a university course.</span>
+                            </p>
+                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-i18n="project1.eventIntro">
+                                GameDays is a 48-hour game development challenge where a small team has to design and build a playable game around a given theme—from idea, through implementation, to a final build.
                             </p>
                         </div>
                     </div>
-                </div>
+                </article>
 
-                <!-- Overview Card -->
-                <div class="card-hover p-6 bg-white rounded-lg">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-4 section-title" data-i18n="project1.overview.h">Project overview</h2>
+                 <!-- Overview -->
+                     <section class="content-block p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project1.overview.h">Project overview</h2>
                     <div class="space-y-3">
-                        <p class="text-gray-700 leading-relaxed" data-i18n="project1.overview.p1">
-                            Call For Justice is a 2D narrative game where the player follows a journalist uncovering corruption.
+                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-i18n="project1.overview.p1">
+                            In our year, the theme was journalism. Call For Justice is a 2D story-driven adventure made in Unity, where you play an investigative journalist trapped in a web of lies, corruption, and betrayal.
                         </p>
-                        <p class="text-gray-700 leading-relaxed" data-i18n="project1.overview.p2">
-                            Progression is driven by exploration, character movement on the map, interactions with NPCs, and simple mini-games.
+                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-i18n="project1.overview.p2">
+                            You explore the city, talk to characters, gather clues, and progress through movement on the map, interactions, and short mini-games that push the narrative forward while the mafia closes in.
                         </p>
                     </div>
-                </div>
+                </section>
 
-                <!-- Contribution Card -->
-                <div class="card-hover p-6 bg-white rounded-lg">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-4 section-title" data-i18n="project1.contribution.h">My contribution</h2>
+                <!-- Contribution -->
+                <section class="content-block p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project1.contribution.h">My contribution</h2>
                     <ul class="space-y-3">
-                        <li class="list-item-custom text-gray-700" data-i18n="project1.contribution.li1">Implemented several mini-games used throughout the story progression.</li>
-                        <li class="list-item-custom text-gray-700" data-i18n="project1.contribution.li2">Built the character movement system for navigating the map.</li>
-                        <li class="list-item-custom text-gray-700" data-i18n="project1.contribution.li3">Helped with quick iteration and integration under strict time limits.</li>
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project1.contribution.li1">Implemented character movement and basic animation logic on the overworld map (controller + Animator).</li>
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project1.contribution.li2">Designed, implemented, and integrated several mini-games used throughout the story progression.</li>
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project1.contribution.li3">Worked with the team on rapid iteration, debugging, and polishing gameplay under strict 48-hour time limits.</li>
                     </ul>
-                </div>
+                </section>
 
-                <!-- Learning Card -->
-                <div class="card-hover p-6 bg-white rounded-lg">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-4 section-title" data-i18n="project1.learned.h">What I gained</h2>
+                <!-- What I gained -->
+                <section class="content-block p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project1.learned.h">What I gained</h2>
                     <ul class="space-y-3">
-                        <li class="list-item-custom text-gray-700" data-i18n="project1.learned.li1">Collaboration under time pressure and fast decision-making.</li>
-                        <li class="list-item-custom text-gray-700" data-i18n="project1.learned.li2">Effective task division and prioritization in a small team.</li>
-                        <li class="list-item-custom text-gray-700" data-i18n="project1.learned.li3">Hands-on experience with a full development cycle in a very short timeframe.</li>
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project1.learned.li1">Better teamwork in a small team: communication and task distribution.</li>
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project1.learned.li2">Faster thinking and decision-making under time pressure.</li>
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project1.learned.li3">A clearer overview of the full game dev process (idea → prototype → implementation → integration → release build) in a short timeframe.</li>
                     </ul>
-                </div>
+                </section>
 
-                <!-- Links Card with better styling -->
-                <div class="card-hover p-6 bg-white rounded-lg">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-4 section-title" data-i18n="project1.links.h">Links</h2>
+                <!-- Technologies -->
+                <section class="content-block p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project1.meta.stackLabel">Technologies</h2>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="tag">Unity</span>
+                        <span class="tag">C#</span>
+                        <span class="tag">2D Game Development</span>
+                        <span class="tag">Rapid Prototyping</span>
+                    </div>
+                </section>
+
+                <!-- Links -->
+                <section class="content-block p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project1.links.h">Links</h2>
                     <div class="space-y-3 flex flex-col">
                         <a class="link-primary text-lg" target="_blank" rel="noopener"
                            href="https://slavomirstucka.itch.io/call-for-justice" data-i18n="project1.links.itch">
@@ -104,29 +111,19 @@
                            Watch gameplay on YouTube
                         </a>
                         <a class="link-primary text-lg" target="_blank" rel="noopener"
-                           href="https://gamedays.sk/" data-i18n="project1.links.gamedays">
+                           href="https://gamedays.sk/about" data-i18n="project1.links.gamedays">
                            About the GameDays event
                         </a>
                     </div>
-                </div>
+                </section>
 
-                <!-- Technologies Card -->
-                <div class="card-hover p-6 bg-white rounded-lg">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-4 section-title" data-i18n="project1.meta.stackLabel">Technologies</h2>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="tag">Unity</span>
-                        <span class="tag">C#</span>
-                        <span class="tag">2D</span>
-                        <span class="tag">Game Jam</span>
-                    </div>
-                </div>
             </section>
 
             <!-- RIGHT: Media with Enhanced Design -->
             <aside class="space-y-6">
-                <!-- Video Card -->
-                <div class="card-hover p-6 bg-white rounded-lg">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-4 section-title" data-i18n="project1.media.video">Gameplay video</h2>
+                <!-- Video -->
+                <figure class="media-block p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project1.media.video">Gameplay video</h2>
                     <div class="video-container aspect-video w-full overflow-hidden rounded-lg">
                         <iframe
                             class="w-full h-full"
@@ -137,11 +134,11 @@
                             allowfullscreen>
                         </iframe>
                     </div>
-                </div>
+                </figure>
 
-                <!-- Gallery Card -->
-                <div class="card-hover p-6 bg-white rounded-lg">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-4 section-title" data-i18n="project1.media.gallery">Screenshots</h2>
+                <!-- Gallery -->
+                <figure class="media-block p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project1.media.gallery">Screenshots</h2>
 
                     <!-- Interactive Gallery Grid -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="gallery">
@@ -169,7 +166,7 @@
                     </div>
 
                     <!-- Lightbox Modal is mounted at end of <body> to avoid clipping by parent containers -->
-                </div>
+                </figure>
             </aside>
         </div>
     </main>
@@ -273,5 +270,17 @@
             initLightbox();
         }
     </script>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" aria-hidden="true">
+        <div class="lightbox-content">
+            <button id="lightboxClose" class="lightbox-close" aria-label="Close">×</button>
+            <button id="lightboxPrev" class="lightbox-nav lightbox-prev" aria-label="Previous">‹</button>
+            <img id="lightboxImg" class="lightbox-img" src="" alt="">
+            <button id="lightboxNext" class="lightbox-nav lightbox-next" aria-label="Next">›</button>
+            <div id="lightboxCounter" class="lightbox-counter">1 / 1</div>
+        </div>
+    </div>
+
 </body>
 </html>
