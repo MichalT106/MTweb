@@ -110,6 +110,7 @@ const translations = {
         "project1.learned.li2": "Faster thinking and decision-making under time pressure.",
         "project1.learned.li3": "A clearer overview of the full game dev process (idea → prototype → implementation → integration → release build) in a short timeframe.",
 
+        "project1.meta.stackLabel": "Technologies",
         // --- LINKS ---
         "project1.links.h": "Links",
         "project1.links.itch": "Play / view on Itch.io",
@@ -182,6 +183,8 @@ const translations = {
 
         "project2.learned.li3":
         "Experience with transforming a centralized system into a cloud-based distributed architecture and working with AWS services.",
+
+        "project2.meta.stackLabel": "Technologies",
 
         "project2.links.event": "About the Live IT Projects event",
         "project2.links.youtube": "Watch presentation on YouTube",
@@ -301,6 +304,7 @@ const translations = {
         "project1.learned.li2": "Rýchlejšie rozmýšľanie a rozhodovanie pod časovým tlakom.",
         "project1.learned.li3": "Praktický prehľad celého procesu vývoja hry (nápad → prototyp → implementácia → integrácia → release build) v krátkom čase.",
 
+        "project1.meta.stackLabel": "Technológie",
         // --- LINKS ---
         "project1.links.h": "Odkazy",
         "project1.links.itch": "Hra na Itch.io",
@@ -377,6 +381,8 @@ const translations = {
 
         "project2.learned.li3":
         "Skúsenosti s transformáciou centralizovaného systému do cloudovej architektúry a prácou s AWS službami.",
+
+        "project2.meta.stackLabel": "Technológie",
 
         "project2.links.event": "O udalosti Live IT Projects",
         "project2.links.youtube": "Pozrieť prezentáciu na YouTube",
