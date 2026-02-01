@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MTweb | Webasto Experience</title>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../projects/styles/project-detail-template.css">
     <!-- Theme applied by globals.js -->
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -24,6 +25,11 @@
     <main class="container mx-auto px-4 py-12">
         <div class="experience-detail-content">
             
+            <!-- Split layout -->
+            <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <!-- LEFT: Text / Description -->
+                <section class="space-y-6">
+
             <div class="detail-container">
                 <div class="detail-grid">
                     <div class="detail-section">
@@ -31,8 +37,8 @@
                         <p data-i18n="experience.job1.period">July 2023 – August 2025</p>
                     </div>
                     <div class="detail-section">
-                        <h3 data-i18n="experience.job1.title">Software & DevOps Engineer</h3>
-                        <p data-i18n="experience.job1.company">Webasto Convertibles Slovakia s.r.o.</p>
+                        <h3 data-i18n="experience.job1.position">Position</h3>
+                        <p data-i18n="experience.job1.title">Software & DevOps Engineer</p>
                     </div>
                 </div>
                 
@@ -127,6 +133,40 @@
                     </div>
                 </div>
 
+                </section>
+
+                <!-- RIGHT: Gallery with Images -->
+                <aside class="space-y-6">
+                    <figure class="media-block p-6 rounded-lg">
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project1.media.gallery">Screenshots</h2>
+
+                        <!-- Interactive Gallery Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="gallery">
+                            <div class="gallery-item">
+                                <img src="WEBASTO_images/last_successful_artifacts.png" alt="Webasto screenshot 1" class="rounded-lg w-full object-cover cursor-pointer" loading="lazy">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="WEBASTO_images/results_summary_comment.png" alt="Webasto screenshot 2" class="rounded-lg w-full object-cover cursor-pointer" loading="lazy">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="WEBASTO_images/sarif_file_results_preview.png" alt="Webasto screenshot 3" class="rounded-lg w-full object-cover cursor-pointer" loading="lazy">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="WEBASTO_images/sidebar.png" alt="Webasto screenshot 6" class="rounded-lg w-full object-cover cursor-pointer" loading="lazy">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="WEBASTO_images/sidebar1.png" alt="Webasto screenshot 7" class="rounded-lg w-full object-cover cursor-pointer" loading="lazy">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="WEBASTO_images/sidebar2.png" alt="Webasto screenshot 8" class="rounded-lg w-full object-cover cursor-pointer" loading="lazy">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="WEBASTO_images/specific_build.png" alt="Webasto screenshot 9" class="rounded-lg w-full object-cover cursor-pointer" loading="lazy">
+                            </div>
+                        </div>
+                    </figure>
+                </aside>
+            </div>
 </div>
         </div>
     </main>
@@ -136,5 +176,109 @@
     <script>
         feather.replace();
     </script>
+
+    <script>
+        // Lightbox functionality for gallery images
+        function initLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightboxCounter = document.getElementById('lightboxCounter');
+            const lightboxClose = document.getElementById('lightboxClose');
+            const lightboxPrev = document.getElementById('lightboxPrev');
+            const lightboxNext = document.getElementById('lightboxNext');
+            const gallery = document.getElementById('gallery');
+            
+            if (!gallery) {
+                console.error('[Lightbox] Gallery element not found');
+                return;
+            }
+            
+            const galleryItems = gallery.querySelectorAll('.gallery-item');
+            
+            console.log('[Lightbox] Initializing with', galleryItems.length, 'images');
+            
+            let currentIndex = 0;
+            const totalImages = galleryItems.length;
+
+            // Open lightbox on image click
+            galleryItems.forEach((item, index) => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('[Lightbox] Clicked image', index);
+                    currentIndex = index;
+                    openLightbox();
+                });
+            });
+
+            function openLightbox() {
+                console.log('[Lightbox] Opening image', currentIndex);
+                const imgEl = galleryItems[currentIndex].querySelector('img');
+                if (!imgEl) return;
+                lightboxImg.src = imgEl.src;
+                lightboxImg.alt = imgEl.alt || '';
+                lightboxCounter.textContent = `${currentIndex + 1} / ${totalImages}`;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                console.log('[Lightbox] Active class added');
+            }
+
+            function closeLightbox() {
+                console.log('[Lightbox] Closing');
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function showNext() {
+                currentIndex = (currentIndex + 1) % totalImages;
+                openLightbox();
+            }
+
+            function showPrev() {
+                currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+                openLightbox();
+            }
+
+            // Event listeners
+            if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+            if (lightboxNext) lightboxNext.addEventListener('click', showNext);
+            if (lightboxPrev) lightboxPrev.addEventListener('click', showPrev);
+
+            // Close on background click
+            if (lightbox) {
+                lightbox.addEventListener('click', (e) => {
+                    if (e.target === lightbox) closeLightbox();
+                });
+            }
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowRight') showNext();
+                if (e.key === 'ArrowLeft') showPrev();
+            });
+
+            console.log('[Lightbox] Initialization complete');
+        }
+
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initLightbox);
+        } else {
+            initLightbox();
+        }
+    </script>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" aria-hidden="true">
+        <div class="lightbox-content">
+            <button id="lightboxClose" class="lightbox-close" aria-label="Close">×</button>
+            <button id="lightboxPrev" class="lightbox-nav lightbox-prev" aria-label="Previous">‹</button>
+            <img id="lightboxImg" class="lightbox-img" src="" alt="">
+            <button id="lightboxNext" class="lightbox-nav lightbox-next" aria-label="Next">›</button>
+            <div id="lightboxCounter" class="lightbox-counter">1 / 1</div>
+        </div>
+    </div>
 </body>
 </html>

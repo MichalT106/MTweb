@@ -6,7 +6,6 @@ const translations = {
         "hero.projects": "School Projects",
         "hero.experience": "Work Experience",
         "hero.cv": "See CV",
-        "projects.title": "Featured Projects",
         "school.title": "School Projects",
         "experience.title": "Work Experience",
         "nav.home": "Home",
@@ -15,6 +14,10 @@ const translations = {
         "nav.cv": "CV",
         "footer.links": "Quick Links",
         "footer.contact": "Contact",
+
+
+        "experience.job1.position": "Position",
+        "experience.job1.period": "July 2023 – August 2025",
         "experience.job1.title": "Software & DevOps Engineer",
         "experience.job1.company": "Webasto Convertibles Slovakia s.r.o.",
         "experience.job1.location": "Košice, Slovak Republic",
@@ -22,8 +25,7 @@ const translations = {
         "experience.details.period": "Period",
         "experience.details.company": "Company",
         "experience.details.location": "Location",
-        "experience.details.responsibilities": "Responsibilities",
-        "experience.details.responsibilities.text": "As a Software & DevOps Engineer at Webasto Convertibles Slovakia, I focused on developing and maintaining scalable software solutions while implementing DevOps best practices. My responsibilities included infrastructure management, CI/CD pipeline optimization, and collaborating with cross-functional teams to deliver high-quality products.",
+
         "school.project1.title": "Game Jam Košice — Game Days",
         "school.project1.subtitle": "48-hour game jam (journalism theme) — Call For Justice",
         "school.project1.desc": "48-hour game challenge",
@@ -36,6 +38,51 @@ const translations = {
         "school.project2.tag1": "React Native",
         "school.project2.tag2": "FastAPI",
         "school.project1.cta": "View details",
+
+
+        // ====== ADDED: Experience details (EN) ======
+        "experience.details.intro.title": "Role overview",
+        "experience.details.intro.text": "I worked as a Software & DevOps Engineer, focusing on internal developer enablement and CI automation. I created and maintained extensive GitLab Wiki documentation and later built a full Polyspace static analysis workflow in Jenkins (Bug Finder and Code Prover), from configuration and filtering to exporting results and publishing reports.",
+
+        "experience.details.keyResponsibilities.title": "Key responsibilities",
+        "experience.details.keyResponsibilities.item1": "Create and maintain internal GitLab Wiki documentation for development processes, pipelines, and tooling.",
+        "experience.details.keyResponsibilities.item2": "Implement Polyspace static analysis in Jenkins pipelines (Bug Finder and Code Prover) with project- and variant-based configuration.",
+        "experience.details.keyResponsibilities.item3": "Design continuous jobs for fast analysis of changed files with concise summaries for Merge Requests, and nightly jobs for full-project analysis with detailed results.",
+        "experience.details.keyResponsibilities.item4": "Provide ongoing Polyspace support: troubleshooting, output optimization, and keeping automation stable across projects; occasionally build small helper tools and scripts.",
+
+        "experience.details.polyspace.title": "Polyspace in Jenkins (Bug Finder & Code Prover)",
+        "experience.details.polyspace.intro": "The goal was to give developers quick, relevant feedback during Merge Requests, while also running deeper full-project verification regularly. The pipelines were structured around variants, robust source filtering, and clear outputs (artifacts, reports, and server uploads).",
+
+        "experience.details.polyspace.continuous.title": "Continuous job (Merge Requests)",
+        "experience.details.polyspace.continuous.item1": "Detect changed files by comparing the Merge Request branch against main and store the list for later filtering.",
+        "experience.details.polyspace.continuous.item2": "Analyze only valid changed .c/.cpp files that are present in the variant's compile_commands.json, while excluding configured folders to avoid noise.",
+        "experience.details.polyspace.continuous.item3": "Run Polyspace Bug Finder for fast feedback (Code Prover intentionally skipped to keep runtime low).",
+        "experience.details.polyspace.continuous.item4": "Export results to CSV and SARIF, normalize SARIF paths with a script, generate a human-readable summary, and post it as a Merge Request comment; archive artifacts for download.",
+
+        "experience.details.polyspace.nightly.title": "Nightly job (full analysis)",
+        "experience.details.polyspace.nightly.item1": "Run full analysis across predefined variants, not limited to changed files.",
+        "experience.details.polyspace.nightly.item2": "Execute both Bug Finder and Code Prover per variant, with parallel processing and consistent preprocessing configuration.",
+        "experience.details.polyspace.nightly.item3": "Upload results to Polyspace Access in a structured hierarchy by variant and tool for team-wide browsing and review.",
+        "experience.details.polyspace.nightly.item4": "Generate HTML reports from selected templates and export standardized CSV/SARIF outputs, then package and publish the outputs as Jenkins artifacts.",
+
+        "experience.details.polyspace.implementation.title": "Implementation details",
+        "experience.details.polyspace.implementation.item1": "Use CMake compilation databases (compile_commands.json) as the single source of truth for per-variant configuration.",
+        "experience.details.polyspace.implementation.item2": "Generate .psopts files via polyspace-configure and apply exclude-sources patterns to remove third-party / generated / irrelevant code from analysis sources.",
+        "experience.details.polyspace.implementation.item3": "Handle cases where excluded folders still appear in preprocessing options by building a custom -do-not-generate-results-for argument (derived from .psopts content).",
+        "experience.details.polyspace.implementation.item4": "Patch configurations for specific compiler environments (e.g., Green Hills) by adding stub include paths required for preprocessing.",
+        "experience.details.polyspace.implementation.item5": "Configure analysis for interrupt handling and project-specific preprocessing (macros and interrupt enable/disable routines).",
+        "experience.details.polyspace.implementation.item6": "Document safe usage of Polyspace code annotations as a last resort, with clear status/severity and justification comments for traceability.",
+
+        "experience.details.support.title": "Polyspace support & troubleshooting",
+        "experience.details.support.item1": "Diagnose and fix pipeline issues (configuration, missing sources/options, preprocessing problems, tool invocation errors).",
+        "experience.details.support.item2": "Improve signal-to-noise by refining exclusions, filtering logic, and report/export outputs so results are actionable.",
+        "experience.details.support.item3": "Help developers consume results effectively (Jenkins artifacts, Polyspace Access browsing, SARIF workflows in VS Code) and keep documentation up to date.",
+
+        "experience.details.tech.title": "Technologies & tooling",
+        "experience.details.tech.subtitle": "Main focus: CI/CD automation, static analysis integration, reporting/export workflows, and internal documentation.",
+
+
+
 
         // ====== ADDED / UPDATED: GameDays – Call For Justice ======
         "project1.title": "Call For Justice",
@@ -158,6 +205,9 @@ const translations = {
         "nav.cv": "Životopis",
         "footer.links": "Rýchle odkazy",
         "footer.contact": "Kontakt",
+
+        "experience.job1.position": "Pozícia",
+        "experience.job1.period": "Júl 2023 – August 2025",
         "experience.job1.title": "Software & DevOps Engineer",
         "experience.job1.company": "Webasto Convertibles Slovakia s.r.o.",
         "experience.job1.location": "Košice, Slovenská republika",
@@ -165,8 +215,8 @@ const translations = {
         "experience.details.period": "Obdobie",
         "experience.details.company": "Spoločnosť",
         "experience.details.location": "Miesto",
-        "experience.details.responsibilities": "Povinnosti",
-        "experience.details.responsibilities.text": "Ako Software & DevOps Engineer v spoločnosti Webasto Convertibles Slovakia som sa zameriava na vývoj a údržbu škálovateľných softvérových riešení a zavádzanie DevOps best practices. Moje povinnosti zahŕňali správu infraštruktúry, optimalizáciu CI/CD potrubí a spoluprácu s medziodborovými tímami na dodaní vysokokvalitných produktov.",
+
+
         "school.project1.title": "Game Jam Košice — Game Days",
         "school.project1.subtitle": "48-hodinová herná výzva (téma žurnalistika) — Call For Justice",
         "school.project1.desc": "48-hodinová herná výzva",
@@ -179,6 +229,50 @@ const translations = {
         "school.project2.tag1": "React Native",
         "school.project2.tag2": "FastAPI",
         "school.project1.cta": "Zobraziť detail",
+
+
+        // ====== ADDED: Experience details (SK) ======
+        "experience.details.intro.title": "Prehľad role",
+        "experience.details.intro.text": "Pracoval som ako Software & DevOps Engineer so zameraním na interné zlepšovanie vývojárskeho prostredia a automatizáciu CI. Vytváral a udržiaval som rozsiahlu dokumentáciu v GitLab Wiki a neskôr som postavil kompletný workflow statickej analýzy Polyspace v Jenkins (Bug Finder aj Code Prover) od konfigurácie a filtrovania až po export výsledkov a publikovanie reportov.",
+
+        "experience.details.keyResponsibilities.title": "Kľúčové zodpovednosti",
+        "experience.details.keyResponsibilities.item1": "Tvorba a údržba internej dokumentácie v GitLab Wiki pre vývojové procesy, pipeline a nástroje.",
+        "experience.details.keyResponsibilities.item2": "Implementácia statickej analýzy Polyspace v Jenkins pipelinoch (Bug Finder a Code Prover) s projektovou a variantovou konfiguráciou.",
+        "experience.details.keyResponsibilities.item3": "Návrh continuous jobov pre rýchlu analýzu zmenených súborov s krátkym súhrnom pre Merge Requesty a nightly jobov pre plnú analýzu projektu s detailnými výsledkami.",
+        "experience.details.keyResponsibilities.item4": "Priebežná podpora Polyspace: troubleshooting, optimalizácia výstupov a stabilita automatizácie naprieč projektmi; občas tvorba pomocných nástrojov a skriptov.",
+
+        "experience.details.polyspace.title": "Polyspace v Jenkins (Bug Finder & Code Prover)",
+        "experience.details.polyspace.intro": "Cieľom bolo dávať vývojárom rýchlu a relevantnú spätnú väzbu počas Merge Requestov a zároveň pravidelne spúšťať hlbšiu verifikáciu celého projektu. Pipelines boli postavené na variantoch, robustnom filtrovaní zdrojov a jasných výstupoch (artefakty, reporty a uploady na server).",
+
+        "experience.details.polyspace.continuous.title": "Continuous job (Merge Requesty)",
+        "experience.details.polyspace.continuous.item1": "Detekcia zmenených súborov porovnaním Merge Request vetvy s main vetvou a uloženie zoznamu pre následné filtrovanie.",
+        "experience.details.polyspace.continuous.item2": "Analýza iba validných zmenených .c/.cpp súborov, ktoré sú prítomné v compile_commands.json daného variantu, s vylúčením nakonfigurovaných priečinkov na zníženie šumu.",
+        "experience.details.polyspace.continuous.item3": "Spustenie Polyspace Bug Finder pre rýchlu spätnú väzbu (Code Prover je zámerne preskočený kvôli krátkemu runtime).",
+        "experience.details.polyspace.continuous.item4": "Export výsledkov do CSV a SARIF, normalizácia ciest v SARIF skriptom, generovanie čitateľného súhrnu a jeho zverejnenie ako komentár k Merge Requestu; archivácia artefaktov na stiahnutie.",
+
+        "experience.details.polyspace.nightly.title": "Nightly job (plná analýza)",
+        "experience.details.polyspace.nightly.item1": "Spustenie plnej analýzy naprieč preddefinovanými variantmi bez obmedzenia na zmenené súbory.",
+        "experience.details.polyspace.nightly.item2": "Vykonanie Bug Finder aj Code Prover pre každý variant, paralelne a s konzistentnou konfiguráciou preprocessingu.",
+        "experience.details.polyspace.nightly.item3": "Upload výsledkov do Polyspace Access v štruktúrovanej hierarchii podľa variantu a nástroja pre tímové prehliadanie a review.",
+        "experience.details.polyspace.nightly.item4": "Generovanie HTML reportov z vybraných šablón a export štandardizovaných CSV/SARIF výstupov, následné zabalenie a publikovanie ako Jenkins artefakty.",
+
+        "experience.details.polyspace.implementation.title": "Implementačné detaily",
+        "experience.details.polyspace.implementation.item1": "Použitie CMake databázy kompilácie (compile_commands.json) ako jediného zdroja pravdy pre konfiguráciu jednotlivých variantov.",
+        "experience.details.polyspace.implementation.item2": "Generovanie .psopts súborov cez polyspace-configure a použitie exclude-sources vzorov na odstránenie third-party / generovaného / nerelevantného kódu zo zdrojov analýzy.",
+        "experience.details.polyspace.implementation.item3": "Riešenie prípadov, keď sa vylúčené priečinky stále objavia v preprocessing voľbách, vytvorením vlastného argumentu -do-not-generate-results-for (odvodeného z obsahu .psopts).",
+        "experience.details.polyspace.implementation.item4": "Úprava konfigurácií pre špecifické kompilátorové prostredia (napr. Green Hills) doplnením stub include ciest potrebných pre preprocessing.",
+        "experience.details.polyspace.implementation.item5": "Konfigurácia analýzy pre prerušenia (interrupt handling) a projektovo špecifický preprocessing (makrá a enable/disable rutiny).",
+        "experience.details.polyspace.implementation.item6": "Zdokumentovanie bezpečného používania Polyspace anotácií ako poslednej možnosti, s jasným statusom/severitou a odôvodnením pre dohľadateľnosť.",
+
+        "experience.details.support.title": "Podpora Polyspace & troubleshooting",
+        "experience.details.support.item1": "Diagnostika a oprava problémov v pipeline (konfigurácia, chýbajúce sources/options, preprocessing problémy, chyby pri spúšťaní nástroja).",
+        "experience.details.support.item2": "Zlepšenie pomeru signal/noise úpravou vylúčení, filtrovacej logiky a report/export výstupov tak, aby boli výsledky použiteľné.",
+        "experience.details.support.item3": "Pomoc vývojárom pri práci s výsledkami (Jenkins artefakty, prehliadanie v Polyspace Access, SARIF workflow vo VS Code) a udržiavanie dokumentácie aktuálnej.",
+
+        "experience.details.tech.title": "Technológie & nástroje",
+        "experience.details.tech.subtitle": "Hlavné zameranie: CI/CD automatizácia, integrácia statickej analýzy, reporting/export workflowy a interná dokumentácia.",
+
+
 
         // ====== ADDED / UPDATED: GameDays – Call For Justice (SK) ======
 
