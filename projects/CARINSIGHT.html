@@ -1,206 +1,265 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MTweb | CarInsight Project</title>
-
-    <link rel="stylesheet" href="../style.css" />
-    <link rel="stylesheet" href="./styles/project-detail-template.css" />
-
-    <script src="../globals.js"></script>
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
-
-    <script defer src="../script.js"></script>
-    <script defer src="../components/navbar.js"></script>
-    <script defer src="../components/language-switcher.js"></script>
-    <script defer src="../components/footer.js"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MTweb | CarInsight Project</title>
+<link href="../style.css" rel="stylesheet"/>
+<link href="./styles/project-detail-template.css" rel="stylesheet"/>
+<script src="../globals.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/feather-icons"></script>
+<script defer="" src="../script.js"></script>
+<script defer="" src="../components/navbar.js"></script>
+<script defer="" src="../components/language-switcher.js"></script>
+<script defer="" src="../components/footer.js"></script>
 </head>
-
 <body class="bg-gray-50 text-gray-800">
-    <custom-navbar>
-        <custom-language-switcher slot="right" inline></custom-language-switcher>
-    </custom-navbar>
-
-    <main class="container mx-auto px-4 py-12">
-        <div class="mb-12">
-            <div class="header-accent mt-6">
-                <h1 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-3"
-                    data-i18n="project2.title">CarInsight</h1>
-            </div>
-        </div>
-
-        <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            <section class="space-y-6">
-                <article class="content-block p-6 rounded-lg">
-                    <div class="flex items-start gap-4">
-                        <div class="text-2xl">🚗</div>
-                        <div class="space-y-3">
-                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
-                                <span data-i18n="project2.eventPrefix">Presented at </span>
-                                <a href="https://kpi.fei.tuke.sk/sk/zaverecna-prezentacia-timovych-projektov-2025"
-                                   target="_blank" rel="noopener" class="link-primary" data-i18n="project2.eventLink">
+<custom-navbar>
+<custom-language-switcher inline="" slot="right"></custom-language-switcher>
+</custom-navbar>
+<main class="container mx-auto px-4 py-12">
+<div class="mb-12">
+<div class="header-accent mt-6">
+<h1 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-3" data-i18n="project2.title">CarInsight</h1>
+</div>
+</div>
+<div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+<section class="space-y-6">
+<article class="content-block p-6 rounded-lg">
+<div class="flex items-start gap-4">
+<div class="text-2xl">🚗</div>
+<div class="space-y-3">
+<p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+<span data-i18n="project2.eventPrefix">Presented at </span>
+<a class="link-primary" data-i18n="project2.eventLink" href="https://kpi.fei.tuke.sk/sk/zaverecna-prezentacia-timovych-projektov-2025" rel="noopener" target="_blank">
                                    Live IT Projects TUKE (Živé IT projekty)
                                 </a>
-                                <span data-i18n="project2.eventSuffix"> as Team #43 in cooperation with Solar Turbines Slovakia (Caterpillar).</span>
-                            </p>
-                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-i18n="project2.eventIntro">
-                                Live IT Projects is a university course where student teams collaborate with real companies to design and deliver software solutions.
-                            </p>
-                        </div>
-                    </div>
-                </article>
-
+<span data-i18n="project2.eventSuffix"> as Team #43 in cooperation with Solar Turbines Slovakia (Caterpillar).</span>
+</p>
+<p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-i18n="project2.eventIntro">Live IT Projects is a team-based university course where student teams work with an industry partner to scope requirements, implement a working prototype, and present results publicly.</p>
+</div>
+</div>
+</article>
                 <section class="content-block p-6 rounded-lg">
                     <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title"
                         data-i18n="project2.overview.h">Project overview</h2>
                     <div class="space-y-3">
                         <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-i18n="project2.overview.p1">
-                            CarInsight is a cross-platform mobile app that helps drivers manage vehicles and responsibilities in one place.
+                            CarInsight is a mobile app that helps drivers manage vehicles and responsibilities in one place.
                         </p>
                         <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-i18n="project2.overview.p2">
                             Users can add multiple vehicles, track key events (technical inspections, insurance, highway vignettes, oil changes), and receive reminders ahead of time via notifications and a clear calendar view.
                         </p>
                     </div>
                 </section>
+<!-- NEW: Initial version block -->
+<section class="content-block p-6 rounded-lg">
+  <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title"
+      data-i18n="project2.version1.h">
+    Initial version – Team Project
+  </h2>
 
-                <!-- NEW: Initial version block -->
-                <section class="content-block p-6 rounded-lg">
-                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title"
-                        data-i18n="project2.version1.h">Initial version – Team Project</h2>
-                    <div class="space-y-3">
-                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-i18n="project2.version1.p">
-                            The initial version of CarInsight was developed as part of the Live IT Projects course. It used a centralized backend architecture built with FastAPI and a relational database, focusing on delivering a complete end-to-end solution within one semester.
-                        </p>
-                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-i18n="project2.version1.tech">
-                            Technologies used:
-                        </p>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="tag">React / React Native</span>
-                            <span class="tag">FastAPI (Python)</span>
-                            <span class="tag">Python</span>
-                            <span class="tag">PostgreSQL</span>
-                            <span class="tag">JWT-based Authentication</span>
-                        </div>
-                    </div>
-                </section>
+  <div class="space-y-3">
+    <ul class="space-y-2">
+      <li class="list-item-custom text-gray-700 dark:text-gray-300"
+          data-i18n="project2.version1.li1">
+        Backend aplikácia bola implementovaná ako monolit v FastAPI, kde jeden server poskytoval všetky REST endpointy
+        pre používateľov, vozidlá, servisné upozornenia a kalendár.
+      </li>
 
-                <!-- NEW: Cloud version block -->
-                <section class="content-block p-6 rounded-lg">
-                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title"
-                        data-i18n="project2.version2.h">Cloud version – Distributed backend</h2>
-                    <div class="space-y-3">
-                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-i18n="project2.version2.p">
-                            In a follow-up course focused on Cloud Systems, the backend architecture was redesigned to be decentralized. The monolithic backend was split into multiple services with cloud-native principles in mind.
-                        </p>
-                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-i18n="project2.version2.tech">
-                            Technologies used:
-                        </p>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="tag">FastAPI microservices</span>
-                            <span class="tag">AWS Cognito (authentication)</span>
-                            <span class="tag">DynamoDB</span>
-                            <span class="tag">S3</span>
-                            <span class="tag">Redis</span>
-                            <span class="tag">Docker</span>
-                        </div>
-                    </div>
-                </section>
+      <li class="list-item-custom text-gray-700 dark:text-gray-300"
+          data-i18n="project2.version1.li2">
+        Aplikácia bola rozdelená do vrstiev – HTTP API riešilo komunikáciu s klientom,
+        business logika spracovávala pravidlá aplikácie a SQLAlchemy ORM zabezpečovalo prístup k databáze.
+      </li>
 
-                <section class="content-block p-6 rounded-lg">
-                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title"
-                        data-i18n="project2.learned.h">What I gained</h2>
-                    <ul class="space-y-3">
-                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project2.learned.li1">
-                            Experience building an end-to-end product based on real client requirements.
-                        </li>
-                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project2.learned.li2">
-                            Stronger teamwork skills: task distribution, communication, and accountability.
-                        </li>
-                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project2.learned.li3">
-                            Practical insight into iterative development and presenting results to stakeholders.
-                        </li>
-                    </ul>
-                </section>
+      <li class="list-item-custom text-gray-700 dark:text-gray-300"
+          data-i18n="project2.version1.li3">
+        Dáta boli ukladané do relačnej databázy PostgreSQL, kde boli modelované entity ako používateľ,
+        auto, servisné upozornenie či push token pre notifikácie.
+      </li>
 
-                <section class="content-block p-6 rounded-lg">
-                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title"
-                        data-i18n="project2.meta.stackLabel">Technologies</h2>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="tag">React / React Native</span>
-                        <span class="tag">FastAPI</span>
-                        <span class="tag">Python</span>
-                        <span class="tag">TypeScript</span>
-                        <span class="tag">PostgreSQL</span>
-                        <span class="tag">AWS (Cognito, DynamoDB, S3)</span>
-                        <span class="tag">Redis</span>
-                        <span class="tag">Docker</span>
-                    </div>
-                </section>
+      <li class="list-item-custom text-gray-700 dark:text-gray-300"
+          data-i18n="project2.version1.li4">
+        Autentifikácia fungovala pomocou stateless JWT tokenov, ktoré boli vydané pri prihlásení
+        a následne overované pri každej požiadavke cez FastAPI security mechanizmy.
+      </li>
 
-                <section class="content-block p-6 rounded-lg">
-                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title"
-                        data-i18n="project2.links.h">Links</h2>
-                    <div class="space-y-3 flex flex-col">
-                        <a class="link-primary text-lg" target="_blank" rel="noopener"
-                           href="https://kpi.fei.tuke.sk/sk/zaverecna-prezentacia-timovych-projektov-2025" data-i18n="project2.links.event">
+      <li class="list-item-custom text-gray-700 dark:text-gray-300"
+          data-i18n="project2.version1.li5">
+        Na pozadí bežali periodické úlohy pomocou APScheduler, ktoré kontrolovali servisné intervaly
+        a pri blížiacom sa termíne odosielali push notifikácie používateľom.
+      </li>
+
+      <li class="list-item-custom text-gray-700 dark:text-gray-300"
+          data-i18n="project2.version1.li6">
+        Fotografie vozidiel boli ukladané priamo na súborový systém servera
+        a sprístupnené klientovi cez statickú FastAPI route.
+      </li>
+
+      <li class="list-item-custom text-gray-700 dark:text-gray-300"
+          data-i18n="project2.version1.li7">
+        Aplikácia bola napojená na externé služby – VIN dekóder NHTSA VPIC na automatické
+        doplnenie údajov o vozidle a Expo push službu na doručovanie notifikácií.
+      </li>
+
+      <li class="list-item-custom text-gray-700 dark:text-gray-300"
+          data-i18n="project2.version1.li8">
+        Celý backend bol zabalený do Docker kontajnera a spustený pomocou Uvicorn ASGI servera.
+      </li>
+    </ul>
+
+    <p class="text-gray-700 dark:text-gray-300 leading-relaxed"
+       data-i18n="project2.version1.tech">
+      Key technologies:
+    </p>
+
+    <div class="flex flex-wrap gap-3">
+      <span class="tag">React Native (Expo)</span>
+      <span class="tag">FastAPI</span>
+      <span class="tag">SQLAlchemy</span>
+      <span class="tag">PostgreSQL</span>
+      <span class="tag">JWT</span>
+      <span class="tag">APScheduler</span>
+      <span class="tag">Expo Push</span>
+      <span class="tag">NHTSA VPIC API</span>
+    </div>
+  </div>
+</section>
+<!-- NEW: Cloud version block -->
+<section class="content-block p-6 rounded-lg">
+  <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title"
+      data-i18n="project2.version2.h">
+    Cloud version – Distributed backend
+  </h2>
+
+  <div class="space-y-3">
+    <ul class="space-y-2">
+      <li class="list-item-custom text-gray-700 dark:text-gray-300"
+          data-i18n="project2.version2.li1">
+        Backend bol refaktorovaný do distribuovanej architektúry, kde bola aplikácia rozdelená
+        na viacero nezávislých FastAPI mikroslužieb, každá bežiaca vo vlastnom Docker kontajneri.
+      </li>
+
+      <li class="list-item-custom text-gray-700 dark:text-gray-300"
+          data-i18n="project2.version2.li2">
+        Jednotlivé služby mali jasne definované zodpovednosti – User Service riešila autentifikáciu,
+        Car Service správu vozidiel a obrázkov, Insight Service servisné záznamy,
+        pričom cache/proxy služby zrýchľovali čítanie dát.
+      </li>
+
+      <li class="list-item-custom text-gray-700 dark:text-gray-300"
+          data-i18n="project2.version2.li3">
+        Autentifikácia bola presunutá na AWS Cognito User Pools, pričom každá služba overovala
+        prichádzajúce JWT tokeny pomocou verejných kľúčov (JWKS).
+      </li>
+
+      <li class="list-item-custom text-gray-700 dark:text-gray-300"
+          data-i18n="project2.version2.li4">
+        Perzistencia dát bola migrovaná do DynamoDB, kde sa využívali globálne sekundárne indexy
+        na efektívne dotazy podľa používateľa alebo vozidla.
+      </li>
+
+      <li class="list-item-custom text-gray-700 dark:text-gray-300"
+          data-i18n="project2.version2.li5">
+        Ukladanie obrázkov vozidiel bolo presunuté do služby Amazon S3,
+        pričom backend pracoval s verejnými URL adresami uložených súborov.
+      </li>
+
+      <li class="list-item-custom text-gray-700 dark:text-gray-300"
+          data-i18n="project2.version2.li6">
+        Na zrýchlenie čítania dát boli nasadené Redis cache proxy služby,
+        ktoré používali read-through cache s TTL a invalidáciou pri zápise.
+      </li>
+
+      <li class="list-item-custom text-gray-700 dark:text-gray-300"
+          data-i18n="project2.version2.li7">
+        Komunikácia medzi službami prebiehala cez HTTP volania,
+        pričom autorizačné hlavičky sa propagovali medzi službami
+        a požiadavky boli routované cez AWS Application Load Balancer.
+      </li>
+
+      <li class="list-item-custom text-gray-700 dark:text-gray-300"
+          data-i18n="project2.version2.li8">
+        Konfigurácia služieb bola riešená pomocou environment variables
+        a prístup k AWS službám zabezpečoval AWS SDK (boto3).
+      </li>
+    </ul>
+
+    <p class="text-gray-700 dark:text-gray-300 leading-relaxed"
+       data-i18n="project2.version2.tech">
+      Key technologies:
+    </p>
+
+    <div class="flex flex-wrap gap-3">
+      <span class="tag">FastAPI microservices</span>
+      <span class="tag">AWS Cognito</span>
+      <span class="tag">DynamoDB</span>
+      <span class="tag">Amazon S3</span>
+      <span class="tag">Redis (ElastiCache)</span>
+      <span class="tag">boto3</span>
+      <span class="tag">httpx</span>
+      <span class="tag">Docker</span>
+    </div>
+  </div>
+</section>
+<section class="content-block p-6 rounded-lg">
+<h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project2.learned.h">What I gained</h2>
+<ul class="space-y-3">
+<li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project2.learned.li1">Hands-on experience with teamwork and collaborative software development based on real client requirements.</li>
+<li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project2.learned.li2">Practical understanding of the full software development lifecycle, including task distribution, iteration, and stakeholder communication.</li>
+<li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project2.learned.li3">Experience with transforming a centralized system into a cloud-based distributed architecture and working with AWS services.</li>
+</ul>
+</section>
+<section class="content-block p-6 rounded-lg">
+<h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project2.meta.stackLabel">Technologies</h2>
+<div class="flex flex-wrap gap-3"><span class="tag">React Native (Expo)</span><span class="tag">FastAPI</span><span class="tag">Python</span><span class="tag">PostgreSQL (SQLAlchemy)</span><span class="tag">APScheduler</span><span class="tag">AWS Cognito</span><span class="tag">DynamoDB</span><span class="tag">Amazon S3</span><span class="tag">Redis</span><span class="tag">Docker</span></div>
+</section>
+<section class="content-block p-6 rounded-lg">
+<h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project2.links.h">Links</h2>
+<div class="space-y-3 flex flex-col">
+<a class="link-primary text-lg" data-i18n="project2.links.event" href="https://kpi.fei.tuke.sk/sk/zaverecna-prezentacia-timovych-projektov-2025" rel="noopener" target="_blank">
                            Live IT Projects TUKE – event page
                         </a>
-                        <a class="link-primary text-lg" target="_blank" rel="noopener"
-                           href="https://www.youtube.com/watch?v=vCEhlFzj2b8" data-i18n="project2.links.youtube">
+<a class="link-primary text-lg" data-i18n="project2.links.youtube" href="https://www.youtube.com/watch?v=vCEhlFzj2b8" rel="noopener" target="_blank">
                            Watch the video presentation on YouTube
                         </a>
-
-                        <!-- NEW: repo links -->
-                        <a class="link-primary text-lg" target="_blank" rel="noopener"
-                           href="https://git.kpi.fei.tuke.sk/slavomir.stucka/carinsight" data-i18n="project2.links.repo1">
+<!-- NEW: repo links -->
+<a class="link-primary text-lg" data-i18n="project2.links.repo1" href="https://github.com/MichalT106/CARINSIGHT-Team-project" rel="noopener" target="_blank">
                            Repository – Team Project version
                         </a>
-                        <a class="link-primary text-lg" target="_blank" rel="noopener"
-                           href="https://git.kpi.fei.tuke.sk/ivana.stefanikova/cloudove_systemy" data-i18n="project2.links.repo2">
+<a class="link-primary text-lg" data-i18n="project2.links.repo2" href="https://github.com/MichalT106/CARINSIGHT-cloud-systems" rel="noopener" target="_blank">
                            Repository – Cloud Systems version
                         </a>
-                    </div>
-                </section>
-            </section>
-
-            <aside class="space-y-6">
-                <figure class="media-block p-6 rounded-lg">
-                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project2.media.video">Video presentation</h2>
-                    <div class="video-container aspect-video w-full overflow-hidden rounded-lg">
-                        <iframe
-                            class="w-full h-full"
-                            src="https://www.youtube.com/embed/vCEhlFzj2b8"
-                            title="CarInsight - video presentation"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                </figure>
-
-                <figure class="media-block p-6 rounded-lg">
-                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project2.media.poster">Poster</h2>
-                    
-                    <div id="gallery" class="grid grid-cols-1 gap-4">
-                        <div class="gallery-item">
-                            <img src="../images/poster.png" alt="CarInsight poster" class="cursor-pointer rounded-lg w-full object-contain" loading="lazy">
-                        </div>
-                    </div>
-                </figure>
-            </aside>
-        </div>
-    </main>
-
-    <custom-footer></custom-footer>
-
-    <script>
+</div>
+</section>
+</section>
+<aside class="space-y-6">
+<figure class="media-block p-6 rounded-lg">
+<h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project2.media.video">Video presentation</h2>
+<div class="video-container aspect-video w-full overflow-hidden rounded-lg">
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" class="w-full h-full" frameborder="0" src="https://www.youtube.com/embed/vCEhlFzj2b8" title="CarInsight - video presentation">
+</iframe>
+</div>
+</figure>
+<figure class="media-block p-6 rounded-lg">
+<h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project2.media.poster">Poster</h2>
+<div class="grid grid-cols-1 gap-4" id="gallery">
+<div class="gallery-item">
+<img alt="CarInsight poster" class="cursor-pointer rounded-lg w-full object-contain" loading="lazy" src="../images/poster.png"/>
+</div>
+</div>
+</figure>
+</aside>
+</div>
+</main>
+<custom-footer></custom-footer>
+<script>
         if (window.feather) feather.replace();
     </script>
-
-    <script>
+<script>
         // Lightbox functionality (single or multi-image galleries)
         function initLightbox() {
             const lightbox = document.getElementById('lightbox');
@@ -287,18 +346,15 @@
             initLightbox();
         }
     </script>
-
-
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="lightbox-modal" aria-hidden="true">
-        <div class="lightbox-content">
-            <button id="lightboxClose" class="lightbox-close" aria-label="Close">×</button>
-            <button id="lightboxPrev" class="lightbox-nav lightbox-prev" aria-label="Previous">‹</button>
-            <img id="lightboxImg" class="lightbox-img" src="" alt="">
-            <button id="lightboxNext" class="lightbox-nav lightbox-next" aria-label="Next">›</button>
-            <div id="lightboxCounter" class="lightbox-counter">1 / 1</div>
-        </div>
-    </div>
-
+<!-- Lightbox Modal -->
+<div aria-hidden="true" class="lightbox-modal" id="lightbox">
+<div class="lightbox-content">
+<button aria-label="Close" class="lightbox-close" id="lightboxClose">×</button>
+<button aria-label="Previous" class="lightbox-nav lightbox-prev" id="lightboxPrev">‹</button>
+<img alt="" class="lightbox-img" id="lightboxImg" src=""/>
+<button aria-label="Next" class="lightbox-nav lightbox-next" id="lightboxNext">›</button>
+<div class="lightbox-counter" id="lightboxCounter">1 / 1</div>
+</div>
+</div>
 </body>
 </html>

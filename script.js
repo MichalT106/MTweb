@@ -32,7 +32,7 @@ const translations = {
         "school.project1.tag3": "Game Jam",
 
         "school.project2.title": "CarInsight – Live IT Projects TUKE",
-        "school.project2.desc": "Cross-platform vehicle management app",
+        "school.project2.desc": "Vehicle management app",
         "school.project2.tag1": "React Native",
         "school.project2.tag2": "FastAPI",
         "school.project1.cta": "View details",
@@ -44,7 +44,7 @@ const translations = {
         "project1.eventPrefix": "Created during ",
         "project1.eventLink": "GameDays (Game Jam Košice)",
         "project1.eventSuffix": ", an event I took part in as part of a university course.",
-        "project1.eventIntro": "GameDays is a 48-hour game development challenge where a small team has to design and build a playable game around a given theme—from idea, through implementation, to a final build.",
+        "project1.eventIntro": "GameDays is a 48-hour game development challenge where a small team has to design and build a playable game around a given them, from idea, through implementation, to a final build.",
 
         // --- OVERVIEW ---
         "project1.overview.h": "Project overview",
@@ -73,44 +73,56 @@ const translations = {
         "project1.media.video": "Gameplay video",
         "project1.media.gallery": "Screenshots",
 
-        // ===== UPDATED: CarInsight texts (EN) =====
+// ===== UPDATED: CarInsight texts (EN) =====
 
+        "project2.media.video": "Video presentation",
         // --- EVENT ---
-        "project2.eventPrefix": "Created as part of the university course ",
-        "project2.eventLink": "Live IT Projects TUKE",
-        "project2.eventSuffix": " in cooperation with Solar Turbines Slovakia (a Caterpillar company), Team #43.",
+        "project2.eventPrefix": "Presented at ",
+        "project2.eventLink": "Live IT Projects TUKE (Živé IT projekty)",
+        "project2.eventSuffix": " as Team #43 in cooperation with Solar Turbines Slovakia (Caterpillar).",
 
         "project2.eventIntro":
-        "Live IT Projects is a team-based university course where students collaborate with real companies to design and develop software solutions within a real-world context.",
+        "Live IT Projects is a team-based university course where student teams work with an industry partner to scope requirements, implement a working prototype, and present results publicly.",
 
         // --- OVERVIEW ---
         "project2.overview.h": "Project overview",
-
         "project2.overview.p1":
-        "CarInsight is a cross-platform mobile application developed during a team project course at the Technical University of Košice. The goal was to design a practical solution for managing vehicles and related responsibilities in cooperation with an industry partner.",
+        "CarInsight is a mobile app for managing multiple vehicles and their lifecycle data from a single account.",
 
         "project2.overview.p2":
-        "The application allows users to manage multiple vehicles, track important events such as technical inspections, insurance, highway vignettes, and oil changes, and receive timely notifications via reminders and a clear calendar view.",
+        "The app stores vehicle records and time‑based events (STK/EK, insurance, vignette, service intervals), renders them in a calendar, and sends reminders via push notifications.",
 
         // --- VERSION 1 ---
-        "project2.version1.h": "Initial version – Team Project",
+        "project2.version1.h": "First version – Team project (monolith)",
 
-        "project2.version1.p":
-        "The initial version of CarInsight was developed as part of the Live IT Projects course. It used a centralized backend architecture built with FastAPI and a relational database, focusing on delivering a complete end-to-end solution within one semester.",
+        "project2.version1.li1": "The backend was implemented as a monolithic FastAPI application, where a single server exposed all REST endpoints for users, vehicles, service insights, and calendar features.",
+        "project2.version1.li2": "The application followed a layered structure: the FastAPI HTTP layer handled client requests, the business logic implemented application rules, and SQLAlchemy ORM managed database access.",
+        "project2.version1.li3": "Data was stored in a PostgreSQL relational database, with entities such as User, Car, Insight, and PushToken.",
+        "project2.version1.li4": "Authentication was handled using stateless JWT tokens issued during login and validated on each request through FastAPI security dependencies.",
+        "project2.version1.li5": "Background tasks were executed using APScheduler, periodically checking service intervals and triggering push notifications when required.",
+        "project2.version1.li6": "Vehicle images were stored on the server’s local filesystem and made available to the client through a FastAPI static route.",
+        "project2.version1.li7": "The application integrated external services, including the NHTSA VPIC VIN decoder to automatically pre-fill vehicle details and the Expo push service for notification delivery.",
+        "project2.version1.li8": "The backend was packaged into a Docker container and executed using the Uvicorn ASGI server.",
 
         // --- VERSION 1 TECH ---
         "project2.version1.tech":
-        "Technologies used:",
+        "Key technologies:",
 
         // --- VERSION 2 ---
-        "project2.version2.h": "Cloud version – Distributed backend",
+        "project2.version2.h": "Cloud version – Distributed backend (microservices)",
 
-        "project2.version2.p":
-        "In a follow-up course focused on Cloud Systems, the backend architecture was redesigned to be decentralized. The monolithic backend was split into multiple services with cloud-native principles in mind.",
+        "project2.version2.li1": "The backend was refactored into a distributed architecture, where the application was split into multiple independent FastAPI microservices, each running in its own Docker container.",
+        "project2.version2.li2": "Each service had a clearly defined responsibility – the User Service handled authentication, the Car Service managed vehicles and images, the Insight Service processed maintenance records, and cache/proxy services improved read performance.",
+        "project2.version2.li3": "Authentication was delegated to AWS Cognito User Pools, while each service validated incoming JWT tokens using public keys provided via JWKS.",
+        "project2.version2.li4": "Data persistence was migrated to DynamoDB, using global secondary indexes to efficiently query data by user or vehicle.",
+        "project2.version2.li5": "Vehicle images were stored in Amazon S3, with the backend storing and returning public URLs to the client.",
+        "project2.version2.li6": "Redis cache proxy services were introduced to speed up read operations using read-through caching with TTL and write-based invalidation.",
+        "project2.version2.li7": "Inter-service communication was implemented using HTTP calls, with authorization headers propagated between services and requests routed through AWS Application Load Balancers.",
+        "project2.version2.li8": "Service configuration was handled through environment variables, while access to AWS services was managed using the AWS SDK (boto3).",
 
         // --- VERSION 2 TECH ---
         "project2.version2.tech":
-        "Technologies used:",
+        "Key technologies:",
 
         // --- LEARNED ---
         "project2.learned.h": "What I gained",
@@ -119,11 +131,13 @@ const translations = {
         "Hands-on experience with teamwork and collaborative software development based on real client requirements.",
 
         "project2.learned.li2":
-        "Practical understanding of the full software development lifecycle, including task distribution, iteration, and stakeholder communication.",
+        "A practical perspective on software development, including team work organization, iterative development, and communication with people responsible for the project requirements.",
 
         "project2.learned.li3":
         "Experience with transforming a centralized system into a cloud-based distributed architecture and working with AWS services.",
 
+        "project2.links.event": "About the Live IT Projects event",
+        "project2.links.youtube": "Watch presentation on YouTube",
         "project2.links.repo1": "Repository – Team Project version",
         "project2.links.repo2": "Repository – Cloud Systems version",
 
@@ -161,7 +175,7 @@ const translations = {
         "school.project1.tag3": "Game Jam",
 
         "school.project2.title": "CarInsight – Živé IT projekty TUKE",
-        "school.project2.desc": "Crossplatformová aplikácia na správu vozidiel",
+        "school.project2.desc": "Aplikácia na správu vozidiel",
         "school.project2.tag1": "React Native",
         "school.project2.tag2": "FastAPI",
         "school.project1.cta": "Zobraziť detail",
@@ -174,7 +188,7 @@ const translations = {
         "project1.eventPrefix": "Vytvorené počas ",
         "project1.eventLink": "GameDays (Game Jam Košice)",
         "project1.eventSuffix": ", udalosti, ktorej som sa zúčastnil v rámci univerzitného predmetu.",
-        "project1.eventIntro": "GameDays je 48-hodinová výzva vo vývoji hier, kde má malý tím za krátky čas navrhnúť a vytvoriť hrateľnú hru na zadanú tému — od nápadu cez implementáciu až po finálny build.",
+        "project1.eventIntro": "GameDays je 48-hodinová výzva vo vývoji hier, kde má malý tím za krátky čas navrhnúť a vytvoriť hrateľnú hru na zadanú tému, od nápadu cez implementáciu až po finálny build.",
 
         // --- OVERVIEW ---
         "project1.overview.h": "Prehľad projektu",
@@ -206,42 +220,57 @@ const translations = {
 
         // ===== UPDATED: CarInsight texts (SK) =====
 
+        "project2.media.video": "Video prezentácia",
+
         // --- EVENT ---
-        "project2.eventPrefix": "Vzniklo v rámci univerzitného predmetu ",
-        "project2.eventLink": "Živé IT projekty TUKE",
-        "project2.eventSuffix": " v spolupráci so spoločnosťou Solar Turbines Slovakia (Caterpillar), tím #43.",
+        "project2.eventPrefix": "Prezentované na ",
+        "project2.eventLink": "Živé IT projekty TUKE (Live IT Projects)",
+        "project2.eventSuffix": " ako tím #43 v spolupráci so Solar Turbines Slovakia (Caterpillar).",
 
         "project2.eventIntro":
-        "Živé IT projekty sú tímovým univerzitným predmetom, v rámci ktorého študenti spolupracujú s reálnymi firmami na návrhu a vývoji softvérových riešení.",
+        "Živé IT projekty sú tímový univerzitný predmet, kde študenti v spolupráci s firmou analyzujú požiadavky, implementujú funkčný prototyp a výsledky verejne odprezentujú.",
 
         // --- OVERVIEW ---
         "project2.overview.h": "Prehľad projektu",
 
         "project2.overview.p1":
-        "CarInsight je crossplatformová mobilná aplikácia vytvorená počas tímového projektu na Technickej univerzite v Košiciach. Cieľom bolo navrhnúť praktické riešenie na správu vozidiel a súvisiacich povinností v spolupráci s priemyselným partnerom.",
+        "CarInsight je mobilná aplikácia na správu viacerých vozidiel a ich životného cyklu v rámci jedného používateľského účtu.",
 
         "project2.overview.p2":
-        "Aplikácia umožňuje spravovať viacero vozidiel, evidovať dôležité udalosti ako STK, EK, poistenie, diaľničné známky či výmeny oleja a včas na ne upozorniť prostredníctvom notifikácií a prehľadného kalendára.",
+        "Aplikácia ukladá údaje o vozidlách a časovo viazané udalosti (STK/EK, poistenie, diaľničná známka, servisné intervaly), zobrazuje ich v kalendári a posiela upozornenia cez push notifikácie.",
 
         // --- VERSION 1 ---
-        "project2.version1.h": "Pôvodná verzia – tímový projekt",
+        "project2.version1.h": "Prvá verzia – Tímový projekt (monolit)",
 
-        "project2.version1.p":
-        "Pôvodná verzia aplikácie CarInsight vznikla v rámci predmetu Živé IT projekty. Backend bol navrhnutý ako centralizovaný systém postavený na FastAPI a relačnej databáze, so zameraním na dodanie kompletného end-to-end riešenia v rámci jedného semestra.",
+        "project2.version1.li1": "Backend aplikácia bola vytvorená ako monolit v FastAPI, kde jeden server poskytoval všetky REST endpointy pre používateľov, autá, servisné upozornenia a kalendár.",
+        "project2.version1.li2": "Aplikácia mala vrstvenú architektúru – HTTP API riešilo komunikáciu s klientom, business logika spracovávala pravidlá aplikácie a SQLAlchemy ORM zabezpečovalo prácu s databázou.",
+        "project2.version1.li3": "Dáta sa ukladali do relačnej databázy PostgreSQL, kde boli definované entity ako User, Car, Insight a PushToken.",
+        "project2.version1.li4": "Autentifikácia bola riešená pomocou stateless JWT tokenov, ktoré sa vydávali pri prihlásení a overovali pri každej požiadavke.",
+        "project2.version1.li5": "Na pozadí bežali periodické úlohy pomocou APScheduler, ktoré kontrolovali servisné intervaly a spúšťali push notifikácie.",
+        "project2.version1.li6": "Fotografie áut sa ukladali lokálne na server a klient ich získaval cez FastAPI static route.",
+        "project2.version1.li7": "Aplikácia využívala externé služby – NHTSA VPIC VIN dekóder na doplnenie údajov o vozidle a Expo push službu na doručovanie notifikácií.",
+        "project2.version1.li8": "Backend bol zabalený do Docker kontajnera a spustený pomocou Uvicorn ASGI servera.",
 
+        
         // --- VERSION 1 TECH ---
         "project2.version1.tech":
-        "Použité technológie:",
+        "Kľúčové technológie:",
 
         // --- VERSION 2 ---
-        "project2.version2.h": "Cloudová verzia – decentralizovaný backend",
+        "project2.version2.h": "Cloud verzia – Distribuovaný backend (mikroslužby)",
 
-        "project2.version2.p":
-        "V nadväzujúcom predmete zameranom na cloudové systémy bol backend aplikácie prepracovaný do decentralizovanej architektúry. Monolitický backend bol rozdelený na viacero samostatných služieb navrhnutých podľa cloud-native princípov.",
+        "project2.version2.li1": "Backend bol refaktorovaný do distribuovanej architektúry, kde bola aplikácia rozdelená na viacero nezávislých FastAPI mikroslužieb, každá bežiaca vo vlastnom Docker kontajneri.",
+        "project2.version2.li2": "Jednotlivé služby mali jasne definované zodpovednosti – User Service riešila autentifikáciu, Car Service správu vozidiel a obrázkov, Insight Service servisné záznamy, pričom cache/proxy služby zrýchľovali čítanie dát.",
+        "project2.version2.li3": "Autentifikácia bola presunutá na AWS Cognito User Pools, pričom každá služba overovala JWT tokeny pomocou verejných kľúčov (JWKS).",
+        "project2.version2.li4": "Dáta boli migrované do DynamoDB, kde sa využívali globálne sekundárne indexy na efektívne dotazy podľa používateľa alebo vozidla.",
+        "project2.version2.li5": "Ukladanie obrázkov vozidiel bolo presunuté do služby Amazon S3 a backend pracoval s verejnými URL adresami uložených súborov.",
+        "project2.version2.li6": "Na zrýchlenie čítania dát boli použité Redis cache proxy služby s read-through cachingom, TTL a invalidáciou pri zápise.",
+        "project2.version2.li7": "Komunikácia medzi službami prebiehala cez HTTP volania s propagáciou autorizačnej hlavičky, pričom routovanie zabezpečoval AWS Application Load Balancer.",
+        "project2.version2.li8": "Konfigurácia služieb bola riešená pomocou environment variables a prístup k AWS službám zabezpečoval AWS SDK (boto3).",
 
         // --- VERSION 2 TECH ---
         "project2.version2.tech":
-        "Použité technológie: ",
+        "Kľúčové technológie:",
 
         // --- LEARNED ---
         "project2.learned.h": "Čo mi to dalo",
@@ -250,14 +279,15 @@ const translations = {
         "Skúsenosť s tímovou spoluprácou a vývojom softvéru podľa reálnych požiadaviek zadávateľa.",
 
         "project2.learned.li2":
-        "Praktický pohľad na celý proces vývoja softvéru vrátane rozdelenia úloh, iteratívneho vývoja a komunikácie so stakeholdermi.",
+        "Praktický pohľad na vývoj softvéru vrátane tímovej organizácie práce, postupného vývoja a komunikácie s osobami zodpovednými za zadanie projektu.",
 
         "project2.learned.li3":
         "Skúsenosti s transformáciou centralizovaného systému do cloudovej architektúry a prácou s AWS službami.",
 
+        "project2.links.event": "O udalosti Live IT Projects",
+        "project2.links.youtube": "Pozrieť prezentáciu na YouTube",
         "project2.links.repo1": "Repozitár – verzia z tímového projektu",
         "project2.links.repo2": "Repozitár – verzia z predmetu Cloudové systémy",
-
     }
 };
 
