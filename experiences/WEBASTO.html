@@ -97,7 +97,6 @@
                     <div class="mt-6">
                         <h4 class="text-lg font-semibold mb-2" data-i18n="experience.details.polyspace.implementation.title">Implementation details</h4>
                         <ul class="list-disc pl-6 space-y-2">
-                            <li data-i18n="experience.details.polyspace.implementation.item1">Use CMake compilation databases (compile_commands.json) as the single source of truth for per-variant configuration.</li>
                             <li data-i18n="experience.details.polyspace.implementation.item2">Generate .psopts files via polyspace-configure and apply exclude-sources patterns to remove third-party / generated / irrelevant code from analysis sources.</li>
                             <li data-i18n="experience.details.polyspace.implementation.item3">Handle cases where excluded folders still appear in preprocessing options by building a custom -do-not-generate-results-for argument (derived from .psopts content).</li>
                             <li data-i18n="experience.details.polyspace.implementation.item4">Patch configurations for specific compiler environments (e.g., Green Hills) by adding stub include paths required for preprocessing.</li>

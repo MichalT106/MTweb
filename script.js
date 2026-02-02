@@ -66,7 +66,6 @@ const translations = {
         "experience.details.polyspace.nightly.item4": "Generate HTML reports from selected templates and export standardized CSV/SARIF outputs, then package and publish the outputs as Jenkins artifacts.",
 
         "experience.details.polyspace.implementation.title": "Implementation details",
-        "experience.details.polyspace.implementation.item1": "Use CMake compilation databases (compile_commands.json) as the single source of truth for per-variant configuration.",
         "experience.details.polyspace.implementation.item2": "Generate .psopts files via polyspace-configure and apply exclude-sources patterns to remove third-party / generated / irrelevant code from analysis sources.",
         "experience.details.polyspace.implementation.item3": "Handle cases where excluded folders still appear in preprocessing options by building a custom -do-not-generate-results-for argument (derived from .psopts content).",
         "experience.details.polyspace.implementation.item4": "Patch configurations for specific compiler environments (e.g., Green Hills) by adding stub include paths required for preprocessing.",
@@ -260,7 +259,6 @@ const translations = {
         "experience.details.polyspace.nightly.item4": "Generovanie HTML reportov z vybraných šablón a export štandardizovaných CSV/SARIF výstupov, následné zabalenie a publikovanie ako Jenkins artefakty.",
 
         "experience.details.polyspace.implementation.title": "Implementačné detaily",
-        "experience.details.polyspace.implementation.item1": "Použitie CMake databázy kompilácie (compile_commands.json) ako jediného zdroja pravdy pre konfiguráciu jednotlivých variantov.",
         "experience.details.polyspace.implementation.item2": "Generovanie .psopts súborov cez polyspace-configure a použitie exclude-sources vzorov na odstránenie third-party / generovaného / nerelevantného kódu zo zdrojov analýzy.",
         "experience.details.polyspace.implementation.item3": "Riešenie prípadov, keď sa vylúčené priečinky stále objavia v preprocessing voľbách, vytvorením vlastného argumentu -do-not-generate-results-for (odvodeného z obsahu .psopts).",
         "experience.details.polyspace.implementation.item4": "Úprava konfigurácií pre špecifické kompilátorové prostredia (napr. Green Hills) doplnením stub include ciest potrebných pre preprocessing.",
