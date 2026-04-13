@@ -61,6 +61,14 @@
             <h2 class="text-3xl font-bold mb-8 text-center" data-i18n="experience.title">Professional Experience</h2>
             <div class="timeline">
                 <div class="timeline-item">
+                    <div class="timeline-content clickable" onclick="window.location.href='experiences/BUILDMIND.html'" style="cursor: pointer;">
+                        <p class="timeline-date" data-i18n="experience.job2.period">February 2026 – Present</p>
+                        <h3 class="timeline-title" data-i18n="experience.job2.title">Data Engineer</h3>
+                        <p class="timeline-description" data-i18n="experience.job2.company">BuiltMind s.r.o.</p>
+                        <p class="timeline-description" data-i18n="experience.job2.location">Home Office</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
                     <div class="timeline-content clickable" onclick="window.location.href='experiences/WEBASTO.html'" style="cursor: pointer;">
                         <p class="timeline-date" data-i18n="experience.job1.period">July 2023 – August 2025</p>
                         <h3 class="timeline-title" data-i18n="experience.job1.title">Software & DevOps Engineer</h3>
@@ -71,67 +79,65 @@
             </div>
         </section>
 
-        <!-- School Projects Section -->
+        <!-- School Projects Section (ordered: diploma thesis → CarInsight → Game Days) -->
         <section id="school-projects" class="mb-20">
             <h2 class="text-3xl font-bold mb-8 text-center" data-i18n="school.title">School Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="project-item" onclick="window.location.href='projects/GAMEDAYS.html'" style="cursor: pointer;">
-                    <div class="project-card">
-                        <img src="./images/gamedays_project.jpg" alt="Game Days Project" class="w-full object-contain rounded-t-lg">
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2" data-i18n="school.project1.title">Game Jam Košice – Game Days</h3>
-                            <p class="text-gray-600 mb-4" data-i18n="school.project1.desc">48-hour game challenge</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm" data-i18n="school.project1.tag1">Unity</span>
-                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm" data-i18n="school.project1.tag2">2D pixel art story game</span>
-                            </div>
+            <div class="school-projects-grid">
+                <a class="project-item school-project-link" href="projects/DIPLOMA_THESIS.html">
+                    <article class="project-card">
+                        <div class="school-project-media">
+                            <img src="./images/diploma_thesis.png" alt="" data-i18n-alt="school.project3.imageAlt" loading="lazy">
                         </div>
-                    </div>
-                </div>
-
-                <div class="project-item" onclick="window.location.href='projects/CARINSIGHT.html'" style="cursor: pointer;">
-                    <div class="project-card">
-                        <img src="./images/poster.png" alt="CarInsight poster" class="w-full object-contain rounded-t-lg">
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2" data-i18n="school.project2.title">CarInsight – Live IT Projects TUKE</h3>
-                            <p class="text-gray-600 mb-4" data-i18n="school.project2.desc">Vehicle management app</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
-                                    data-i18n="project2.tag1">React Native</span>
-
-                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
-                                    data-i18n="project2.tag2">FastAPI</span>
-
-                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
-                                    data-i18n="project2.tag3">Python</span>
-
-                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
-                                    data-i18n="project2.tag4">PostgreSQL</span>
-
-                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
-                                    data-i18n="project2.tag5">JWT Authentication</span>
-
-                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
-                                    data-i18n="project2.tag6">AWS (Cognito, DynamoDB, S3)</span>
-
-                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
-                                    data-i18n="project2.tag7">Redis (ElastiCache)</span>
-
-                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
-                                    data-i18n="project2.tag8">Docker</span>
-
-                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
-                                    data-i18n="project2.tag9">APScheduler</span>
-
-                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
-                                    data-i18n="project2.tag10">Expo Push Notifications</span>
-
-                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
-                                    data-i18n="project2.tag11">External APIs (NHTSA VPIC)</span>
+                        <div class="school-project-body">
+                            <h3 class="school-project-title" data-i18n="school.project3.title">Detection of Formal Errors in Final Theses using XML Technologies</h3>
+                            <p class="school-project-desc" data-i18n="school.project3.desc">CI-ready LaTeX → XML validation toolchain</p>
+                            <div class="school-project-tags">
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm dark:bg-indigo-900/50 dark:text-indigo-200" data-i18n="school.project3.tag1">XML + XPath rules</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm dark:bg-indigo-900/50 dark:text-indigo-200" data-i18n="school.project3.tag2">GitLab CI/CD</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm dark:bg-indigo-900/50 dark:text-indigo-200" data-i18n="school.project3.tag3">LaTeXML</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm dark:bg-indigo-900/50 dark:text-indigo-200" data-i18n="school.project3.tag4">Python + SaxonC</span>
                             </div>
+                            <p class="school-project-cta" data-i18n="school.project3.cta">View details</p>
                         </div>
-                    </div>
-                </div>
+                    </article>
+                </a>
+
+                <a class="project-item school-project-link" href="projects/CARINSIGHT.html">
+                    <article class="project-card">
+                        <div class="school-project-media">
+                            <img src="./images/poster.png" alt="" data-i18n-alt="school.project2.imageAlt" loading="lazy">
+                        </div>
+                        <div class="school-project-body">
+                            <h3 class="school-project-title" data-i18n="school.project2.title">CarInsight – Live IT Projects TUKE</h3>
+                            <p class="school-project-desc" data-i18n="school.project2.desc">Vehicle management app</p>
+                            <div class="school-project-tags">
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm dark:bg-indigo-900/50 dark:text-indigo-200" data-i18n="project2.tag1">React Native</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm dark:bg-indigo-900/50 dark:text-indigo-200" data-i18n="project2.tag2">FastAPI</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm dark:bg-indigo-900/50 dark:text-indigo-200" data-i18n="project2.tag3">Python</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm dark:bg-indigo-900/50 dark:text-indigo-200" data-i18n="project2.tag4">PostgreSQL</span>
+                            </div>
+                            <p class="school-project-cta" data-i18n="school.project2.cta">View details</p>
+                        </div>
+                    </article>
+                </a>
+
+                <a class="project-item school-project-link" href="projects/GAMEDAYS.html">
+                    <article class="project-card">
+                        <div class="school-project-media">
+                            <img src="./images/gamedays_project.jpg" alt="" data-i18n-alt="school.project1.imageAlt" loading="lazy">
+                        </div>
+                        <div class="school-project-body">
+                            <h3 class="school-project-title" data-i18n="school.project1.title">Game Jam Košice — Game Days</h3>
+                            <p class="school-project-desc" data-i18n="school.project1.desc">48-hour game challenge</p>
+                            <div class="school-project-tags">
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm dark:bg-indigo-900/50 dark:text-indigo-200" data-i18n="school.project1.tag1">Unity</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm dark:bg-indigo-900/50 dark:text-indigo-200" data-i18n="school.project1.tag2">2D Story Game</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm dark:bg-indigo-900/50 dark:text-indigo-200" data-i18n="school.project1.tag3">Game Jam</span>
+                            </div>
+                            <p class="school-project-cta" data-i18n="school.project1.cta">View details</p>
+                        </div>
+                    </article>
+                </a>
             </div>
         </section>
     </main>

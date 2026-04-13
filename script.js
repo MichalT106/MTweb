@@ -26,18 +26,51 @@ const translations = {
         "experience.details.company": "Company",
         "experience.details.location": "Location",
 
+        "experience.job2.position": "Position",
+        "experience.job2.period": "February 2026 – Present",
+        "experience.job2.title": "Data Engineer",
+        "experience.job2.company": "BuiltMind s.r.o.",
+        "experience.job2.location": "Home Office",
+
+        "experience.job2.details.intro.title": "Role overview",
+        "experience.job2.details.intro.text": "I work on automated collection of real-estate and market data using UiPath workflows and Python-based scrapers. For more complex or unsupported websites, I implement scraping logic in Python (APIs, requests, BeautifulSoup) and deploy it as AWS Lambda functions, with results integrated into downstream data pipelines.",
+
+        "experience.job2.details.keyResponsibilities.title": "Key responsibilities",
+        "experience.job2.details.keyResponsibilities.item1": "Implement new scraping projects and data pipelines for real-estate and market analytics.",
+        "experience.job2.details.keyResponsibilities.item2": "Maintain and fix existing scrapers when websites change, including selectors, parsing rules, and anti-bot workarounds.",
+        "experience.job2.details.keyResponsibilities.item3": "Upload and manage UiPath automation workflows in UiPath Orchestrator and run scheduled jobs reliably.",
+        "experience.job2.details.keyResponsibilities.item4": "Monitor data quality and consistency in the database and correct issues to keep analytics and graphs accurate.",
+        "experience.job2.details.keyResponsibilities.item5": "Update historical data when required to ensure long-term correctness of reports.",
+        "experience.job2.details.keyResponsibilities.item6": "Participate in testing of new application releases.",
+
+        "experience.job2.details.tech.title": "Technologies & tooling",
+        "experience.job2.details.tech.subtitle": "Main focus: automated data collection, parsing, orchestration scheduling, and data quality monitoring.",
+        "experience.job2.details.sideNote": "This role is ongoing.",
+
         "school.project1.title": "Game Jam Košice — Game Days",
         "school.project1.subtitle": "48-hour game jam (journalism theme) — Call For Justice",
         "school.project1.desc": "48-hour game challenge",
         "school.project1.tag1": "Unity",
         "school.project1.tag2": "2D Story Game",
         "school.project1.tag3": "Game Jam",
+        "school.project1.imageAlt": "Game Days — Call For Justice project preview",
 
         "school.project2.title": "CarInsight – Live IT Projects TUKE",
         "school.project2.desc": "Vehicle management app",
         "school.project2.tag1": "React Native",
         "school.project2.tag2": "FastAPI",
         "school.project1.cta": "View details",
+        "school.project2.cta": "View details",
+        "school.project3.cta": "View details",
+
+        "school.project3.title": "Detection of Formal Errors in Final Theses using XML Technologies",
+        "school.project3.desc": "CI-ready LaTeX → XML validation toolchain",
+        "school.project3.tag1": "XML + XPath rules",
+        "school.project3.tag2": "GitLab CI/CD",
+        "school.project3.tag3": "LaTeXML",
+        "school.project3.tag4": "Python + SaxonC",
+        "school.project2.imageAlt": "CarInsight — project poster",
+        "school.project3.imageAlt": "Diploma thesis — LaTeX/XML formal error detection toolchain",
 
 
         // ====== ADDED: Experience details (EN) ======
@@ -190,6 +223,47 @@ const translations = {
         "project2.links.repo1": "Repository – Team Project version",
         "project2.links.repo2": "Repository – Cloud Systems version",
 
+        // ====== ADDED: Diploma thesis – Formal error detection (EN) ======
+        "project3.title": "Detection of Formal Errors in Final Theses using XML Technologies",
+
+        "project3.eventPrefix": "Diploma thesis topic: ",
+        "project3.eventTitle": "Detection of Formal Errors in Final Theses using XML Technologies",
+        "project3.eventSuffix": ".",
+        "project3.eventIntro": "The goal was to bring repeatable, automation-friendly validation to LaTeX theses by converting sources into structured XML and evaluating an extensible set of rules in CI/CD and locally.",
+
+        "project3.overview.h": "Project overview",
+        "project3.overview.p1": "This project implements a toolchain for detecting formal and stylistic issues in LaTeX academic theses. Instead of relying on manual PDF review or basic text-based checking tools, it transforms the document into a structured XML representation and applies rule-based validation over its internal structure.",
+        "project3.overview.p2": "It is designed to run automatically in GitLab CI pipelines (with artifacts and optional GitLab Pages publishing) and locally via Docker using the same conversion and detection stack.",
+
+        "project3.architecture.h": "Architecture (converter → detector → outputs)",
+        "project3.architecture.li1": "Converter (`converter/`): Perl orchestration around LaTeXML that converts LaTeX sources into analysis-ready LaTeXML XML, preserving structure and traceability.",
+        "project3.architecture.li2": "Detector (`detector/`): Python rule engine using SaxonC XPath 3.1 to evaluate XML rule definitions and render TXT/HTML reports.",
+        "project3.architecture.li3": "CI integration (`ci/`): GitLab CI templates and scripts that clone the checker repository inside a thesis repository pipeline job and publish artifacts (and optionally Pages).",
+        "project3.architecture.li4": "Local runner (`local_run/`): Docker-based execution that mirrors CI behavior for consistent results across environments.",
+
+        "project3.features.h": "Key features",
+        "project3.features.li1": "Structural validation based on LaTeXML XML (document-aware checks, not just text linting).",
+        "project3.features.li2": "Rules defined as XML files (thesis + bibliography scopes) with XPath selectors and messages.",
+        "project3.features.li3": "Central configuration to enable/disable rules and override severities (`detector/rules_config.xml`).",
+        "project3.features.li4": "Human-friendly outputs: TXT for logs and HTML reports with an index for browsing.",
+
+        "project3.outputs.h": "Outputs & results",
+        "project3.outputs.p1": "Runs generate converter outputs (e.g., `thesis.xml`, optional `thesis.bib.xml`) and detector reports under `output/` as TXT and optionally HTML. Reports contain rule identifiers, severity, an explanation, and source pointers that can become clickable links in GitLab CI.",
+        "project3.outputs.p2": "These artifacts can be used as a review aid, a CI quality gate (e.g., fail builds on ERROR-level findings), and an auditable record of automated thesis validation.",
+
+        "project3.cicd.h": "CI/CD integration (GitLab)",
+        "project3.cicd.p1": "The checker is reused across multiple LaTeX repositories via templates in `ci/`. In the CI job, the pipeline clones this repository at a configured ref and runs converter, detector, and optional Pages preparation scripts.",
+        "project3.cicd.p2": "Outputs are collected as artifacts, and HTML reports can be published via GitLab Pages for convenient browsing.",
+
+        "project3.local.h": "Local usage (Docker)",
+        "project3.local.p1": "A Docker runner mirrors the CI environment to avoid differences between local runs and pipeline runs. Wrapper scripts support both single-thesis and batch processing modes.",
+
+        "project3.extensibility.h": "Rule extensibility",
+        "project3.extensibility.p1": "Most checks can be added without changing Python code: create a new XML rule file in the appropriate rules folder (thesis or bibliography), define an XPath selector and message, and optionally tune behavior in `rules_config.xml`.",
+
+        "project3.meta.stackLabel": "Technologies",
+        "project3.media.gallery": "Gallery",
+
 
     },
     sk: {
@@ -218,6 +292,27 @@ const translations = {
         "experience.details.company": "Spoločnosť",
         "experience.details.location": "Miesto",
 
+        "experience.job2.position": "Pozícia",
+        "experience.job2.period": "Február 2026 – Súčasnosť",
+        "experience.job2.title": "Data Engineer",
+        "experience.job2.company": "BuiltMind s.r.o.",
+        "experience.job2.location": "Home Office",
+
+        "experience.job2.details.intro.title": "Prehľad role",
+        "experience.job2.details.intro.text": "Pracujem na automatizovanom zbere dát z realitného trhu a trhových zdrojov pomocou UiPath workflowov a Python scraperov. Pre zložitejšie alebo nepodporované weby implementujem scraping logiku v Pythone (API, requests, BeautifulSoup) a nasadzujem ju ako AWS Lambda funkcie, pričom výsledky sú napojené na ďalšie dátové pipeline.",
+
+        "experience.job2.details.keyResponsibilities.title": "Kľúčové zodpovednosti",
+        "experience.job2.details.keyResponsibilities.item1": "Implementácia nových scraping projektov a dátových pipeline pre realitné a trhové analýzy.",
+        "experience.job2.details.keyResponsibilities.item2": "Údržba a opravy existujúcich scraperov pri zmenách na weboch (selektory, parsing pravidlá, riešenie obmedzení).",
+        "experience.job2.details.keyResponsibilities.item3": "Nahrávanie a správa UiPath automatizácií v UiPath Orchestrator a spoľahlivé spúšťanie naplánovaných jobov.",
+        "experience.job2.details.keyResponsibilities.item4": "Monitoring kvality dát a konzistencie v databáze a riešenie problémov tak, aby boli analytiky a grafy správne.",
+        "experience.job2.details.keyResponsibilities.item5": "Aktualizácia historických dát podľa potreby pre dlhodobú správnosť reportov.",
+        "experience.job2.details.keyResponsibilities.item6": "Spoluúčasť na testovaní nových release verzií aplikácie.",
+
+        "experience.job2.details.tech.title": "Technológie & nástroje",
+        "experience.job2.details.tech.subtitle": "Hlavné zameranie: automatizovaný zber dát, parsing, plánovanie jobov a monitoring kvality dát.",
+        "experience.job2.details.sideNote": "Táto pozícia je aktuálna (prebieha).",
+
 
         "school.project1.title": "Game Jam Košice — Game Days",
         "school.project1.subtitle": "48-hodinová herná výzva (téma žurnalistika) — Call For Justice",
@@ -225,12 +320,24 @@ const translations = {
         "school.project1.tag1": "Unity",
         "school.project1.tag2": "2D príbehová hra",
         "school.project1.tag3": "Game Jam",
+        "school.project1.imageAlt": "Game Days — ukážka projektu Call For Justice",
 
         "school.project2.title": "CarInsight – Živé IT projekty TUKE",
         "school.project2.desc": "Aplikácia na správu vozidiel",
         "school.project2.tag1": "React Native",
         "school.project2.tag2": "FastAPI",
         "school.project1.cta": "Zobraziť detail",
+        "school.project2.cta": "Zobraziť detail",
+        "school.project3.cta": "Zobraziť detail",
+
+        "school.project3.title": "Detekcia formálnych chýb v záverečných prácach pomocou XML technológií",
+        "school.project3.desc": "CI-ready LaTeX → XML validačný toolchain",
+        "school.project3.tag1": "XML + XPath pravidlá",
+        "school.project3.tag2": "GitLab CI/CD",
+        "school.project3.tag3": "LaTeXML",
+        "school.project3.tag4": "Python + SaxonC",
+        "school.project2.imageAlt": "CarInsight — plagát projektu",
+        "school.project3.imageAlt": "Diplomová práca — toolchain na detekciu formálnych chýb (LaTeX/XML)",
 
 
         // ====== ADDED: Experience details (SK) ======
@@ -386,6 +493,47 @@ const translations = {
         "project2.links.youtube": "Pozrieť prezentáciu na YouTube",
         "project2.links.repo1": "Repozitár – verzia z tímového projektu",
         "project2.links.repo2": "Repozitár – verzia z predmetu Cloudové systémy",
+
+        // ====== ADDED: Diploma thesis – Formal error detection (SK) ======
+        "project3.title": "Detekcia formálnych chýb v záverečných prácach pomocou XML technológií",
+
+        "project3.eventPrefix": "Téma diplomovej práce: ",
+        "project3.eventTitle": "Detekcia formálnych chýb v záverečných prácach pomocou XML technológií",
+        "project3.eventSuffix": ".",
+        "project3.eventIntro": "Cieľom bolo priniesť opakovateľnú a automatizovanú validáciu LaTeX záverečných prác tým, že sa zdrojové súbory konvertujú do štruktúrovaného XML a nad dokumentovou štruktúrou sa vyhodnocujú rozšíriteľné pravidlá v CI/CD aj lokálne.",
+
+        "project3.overview.h": "Prehľad projektu",
+        "project3.overview.p1": "Projekt implementuje nástrojový reťazec na detekciu formálnych a štylistických nedostatkov v LaTeX záverečných prácach. Namiesto manuálneho prechádzania PDF dokumentu alebo využívania jednoduchých textových kontrolných nástrojov pracuje s dokumentom v štruktúrovanej XML podobe, nad ktorou vykonáva pravidlové kontroly zamerané na samotnú štruktúru práce.",
+        "project3.overview.p2": "Je navrhnutý pre automatické spúšťanie v GitLab CI (s artefaktmi a voliteľným publikovaním cez GitLab Pages) a aj pre lokálne spustenie cez Docker s rovnakým conversion/detection stackom.",
+
+        "project3.architecture.h": "Architektúra (converter → detector → výstupy)",
+        "project3.architecture.li1": "Converter (`converter/`): Perl orchestrácia okolo LaTeXML, ktorá konvertuje LaTeX zdroje na LaTeXML XML pripravené na analýzu, so zachovaním štruktúry a dohľadateľnosti.",
+        "project3.architecture.li2": "Detector (`detector/`): Python rule engine využívajúci SaxonC XPath 3.1 na vyhodnotenie XML pravidiel a generovanie TXT/HTML reportov.",
+        "project3.architecture.li3": "CI integrácia (`ci/`): GitLab CI šablóny a skripty, ktoré v jobe naklonujú tento checker repozitár do pipeline záverečnej práce a vytvoria artefakty (a voliteľne Pages).",
+        "project3.architecture.li4": "Lokálne spustenie (`local_run/`): Docker-based runner, ktorý zrkadlí správanie CI pre konzistentné výsledky naprieč prostrediami.",
+
+        "project3.features.h": "Kľúčové vlastnosti",
+        "project3.features.li1": "Štruktúrna validácia založená na LaTeXML XML (kontroly závislé od štruktúry dokumentu, nie len textu).",
+        "project3.features.li2": "Pravidlá definované ako XML súbory (scope: práca + bibliografia) s XPath selektormi a správami.",
+        "project3.features.li3": "Centrálna konfigurácia na zapnutie/vypnutie pravidiel a zmenu severity (`detector/rules_config.xml`).",
+        "project3.features.li4": "Použiteľné výstupy: TXT pre logy a HTML reporty s indexom na prehliadanie.",
+
+        "project3.outputs.h": "Výstupy & výsledky",
+        "project3.outputs.p1": "Spustenie generuje výstupy konverzie (napr. `thesis.xml`, voliteľne `thesis.bib.xml`) a reporty detektora do `output/` vo forme TXT a voliteľne HTML. Položky reportu obsahujú ID pravidla, severitu, vysvetlenie a odkazy na zdroj, ktoré môžu byť v GitLab CI klikateľné.",
+        "project3.outputs.p2": "Artefakty slúžia ako pomôcka pri kontrole, ako CI quality gate (napr. fail build pri ERROR nálezoch) a ako auditovateľný záznam automatizovanej validácie.",
+
+        "project3.cicd.h": "CI/CD integrácia (GitLab)",
+        "project3.cicd.p1": "Checker je znovupoužiteľný naprieč LaTeX repozitármi cez šablóny v `ci/`. V CI jobe pipeline naklonuje tento repozitár na nakonfigurovaný ref a spustí skripty pre converter, detector a prípravu Pages.",
+        "project3.cicd.p2": "Výstupy sa zbierajú ako artefakty a HTML reporty je možné publikovať cez GitLab Pages pre pohodlné prehliadanie.",
+
+        "project3.local.h": "Lokálne použitie (Docker)",
+        "project3.local.p1": "Docker runner zrkadlí CI prostredie, aby nevznikali rozdiely medzi lokálnym a pipeline spustením. Wrapper skripty podporujú režim jednej práce aj batch spracovanie.",
+
+        "project3.extensibility.h": "Rozšíriteľnosť pravidiel",
+        "project3.extensibility.p1": "Väčšinu kontrol je možné doplniť bez úprav Python kódu: stačí pridať nové XML pravidlo do príslušného priečinka (práca alebo bibliografia), definovať XPath selektor a správu a prípadne doladiť správanie v `rules_config.xml`.",
+
+        "project3.meta.stackLabel": "Technológie",
+        "project3.media.gallery": "Galéria",
     }
 };
 
@@ -396,10 +544,17 @@ let currentLanguage = 'en';
 
 // Apply translations for non-shadow DOM elements
 function applyTranslations(lang) {
+    const dict = translations[lang] || {};
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
-        if (translations[lang] && translations[lang][key]) {
-            element.textContent = translations[lang][key];
+        if (dict[key]) {
+            element.textContent = dict[key];
+        }
+    });
+    document.querySelectorAll('[data-i18n-alt]').forEach(element => {
+        const key = element.getAttribute('data-i18n-alt');
+        if (dict[key]) {
+            element.setAttribute('alt', dict[key]);
         }
     });
     // update any language-toggle buttons state (if present on page)
