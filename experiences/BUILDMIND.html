@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTweb | BuiltMind Experience</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../projects/styles/project-detail-template.css">
+    <!-- Theme applied by globals.js -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="../globals.js"></script>
+    <script defer src="../script.js"></script>
+    <script defer src="../components/navbar.js"></script>
+    <script defer src="../components/language-switcher.js"></script>
+    <script defer src="../components/footer.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <custom-navbar>
+        <custom-language-switcher slot="right" inline></custom-language-switcher>
+    </custom-navbar>
+
+    <main class="container mx-auto px-4 py-12">
+        <div class="experience-detail-content">
+            <div class="detail-container mt-12">
+                <div class="detail-grid">
+                    <div class="detail-section">
+                        <h3 data-i18n="experience.details.period">Period</h3>
+                        <p data-i18n="experience.job2.period">February 2026 – Present</p>
+                    </div>
+                    <div class="detail-section">
+                        <h3 data-i18n="experience.job2.position">Position</h3>
+                        <p data-i18n="experience.job2.title">Data Engineer</p>
+                    </div>
+                </div>
+                
+                <div class="detail-grid">
+                    <div class="detail-section">
+                        <h3 data-i18n="experience.details.company">Company</h3>
+                        <p data-i18n="experience.job2.company">BuiltMind s.r.o.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h3 data-i18n="experience.details.location">Location</h3>
+                        <p data-i18n="experience.job2.location">Home Office</p>
+                    </div>
+                </div>
+                
+                <div class="detail-section">
+                    <h3 data-i18n="experience.job2.details.intro.title">Role overview</h3>
+                    <p data-i18n="experience.job2.details.intro.text">I work on automated collection of real-estate and market data using UiPath workflows and Python-based scrapers. For more complex or unsupported websites, I implement scraping logic in Python (APIs, requests, BeautifulSoup) and deploy it as AWS Lambda functions, with results integrated into downstream data pipelines.</p>
+                </div>
+
+                <div class="detail-section">
+                    <h3 data-i18n="experience.job2.details.keyResponsibilities.title">Key responsibilities</h3>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li data-i18n="experience.job2.details.keyResponsibilities.item1">Implement new scraping projects and data pipelines for real-estate and market analytics.</li>
+                        <li data-i18n="experience.job2.details.keyResponsibilities.item2">Maintain and fix existing scrapers when websites change, including selectors, parsing rules, and anti-bot workarounds.</li>
+                        <li data-i18n="experience.job2.details.keyResponsibilities.item3">Upload and manage UiPath automation workflows in UiPath Orchestrator and run scheduled jobs reliably.</li>
+                        <li data-i18n="experience.job2.details.keyResponsibilities.item4">Monitor data quality and consistency in the database and correct issues to keep analytics and graphs accurate.</li>
+                        <li data-i18n="experience.job2.details.keyResponsibilities.item5">Update historical data when required to ensure long-term correctness of reports.</li>
+                        <li data-i18n="experience.job2.details.keyResponsibilities.item6">Participate in testing of new application releases.</li>
+                    </ul>
+                </div>
+
+                <div class="detail-section">
+                    <h3 data-i18n="experience.job2.details.tech.title">Technologies & tooling</h3>
+                    <p class="mb-4" data-i18n="experience.job2.details.tech.subtitle">Main focus: automated data collection, parsing, serverless deployment, orchestration scheduling, and data quality monitoring.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-full text-sm bg-gray-200 text-gray-800">UiPath</span>
+                        <span class="px-3 py-1 rounded-full text-sm bg-gray-200 text-gray-800">UiPath Orchestrator</span>
+                        <span class="px-3 py-1 rounded-full text-sm bg-gray-200 text-gray-800">Python</span>
+                        <span class="px-3 py-1 rounded-full text-sm bg-gray-200 text-gray-800">Requests</span>
+                        <span class="px-3 py-1 rounded-full text-sm bg-gray-200 text-gray-800">BeautifulSoup</span>
+                        <span class="px-3 py-1 rounded-full text-sm bg-gray-200 text-gray-800">AWS Lambda</span>
+                        <span class="px-3 py-1 rounded-full text-sm bg-gray-200 text-gray-800">AWS S3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>
+

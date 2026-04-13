@@ -155,16 +155,17 @@ class CustomNavbar extends HTMLElement {
         // listen for language changes from centralized AppState with immediate: true to ensure sync
         if (window.AppState && window.AppState.on) {
             window.AppState.on('languageChange', (e) => {
-                console.log('[navbar] languageChange received', e.detail.language);
                 applyI18n(e.detail.language);
             }, { immediate: true });
         }
-        document.addEventListener('languageChange', (e) => { console.log('[navbar] document languageChange', e.detail.language); applyI18n(e.detail.language); });
 
         // CV button: construct PDF URL based on current language
         const cvLink = this.shadowRoot.getElementById('cvLink');
         const openCvPdf = () => {
-            const lang = (window.getLanguage && window.getLanguage()) || window.currentLanguage || 'en';
+            const lang = (window.AppState && window.AppState.getLanguage && window.AppState.getLanguage())
+                || (window.getLanguage && window.getLanguage())
+                || window.currentLanguage
+                || 'en';
             const fileName = lang === 'sk' ? 'CV_SK.pdf' : 'CV_EN.pdf';
             const cvPath = isInSubdir ? '../biography/' : './biography/';
             const cvUrl = cvPath + fileName;
@@ -177,9 +178,8 @@ class CustomNavbar extends HTMLElement {
         };
 
         if (window.AppState && window.AppState.on) {
-            window.AppState.on('languageChange', (e) => { console.log('[navbar] languageChange for CV', e.detail.language); updateCvForLang(); }, { immediate: true });
+            window.AppState.on('languageChange', () => { updateCvForLang(); }, { immediate: true });
         }
-        document.addEventListener('languageChange', (e) => { console.log('[navbar] document languageChange for CV', e.detail.language); updateCvForLang(); });
 
         if (cvLink) {
             cvLink.addEventListener('click', (e) => {

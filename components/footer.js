@@ -51,8 +51,8 @@ class CustomFooter extends HTMLElement {
                 text-align: center;
                 margin-top: 3rem;
                 padding-top: 1.5rem;
-                border-top: 1px solid #374151;
-                color: #9CA3AF;
+                border-top: 1px solid var(--border);
+                color: var(--muted-text);
             }
             </style>
             <footer>
@@ -119,9 +119,8 @@ class CustomFooter extends HTMLElement {
 
         // listen for language changes from centralized AppState with immediate: true to ensure sync
         if (window.AppState && window.AppState.on) {
-            window.AppState.on('languageChange', (e) => { console.log('[footer] languageChange received', e.detail.language); applyI18n(e.detail.language); }, { immediate: true });
+            window.AppState.on('languageChange', (e) => { applyI18n(e.detail.language); }, { immediate: true });
         }
-        document.addEventListener('languageChange', (e) => { console.log('[footer] document languageChange', e.detail.language); applyI18n(e.detail.language); });
     }
 }
 customElements.define('custom-footer', CustomFooter);

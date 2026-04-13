@@ -5,6 +5,7 @@ const translations = {
         "hero.subtitlePrefix": "Showcasing my",
         "hero.projects": "School Projects",
         "hero.experience": "Work Experience",
+        "hero.subtitleMiddle": " & ",
         "hero.cv": "See CV",
         "school.title": "School Projects",
         "experience.title": "Work Experience",
@@ -271,6 +272,7 @@ const translations = {
         "hero.subtitlePrefix": "Prezentácia mojich",
         "hero.projects": " Školské projekty",
         "hero.experience": "Pracovných skúsenosti",
+        "hero.subtitleMiddle": " a ",
         "hero.cv": "Prezrieť životopis",
         "projects.title": "Vybrané projekty",
         "school.title": "Školské projekty",
@@ -542,9 +544,12 @@ window.translations = translations;
 
 let currentLanguage = 'en';
 
-// Apply translations for non-shadow DOM elements
+// Apply translations for non-shadow DOM elements (light DOM only; shadow roots use their own listeners)
 function applyTranslations(lang) {
-    const dict = translations[lang] || {};
+    const resolved = lang === 'sk' ? 'sk' : 'en';
+    const dict = translations[resolved] || {};
+    window.currentLanguage = resolved;
+
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
         if (dict[key]) {
@@ -557,69 +562,67 @@ function applyTranslations(lang) {
             element.setAttribute('alt', dict[key]);
         }
     });
-    // update any language-toggle buttons state (if present on page)
     document.querySelectorAll('.language-btn').forEach(btn => {
-        if (btn.dataset.lang === lang) btn.classList.add('active'); else btn.classList.remove('active');
+        if (btn.dataset.lang === resolved) btn.classList.add('active'); else btn.classList.remove('active');
     });
 }
 
-// Initialize translations on load using the global language (set by globals.js)
-document.addEventListener('DOMContentLoaded', () => {
-    const lang = (window.AppState && window.AppState.getLanguage && window.AppState.getLanguage()) || (window.getLanguage && window.getLanguage && window.getLanguage()) || window.currentLanguage || 'en';
-    console.log('[script] initial language', lang);
-    applyTranslations(lang);
+let _lightDomLanguageBound = false;
 
-    // Re-apply translations whenever language changes (triggered by the language switcher / AppState)
-    if (window.AppState && window.AppState.addEventListener) {
-        window.AppState.addEventListener('languageChange', (e) => {
-            const next = (e && e.detail && e.detail.language) ? e.detail.language : ((window.AppState.getLanguage && window.AppState.getLanguage()) || 'en');
-            console.log('[script] languageChange', next);
+function bindLanguageChangeToLightDom() {
+    if (_lightDomLanguageBound) return;
+    _lightDomLanguageBound = true;
+    if (window.AppState && typeof window.AppState.on === 'function') {
+        window.AppState.on('languageChange', (e) => {
+            const next = (e && e.detail && e.detail.language) ? e.detail.language : window.AppState.getLanguage();
+            applyTranslations(next);
+        });
+    } else {
+        document.addEventListener('languageChange', (e) => {
+            const next = (e && e.detail && e.detail.language) ? e.detail.language : 'en';
             applyTranslations(next);
         });
     }
-    document.addEventListener('languageChange', (e) => {
-        const next = (e && e.detail && e.detail.language) ? e.detail.language : ((window.AppState && window.AppState.getLanguage && window.AppState.getLanguage()) || 'en');
-        console.log('[script] document languageChange', next);
-        applyTranslations(next);
-    });
-    // expose for debugging
-    window.translations = translations;
-    window.applyTranslations = applyTranslations;
-    // Attach smooth-scroll handlers after DOM ready
+}
+
+function initAnchorSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        const href = anchor.getAttribute('href');
+        if (!href || href === '#') return;
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) target.scrollIntoView({ behavior: 'smooth' });
         });
     });
-
-    // CV button handler
-    const cvBtn = document.getElementById('cvBtn');
-    if (cvBtn) {
-        cvBtn.addEventListener('click', () => {
-            const lang = (window.getLanguage && window.getLanguage()) || window.currentLanguage || 'en';
-            const fileName = lang === 'sk' ? 'CV_SK.pdf' : 'CV_EN.pdf';
-            const cvUrl = './biography/' + fileName;
-            window.open(cvUrl, '_blank');
-        });
-    }
-});
-
-// Listen for global language changes (AppState emits this)
-if (window.AppState && window.AppState.on) {
-    window.AppState.on('languageChange', (e) => { console.log('[script] languageChange received', e.detail.language); applyTranslations(e.detail.language); }, { immediate: true });
 }
-document.addEventListener('languageChange', (e) => { console.log('[script] document languageChange', e.detail.language); applyTranslations(e.detail.language); });
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+
+function initCvButtonIfPresent() {
+    const cvBtn = document.getElementById('cvBtn');
+    if (!cvBtn) return;
+    cvBtn.addEventListener('click', () => {
+        const lang = (window.getLanguage && window.getLanguage()) || window.currentLanguage || 'en';
+        const fileName = lang === 'sk' ? 'CV_SK.pdf' : 'CV_EN.pdf';
+        const cvUrl = './biography/' + fileName;
+        window.open(cvUrl, '_blank');
     });
-});
+}
+
+function initPageI18nAndUi() {
+    const lang = (window.AppState && window.AppState.getLanguage && window.AppState.getLanguage()) || (window.getLanguage && window.getLanguage()) || 'en';
+    applyTranslations(lang);
+    bindLanguageChangeToLightDom();
+    initAnchorSmoothScroll();
+    initCvButtonIfPresent();
+    window.translations = translations;
+    window.applyTranslations = applyTranslations;
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPageI18nAndUi);
+} else {
+    initPageI18nAndUi();
+}
 
 
 // Theme management is handled globally by globals.js. Components can listen to

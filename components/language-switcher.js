@@ -75,8 +75,6 @@ class CustomLanguageSwitcher extends HTMLElement {
         };
 
         const toggleLang = () => {
-            // Do not hold local state; ask AppState to change the language.
-            console.log('[language-switcher] toggleLang clicked');
             if (window.AppState && typeof window.AppState.getLanguage === 'function') {
                 const current = window.AppState.getLanguage();
                 const next = current === 'sk' ? 'en' : 'sk';
@@ -98,13 +96,10 @@ class CustomLanguageSwitcher extends HTMLElement {
 
         // listen for external language changes from AppState (and legacy document events)
         if (window.AppState && window.AppState.on) {
-            // use immediate:true to avoid race where AppState already emitted initial events
             window.AppState.on('languageChange', (e) => {
-                console.log('[language-switcher] languageChange received', e.detail.language);
                 setLangUI(e.detail.language);
             }, { immediate: true });
         }
-        document.addEventListener('languageChange', (e) => { console.log('[language-switcher] document languageChange', e.detail.language); setLangUI(e.detail.language); });
 
         // Theme toggle (checkbox)
         const themeToggle = this.shadowRoot.getElementById('themeToggle');
@@ -119,7 +114,6 @@ class CustomLanguageSwitcher extends HTMLElement {
         };
 
         const toggleTheme = () => {
-            console.log('[language-switcher] toggleTheme clicked');
             if (window.AppState && window.AppState.toggleTheme) {
                 window.AppState.toggleTheme();
             } else if (window.toggleTheme) {
@@ -130,15 +124,21 @@ class CustomLanguageSwitcher extends HTMLElement {
         themeToggle.addEventListener('click', toggleTheme);
         themeToggle.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTheme(); } });
 
+        const syncHostColorScheme = () => {
+            const t = (window.AppState && window.AppState.getTheme && window.AppState.getTheme())
+                || document.documentElement.getAttribute('data-theme')
+                || 'light';
+            this.style.setProperty('color-scheme', t === 'dark' ? 'dark' : 'light');
+        };
+
         if (window.AppState && window.AppState.on) {
             window.AppState.on('themeChange', (e) => {
-                console.log('[language-switcher] themeChange received', e.detail.theme);
                 syncThemeUI(e.detail.theme);
+                syncHostColorScheme();
             }, { immediate: true });
         }
-        document.addEventListener('themeChange', (e) => { console.log('[language-switcher] document themeChange', e.detail.theme); syncThemeUI(e.detail.theme); });
-        // initialize theme UI
         syncThemeUI();
+        syncHostColorScheme();
     }
 }
 customElements.define('custom-language-switcher', CustomLanguageSwitcher);

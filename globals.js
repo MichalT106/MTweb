@@ -27,6 +27,11 @@
         }
     };
 
+    const applyDocumentLanguage = (lang) => {
+        const code = lang === 'sk' ? 'sk' : 'en';
+        document.documentElement.setAttribute('lang', code);
+    };
+
     class AppStateClass extends EventTarget {
         constructor() {
             super();
@@ -38,6 +43,7 @@
 
             // Apply theme immediately to avoid flash
             applyThemeToDocument(this._theme);
+            applyDocumentLanguage(this._lang);
 
             // Ensure <body> gets updated once it exists.
             document.addEventListener('DOMContentLoaded', () => applyThemeToDocument(this._theme));
@@ -51,14 +57,12 @@
             if (DEBUG) console.log('[AppState] storage event', e.key, e.newValue);
             if (e.key === LANG_KEY && e.newValue && e.newValue !== this._lang) {
                 this._lang = e.newValue;
+                applyDocumentLanguage(this._lang);
                 this._emit('languageChange', { language: this._lang });
             }
             if (e.key === THEME_KEY && e.newValue && e.newValue !== this._theme) {
                 this._theme = e.newValue === 'dark' ? 'dark' : 'light';
                 applyThemeToDocument(this._theme);
-
-            // Ensure <body> gets updated once it exists.
-            document.addEventListener('DOMContentLoaded', () => applyThemeToDocument(this._theme));
                 this._emit('themeChange', { theme: this._theme });
             }
         }
@@ -82,6 +86,7 @@
             if (DEBUG) console.log('[AppState] setLanguage called', lang);
             this._lang = lang;
             localStorage.setItem(LANG_KEY, lang);
+            applyDocumentLanguage(lang);
             this._emit('languageChange', { language: lang });
         }
 
