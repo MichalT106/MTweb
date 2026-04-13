@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MTweb | Diploma Thesis Project</title>
+
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="./styles/project-detail-template.css" />
+    <!-- Theme + global state -->
+    <script src="../globals.js"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- App translations + components (defer so DOM is ready) -->
+    <script defer src="../script.js"></script>
+    <script defer src="../components/navbar.js"></script>
+    <script defer src="../components/language-switcher.js"></script>
+    <script defer src="../components/footer.js"></script>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+    <custom-navbar>
+        <custom-language-switcher slot="right" inline></custom-language-switcher>
+    </custom-navbar>
+
+    <main class="container mx-auto px-4 py-12">
+        <div class="mb-12">
+            <div class="header-accent mt-6">
+                <h1 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-3" data-i18n="project3.title">
+                    Detection of Formal Errors in Final Theses using XML Technologies
+                </h1>
+            </div>
+        </div>
+
+        <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <!-- LEFT: Text / Description -->
+            <section class="space-y-6">
+                <!-- Event Info -->
+                <article class="content-block p-6 rounded-lg">
+                    <div class="flex items-start gap-4">
+                        <div class="text-2xl">🎓</div>
+                        <div class="space-y-3">
+                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                                <span data-i18n="project3.eventPrefix">Diploma thesis topic: </span>
+                                <span class="font-semibold" data-i18n="project3.eventTitle">Detection of Formal Errors in Final Theses using XML Technologies</span>
+                                <span data-i18n="project3.eventSuffix">.</span>
+                            </p>
+                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-i18n="project3.eventIntro">
+                                The goal was to bring repeatable, automation-friendly validation to LaTeX theses by converting sources into structured XML and evaluating an extensible set of rules in CI/CD and locally.
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Overview -->
+                <section class="content-block p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project3.overview.h">Project overview</h2>
+                    <div class="space-y-3">
+                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-i18n="project3.overview.p1">
+                            This project implements a toolchain for detecting formal and stylistic issues in LaTeX academic theses. Instead of relying on manual PDF review or generic text linters, it converts the thesis into a structured XML representation and runs rule-based checks over the document structure.
+                        </p>
+                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-i18n="project3.overview.p2">
+                            It is designed to run automatically in GitLab CI pipelines (with artifacts and optional GitLab Pages publishing) and locally via Docker using the same conversion and detection stack.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Architecture -->
+                <section class="content-block p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project3.architecture.h">Architecture (converter → detector → outputs)</h2>
+                    <ul class="space-y-3">
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.architecture.li1">Converter (`converter/`): Perl orchestration around LaTeXML that converts LaTeX sources into analysis-ready LaTeXML XML, preserving structure and traceability.</li>
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.architecture.li2">Detector (`detector/`): Python rule engine using SaxonC XPath 3.1 to evaluate XML rule definitions and render TXT/HTML reports.</li>
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.architecture.li3">CI integration (`ci/`): GitLab CI templates and scripts that clone the checker repository inside a thesis repository pipeline job and publish artifacts (and optionally Pages).</li>
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.architecture.li4">Local runner (`local_run/`): Docker-based execution that mirrors CI behavior for consistent results across environments.</li>
+                    </ul>
+                </section>
+
+                <!-- Key Features -->
+                <section class="content-block p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project3.features.h">Key features</h2>
+                    <ul class="space-y-3">
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.features.li1">Structural validation based on LaTeXML XML (document-aware checks, not just text linting).</li>
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.features.li2">Rules defined as versioned XML files (thesis + bibliography scopes) with XPath selectors and messages.</li>
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.features.li3">Central configuration to enable/disable rules and override severities (`detector/rules_config.xml`).</li>
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.features.li4">Human-friendly outputs: TXT for logs and HTML reports with an index for browsing.</li>
+                    </ul>
+                </section>
+
+                <!-- Outputs -->
+                <section class="content-block p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project3.outputs.h">Outputs & results</h2>
+                    <div class="space-y-3">
+                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-i18n="project3.outputs.p1">
+                            Runs generate converter outputs (e.g., `thesis.xml`, optional `thesis.bib.xml`) and detector reports under `output/` as TXT and optionally HTML. Reports contain rule identifiers, severity, an explanation, and source pointers that can become clickable links in GitLab CI.
+                        </p>
+                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-i18n="project3.outputs.p2">
+                            These artifacts can be used as a review aid, a CI quality gate (e.g., fail builds on ERROR-level findings), and an auditable record of automated thesis validation.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- CI/CD -->
+                <section class="content-block p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project3.cicd.h">CI/CD integration (GitLab)</h2>
+                    <div class="space-y-3">
+                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-i18n="project3.cicd.p1">
+                            The checker is reused across multiple LaTeX repositories via templates in `ci/`. In the CI job, the pipeline clones this repository at a configured ref and runs converter, detector, and optional Pages preparation scripts.
+                        </p>
+                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-i18n="project3.cicd.p2">
+                            Outputs are collected as artifacts, and HTML reports can be published via GitLab Pages for convenient browsing.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Local usage -->
+                <section class="content-block p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project3.local.h">Local usage (Docker)</h2>
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-i18n="project3.local.p1">
+                        A Docker runner mirrors the CI environment to avoid differences between local runs and pipeline runs. Wrapper scripts support both single-thesis and batch processing modes.
+                    </p>
+                </section>
+
+                <!-- Extensibility -->
+                <section class="content-block p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project3.extensibility.h">Rule extensibility</h2>
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-i18n="project3.extensibility.p1">
+                        Most checks can be added without changing Python code: create a new XML rule file in the appropriate rules folder (thesis or bibliography), define an XPath selector and message, and optionally tune behavior in `rules_config.xml`.
+                    </p>
+                </section>
+
+                <!-- Technologies -->
+                <section class="content-block p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project3.meta.stackLabel">Technologies</h2>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="tag">Perl</span>
+                        <span class="tag">LaTeXML</span>
+                        <span class="tag">Python 3</span>
+                        <span class="tag">SaxonC (XPath 3.1)</span>
+                        <span class="tag">XML + XPath</span>
+                        <span class="tag">Docker + Compose</span>
+                        <span class="tag">GitLab CI/CD</span>
+                        <span class="tag">GitLab Pages</span>
+                    </div>
+                </section>
+            </section>
+
+            <!-- RIGHT: Media -->
+            <aside class="space-y-6">
+                <figure class="media-block p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project3.media.gallery">Gallery</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="gallery">
+                        <div class="gallery-item">
+                            <img src="DIPLOMA_THESIS_images/Snímka%20obrazovky%202026-04-13%20185852.png" alt="Diploma thesis project image 1" class="rounded-lg w-full object-cover cursor-pointer" loading="lazy">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="DIPLOMA_THESIS_images/Snímka%20obrazovky%202026-04-13%20185927.png" alt="Diploma thesis project image 2" class="rounded-lg w-full object-cover cursor-pointer" loading="lazy">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="DIPLOMA_THESIS_images/Snímka%20obrazovky%202026-04-13%20190005.png" alt="Diploma thesis project image 3" class="rounded-lg w-full object-cover cursor-pointer" loading="lazy">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="DIPLOMA_THESIS_images/Snímka%20obrazovky%202026-04-13%20190030.png" alt="Diploma thesis project image 4" class="rounded-lg w-full object-cover cursor-pointer" loading="lazy">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="DIPLOMA_THESIS_images/Snímka%20obrazovky%202026-04-13%20190122.png" alt="Diploma thesis project image 5" class="rounded-lg w-full object-cover cursor-pointer" loading="lazy">
+                        </div>
+                    </div>
+                </figure>
+            </aside>
+        </div>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script>
+        if (window.feather) feather.replace();
+    </script>
+
+    <script>
+        // Lightbox functionality (single or multi-image galleries)
+        function initLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightboxCounter = document.getElementById('lightboxCounter');
+            const lightboxClose = document.getElementById('lightboxClose');
+            const lightboxPrev = document.getElementById('lightboxPrev');
+            const lightboxNext = document.getElementById('lightboxNext');
+            const gallery = document.getElementById('gallery');
+
+            if (!gallery || !lightbox || !lightboxImg) return;
+
+            const galleryItems = gallery.querySelectorAll('.gallery-item');
+            if (!galleryItems.length) return;
+
+            let currentIndex = 0;
+            const totalImages = galleryItems.length;
+
+            function openLightbox() {
+                const imgEl = galleryItems[currentIndex].querySelector('img');
+                if (!imgEl) return;
+
+                lightboxImg.src = imgEl.src;
+                lightboxImg.alt = imgEl.alt || '';
+                lightboxCounter.textContent = `${currentIndex + 1} / ${totalImages}`;
+                lightbox.classList.add('active');
+                lightbox.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+
+                const navDisplay = totalImages > 1 ? '' : 'none';
+                if (lightboxPrev) lightboxPrev.style.display = navDisplay;
+                if (lightboxNext) lightboxNext.style.display = navDisplay;
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                lightbox.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }
+
+            function showNext() {
+                currentIndex = (currentIndex + 1) % totalImages;
+                openLightbox();
+            }
+
+            function showPrev() {
+                currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+                openLightbox();
+            }
+
+            galleryItems.forEach((item, index) => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    currentIndex = index;
+                    openLightbox();
+                });
+            });
+
+            if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+            if (lightboxNext) lightboxNext.addEventListener('click', showNext);
+            if (lightboxPrev) lightboxPrev.addEventListener('click', showPrev);
+
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) closeLightbox();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowRight' && totalImages > 1) showNext();
+                if (e.key === 'ArrowLeft' && totalImages > 1) showPrev();
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initLightbox);
+        } else {
+            initLightbox();
+        }
+    </script>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" aria-hidden="true">
+        <div class="lightbox-content">
+            <button id="lightboxClose" class="lightbox-close" aria-label="Close">×</button>
+            <button id="lightboxPrev" class="lightbox-nav lightbox-prev" aria-label="Previous">‹</button>
+            <img id="lightboxImg" class="lightbox-img" src="" alt="">
+            <button id="lightboxNext" class="lightbox-nav lightbox-next" aria-label="Next">›</button>
+            <div id="lightboxCounter" class="lightbox-counter">1 / 1</div>
+        </div>
+    </div>
+
+</body>
+</html>
