@@ -71,10 +71,21 @@
                 <section class="content-block p-6 rounded-lg">
                     <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project3.architecture.h">Architecture (converter → detector → outputs)</h2>
                     <ul class="space-y-3">
-                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.architecture.li1">Converter (`converter/`): Perl orchestration around LaTeXML that converts LaTeX sources into analysis-ready LaTeXML XML, preserving structure and traceability.</li>
-                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.architecture.li2">Detector (`detector/`): Python rule engine using SaxonC XPath 3.1 to evaluate XML rule definitions and render TXT/HTML reports.</li>
-                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.architecture.li3">CI integration (`ci/`): GitLab CI templates and scripts that clone the checker repository inside a thesis repository pipeline job and publish artifacts (and optionally Pages).</li>
-                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.architecture.li4">Local runner (`local_run/`): Docker-based execution that mirrors CI behavior for consistent results across environments.</li>
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.architecture.li1">Converter (`converter/`): Perl-based pipeline around the LaTeXML API that converts LaTeX sources into LaTeXML XML and injects source-location metadata for traceability back to the original `.tex`/`.bib` files.</li>
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.architecture.li2">Detector (`detector/`): Python rule engine built on SaxonC (XPath 3.1). It loads versioned XML rules, evaluates them over the document structure, and renders TXT/console/HTML reports.</li>
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.architecture.li3">CI integration (`ci/`): GitLab CI templates + helper scripts that run the same converter → detector flow inside a prebuilt Docker image and publish artifacts and optional GitLab Pages.</li>
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.architecture.li4">Local runner (`local_run/`): Docker Compose + wrapper scripts for reproducible local runs (single thesis or batch mode) that match CI behavior.</li>
+                    </ul>
+                </section>
+
+                <!-- End-to-end workflow -->
+                <section class="content-block p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project3.workflow.h">Workflow (from LaTeX sources to actionable findings)</h2>
+                    <ul class="space-y-3">
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.workflow.li1">Preprocess sources: inject `srcroot` and `srcloc` markers into `.tex`/`.bib` inputs so every finding can be traced back to the original file and line.</li>
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.workflow.li2">Convert with LaTeXML (Perl API): produce `thesis.xml` and, when a bibliography is declared, `thesis.bib.xml`.</li>
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.workflow.li3">Evaluate XPath rules (SaxonC): apply a versioned rule set to the XML structure; support both node-based checks (precise locations) and threshold-style rules.</li>
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.workflow.li4">Generate outputs: write TXT reports, console-friendly summaries, and optional HTML dashboards with deep links to source code.</li>
                     </ul>
                 </section>
 
@@ -87,6 +98,21 @@
                         <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.features.li3">Central configuration to enable/disable rules and override severities (`detector/rules_config.xml`).</li>
                         <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.features.li4">Human-friendly outputs: TXT for logs and HTML reports with an index for browsing.</li>
                     </ul>
+                </section>
+
+                <!-- Rule engine -->
+                <section class="content-block p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project3.rules.h">Rule engine & extensibility</h2>
+                    <div class="space-y-3">
+                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-i18n="project3.rules.p1">
+                            Checks are authored as standalone XML rule files and evaluated as XPath 3.1 expressions over the LaTeXML document model. This keeps most new checks “data-driven”: adding rules typically does not require Python changes.
+                        </p>
+                        <ul class="space-y-3">
+                            <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.rules.li1">Two scopes: thesis rules (`detector/rules/thesis_rules/`) and bibliography rules (`detector/rules/bibliography_rules/`).</li>
+                            <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.rules.li2">Central policy in `detector/rules_config.xml`: disable specific rule IDs and override severities per scope (INFO/WARNING/ERROR).</li>
+                            <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.rules.li3">Rules can emit findings with precise source mapping by leveraging converter-injected `srcloc` markers embedded in the produced XML.</li>
+                        </ul>
+                    </div>
                 </section>
 
                 <!-- Outputs -->
@@ -102,15 +128,35 @@
                     </div>
                 </section>
 
+                <!-- Reporting & navigation -->
+                <section class="content-block p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project3.reporting.h">Reporting & navigation (findings → source code)</h2>
+                    <ul class="space-y-3">
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.reporting.li1">HTML reports include per-finding deep links: in GitLab CI they point to `/-/blob/<ref>/<file>#L<line>` so reviewers can jump straight to the affected line.</li>
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.reporting.li2">Local runs generate editor-friendly links (`vscode://file/...`) and also provide plain `file://` links plus a short source snippet for quick context.</li>
+                        <li class="list-item-custom text-gray-700 dark:text-gray-300" data-i18n="project3.reporting.li3">Path mapping is handled automatically for local Docker runs so reports show host paths even when the detector runs inside a container.</li>
+                    </ul>
+                </section>
+
                 <!-- CI/CD -->
                 <section class="content-block p-6 rounded-lg">
                     <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project3.cicd.h">CI/CD integration (GitLab)</h2>
                     <div class="space-y-3">
                         <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-i18n="project3.cicd.p1">
-                            The checker is reused across multiple LaTeX repositories via templates in `ci/`. In the CI job, the pipeline clones this repository at a configured ref and runs converter, detector, and optional Pages preparation scripts.
+                            The checker is reused across multiple LaTeX repositories via templates in `ci/`. The analyzed repository includes a `.gitlab-ci.yml` based on these templates and runs the checker inside a Docker image that already contains the full toolchain under `/formal_checker`.
                         </p>
                         <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-i18n="project3.cicd.p2">
-                            Outputs are collected as artifacts, and HTML reports can be published via GitLab Pages for convenient browsing.
+                            The pipeline bundles outputs as artifacts and can publish HTML reports through GitLab Pages for convenient browsing and review.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Docker image / distribution -->
+                <section class="content-block p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 section-title" data-i18n="project3.image.h">Packaging & distribution (reusable Docker image)</h2>
+                    <div class="space-y-3">
+                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed" data-i18n="project3.image.p1">
+                            The full toolchain is packaged into a Docker image containing LaTeXML + TeX Live and the Python detector runtime. In GitLab, the checker repository builds and publishes commit-addressable image tags, so analyzed projects can pin an exact version for reproducible results.
                         </p>
                     </div>
                 </section>
@@ -143,6 +189,7 @@
                         <span class="tag">Docker + Compose</span>
                         <span class="tag">GitLab CI/CD</span>
                         <span class="tag">GitLab Pages</span>
+                        <span class="tag">TeX Live</span>
                     </div>
                 </section>
             </section>
